@@ -61,7 +61,7 @@ const portfolioData = {
         {
             company: "Nokia",
             role: "Product Owner",
-            date: "2019 — 2024",
+            date: "2014 — 2019",
             url: "https://nokia.com",
             logo: null,
             skills: ["Test Automation", "Product Management", "Agile", "Scrum"]
