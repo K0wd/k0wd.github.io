@@ -7,7 +7,7 @@ const portfolioData = {
         name: "Kim E. Bandeleon",
         title: "Quality and Automation Engineer",
         location: "Marilao, Bulacan",
-        email: "kbandeleon@gmail.com",
+        email: "Kim E. Bandeleon",
         phone: "09778264301",
         description: "I'm a Quality and Automation Engineer living in Marilao, Bulacan, currently working at AtMail."
     },
@@ -16,7 +16,7 @@ const portfolioData = {
     social: [
         {
             name: "Email",
-            url: "mailto:kbandeleon@gmail.com",
+            url: "mailto:consult@testwithkim.com",
             icon: "email"
         },
         {
@@ -186,17 +186,10 @@ const portfolioData = {
     education: [
         {
             institution: "University of the East",
-            degree: "Bachelor of Science Major in Computer Engineering",
+            degree: "BS Computer Engineering",
             date: "2009 — 2014",
             url: "#",
-            logoColor: "#b91c1c"
-        },
-        {
-            institution: "St. Benedict School",
-            degree: "Secondary Education",
-            date: "2006 — 2009",
-            url: "#",
-            logoColor: "#15803d"
+            logoImage: "UE-3d-seal.png"
         }
     ],
 
@@ -246,36 +239,12 @@ const portfolioData = {
 
     // Certifications - displayed as compact horizontal tiles
     certifications: [
-        {
-            title: "ISTQB CTFL",
-            abbr: "ISTQB",
-            color: "#2563eb",
-            icon: "shield"
-        },
-        {
-            title: "SAFe",
-            abbr: "SAFe",
-            color: "#0d9488",
-            icon: "layers"
-        },
-        {
-            title: "Lean Six Sigma",
-            abbr: "6σ",
-            color: "#ca8a04",
-            icon: "sigma"
-        },
-        {
-            title: "AI Test Engineer",
-            abbr: "AI",
-            color: "#7c3aed",
-            icon: "cpu"
-        },
-        {
-            title: "KnowBe4 Security",
-            abbr: "K4",
-            color: "#dc2626",
-            icon: "lock"
-        }
+        { title: "ISTQB CTFL", abbr: "ISTQB", color: "#2563eb", icon: "shield", row: 1 },
+        { title: "AI Test Engineer", abbr: "AI", color: "#7c3aed", icon: "cpu", row: 1 },
+        { title: "Claude Max User", abbr: "C", color: "#d97706", icon: "zap", row: 1 },
+        { title: "SAFe", abbr: "SAFe", color: "#0d9488", icon: "layers", row: 2 },
+        { title: "Lean Six Sigma", abbr: "6σ", color: "#ca8a04", icon: "sigma", row: 2 },
+        { title: "KnowBe4 Security", abbr: "K4", color: "#dc2626", icon: "lock", row: 2 }
     ],
 
     // TestGenerator Pipeline Steps

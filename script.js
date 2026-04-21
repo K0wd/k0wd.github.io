@@ -19,8 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Render TestGenerator
     renderTestGenerator();
 
-    // Start demo animation
-    setTimeout(initPipelineDemo, 1500);
+    // Setup collapsible toggle
+    initTgToggle();
+
+    // Hero terminal animation
+    initHeroTerminal();
 });
 
 function renderProjects() {
@@ -86,17 +89,21 @@ function renderEducation() {
     if (!educationList || !portfolioData.education) return;
 
     educationList.innerHTML = portfolioData.education.map(edu => {
-        const color = edu.logoColor || '#4f8ff7';
-        const initial = getInitial(edu.institution);
+        var logoHtml;
+        if (edu.logoImage) {
+            logoHtml = '<img src="' + edu.logoImage + '" alt="' + edu.institution + '" class="edu-logo edu-logo-img">';
+        } else {
+            var color = edu.logoColor || '#4f8ff7';
+            var initial = getInitial(edu.institution);
+            logoHtml = '<div class="edu-logo" style="background: ' + color + '"><span class="logo-initial">' + initial + '</span></div>';
+        }
         return `
         <li class="item-list-item edu-item">
             <a href="${edu.url}">
-                <div class="edu-logo" style="background: ${color}">
-                    <span class="logo-initial">${initial}</span>
-                </div>
+                ${logoHtml}
                 <div class="edu-info">
-                    <span class="item-title">${edu.institution}</span>
-                    <span class="item-description">${edu.degree}</span>
+                    <span class="item-title">${edu.degree}</span>
+                    <span class="item-description">${edu.institution}</span>
                     <span class="item-meta">${edu.date}</span>
                 </div>
             </a>
@@ -125,7 +132,8 @@ function getCertIcon(icon) {
         layers: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
         sigma: '<path d="M18 7V4H6l6 8-6 8h12v-3"/>',
         cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
-        lock: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
+        lock: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+        zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'
     };
     return icons[icon] || icons.shield;
 }
@@ -134,14 +142,21 @@ function renderCertifications() {
     const certificationsList = document.getElementById('certifications-list');
     if (!certificationsList || !portfolioData.certifications) return;
 
-    certificationsList.innerHTML = portfolioData.certifications.map(cert => `
-        <li class="cert-tile">
-            <div class="cert-icon" style="background: ${cert.color}">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${getCertIcon(cert.icon)}</svg>
-            </div>
-            <span class="cert-label">${cert.title}</span>
-        </li>
-    `).join('');
+    var html = '';
+    var currentRow = 1;
+    portfolioData.certifications.forEach(function(cert) {
+        if (cert.row && cert.row !== currentRow) {
+            html += '<li class="cert-break"></li>';
+            currentRow = cert.row;
+        }
+        html += '<li class="cert-tile">'
+            + '<div class="cert-icon" style="background: ' + cert.color + '">'
+            + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + getCertIcon(cert.icon) + '</svg>'
+            + '</div>'
+            + '<span class="cert-label">' + cert.title + '</span>'
+            + '</li>';
+    });
+    certificationsList.innerHTML = html;
 }
 
 function renderTestGenerator() {
@@ -169,6 +184,101 @@ function renderTestGenerator() {
             </div>
         </div>
     `).join('');
+}
+
+function initHeroTerminal() {
+    var body = document.getElementById('hero-term-body');
+    if (!body) return;
+
+    var sequences = [
+        [
+            { text: '<span class="cmd">$</span> <span class="info">npx playwright test</span>' },
+            { text: '<span class="dim">───────────────────────────</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">auth/login.spec.ts</span>       <span class="dim">420ms</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">auth/session.spec.ts</span>     <span class="dim">310ms</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">api/users.spec.ts</span>        <span class="dim">280ms</span>' },
+            { text: '<span class="fail">FAIL</span>  <span class="info">auth/callback.spec.ts</span>    <span class="dim">1.2s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">ui/dashboard.spec.ts</span>     <span class="dim">390ms</span>' },
+            { text: '<span class="dim">───────────────────────────</span>' },
+            { text: '<span class="info">Results:</span> <span class="pass">4 passed</span> <span class="fail">1 failed</span> <span class="dim">2.6s</span>' }
+        ],
+        [
+            { text: '<span class="cmd">$</span> <span class="info">pytest tests/ -v</span>' },
+            { text: '<span class="dim">───────────────────────────</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">test_create_user</span>         <span class="dim">0.12s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">test_update_profile</span>      <span class="dim">0.08s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">test_delete_account</span>      <span class="dim">0.15s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">test_list_permissions</span>    <span class="dim">0.09s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">test_rate_limiter</span>        <span class="dim">0.22s</span>' },
+            { text: '<span class="dim">───────────────────────────</span>' },
+            { text: '<span class="info">Results:</span> <span class="pass">5 passed</span> <span class="dim">0.66s</span>' }
+        ],
+        [
+            { text: '<span class="cmd">$</span> <span class="info">robot --suite smoke tests/</span>' },
+            { text: '<span class="dim">───────────────────────────</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">Login With Valid Creds</span>    <span class="dim">1.1s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">Navigate Dashboard</span>       <span class="dim">0.8s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">Search Functionality</span>     <span class="dim">0.9s</span>' },
+            { text: '<span class="pass">PASS</span>  <span class="info">Export Report CSV</span>        <span class="dim">1.3s</span>' },
+            { text: '<span class="fail">FAIL</span>  <span class="info">Upload Large File</span>        <span class="dim">5.0s</span>' },
+            { text: '<span class="dim">───────────────────────────</span>' },
+            { text: '<span class="info">Results:</span> <span class="pass">4 passed</span> <span class="fail">1 failed</span> <span class="dim">9.1s</span>' }
+        ]
+    ];
+
+    var seqIndex = 0;
+
+    function runSequence() {
+        body.innerHTML = '';
+        var lines = sequences[seqIndex];
+        seqIndex = (seqIndex + 1) % sequences.length;
+
+        lines.forEach(function(line, i) {
+            var el = document.createElement('div');
+            el.className = 'hero-term-line';
+            el.innerHTML = line.text;
+            body.appendChild(el);
+
+            setTimeout(function() {
+                el.classList.add('visible');
+            }, 200 + i * 300);
+        });
+
+        setTimeout(runSequence, lines.length * 300 + 4000);
+    }
+
+    setTimeout(runSequence, 800);
+}
+
+function initTgToggle() {
+    var btn = document.getElementById('tg-toggle');
+    var closeBtn = document.getElementById('tg-close');
+    var panel = document.getElementById('tg-collapsible');
+    var demoStarted = false;
+    if (!btn || !panel || !closeBtn) return;
+
+    function openDemo() {
+        btn.classList.add('hidden');
+        panel.classList.add('open');
+        setTimeout(function() {
+            closeBtn.classList.add('visible');
+        }, 300);
+        if (!demoStarted) {
+            demoStarted = true;
+            setTimeout(initPipelineDemo, 800);
+        }
+    }
+
+    function closeDemo() {
+        closeBtn.classList.remove('visible');
+        panel.classList.remove('open');
+        setTimeout(function() {
+            btn.classList.remove('hidden');
+        }, 400);
+    }
+
+    btn.addEventListener('click', openDemo);
+    closeBtn.addEventListener('click', closeDemo);
 }
 
 function initPipelineDemo() {
@@ -422,131 +532,69 @@ function initPipelineDemo() {
     observer.observe(document.getElementById('tg-pipeline'));
 }
 
-// Work Carousel Functionality
+// Work Carousel - 3 items per page
 function initWorkCarousel() {
-    const workList = document.getElementById('work-list');
-    const workContainer = workList?.closest('.work-container');
-    const prevBtn = document.getElementById('work-prev');
-    const nextBtn = document.getElementById('work-next');
-    
+    var workList = document.getElementById('work-list');
+    var workContainer = workList ? workList.closest('.work-container') : null;
+    var prevBtn = document.getElementById('work-prev');
+    var nextBtn = document.getElementById('work-next');
+
     if (!workList || !workContainer || !prevBtn || !nextBtn) return;
-    
-    const items = workList.querySelectorAll('.work-item');
-    const itemsPerPage = 5;
-    const totalPages = Math.ceil(items.length / itemsPerPage);
-    
+
+    var items = workList.querySelectorAll('.work-item');
+    var itemsPerPage = 3;
+    var totalPages = Math.ceil(items.length / itemsPerPage);
+
     if (items.length <= itemsPerPage) {
-        // Hide navigation if 5 or fewer items
         prevBtn.style.display = 'none';
         nextBtn.style.display = 'none';
         return;
     }
-    
-    let currentIndex = 0;
-    
-    function calculateContainerHeight() {
-        if (items.length === 0) return 0;
-        
-        // Calculate height of first 5 items
-        let totalHeight = 0;
-        const visibleItems = Math.min(itemsPerPage, items.length);
-        
-        for (let i = 0; i < visibleItems; i++) {
-            if (items[i]) {
-                const item = items[i];
-                const itemHeight = item.offsetHeight || item.getBoundingClientRect().height;
-                totalHeight += itemHeight;
-                
-                // Add gap between items (except for last item)
-                if (i < visibleItems - 1) {
-                    totalHeight += 4; // --spacing-xs
-                }
-            }
+
+    var currentIndex = 0;
+
+    function getPageHeight(page) {
+        var start = page * itemsPerPage;
+        var end = Math.min(start + itemsPerPage, items.length);
+        var h = 0;
+        for (var i = start; i < end; i++) {
+            h += items[i].offsetHeight;
+            if (i < end - 1) h += 4;
         }
-        
-        return totalHeight;
+        return h;
     }
-    
-    function getItemHeight() {
-        if (items.length === 0) return 0;
-        
-        // Get average height of items
-        let totalHeight = 0;
-        const sampleSize = Math.min(5, items.length);
-        
-        for (let i = 0; i < sampleSize; i++) {
-            totalHeight += items[i].offsetHeight;
-        }
-        
-        const avgHeight = totalHeight / sampleSize;
-        const gap = 4; // --spacing-xs from CSS
-        return avgHeight + gap;
-    }
-    
+
     function updateCarousel() {
-        const itemHeight = getItemHeight();
-        const translateY = -currentIndex * itemHeight * itemsPerPage;
-        workList.style.transform = `translateY(${translateY}px)`;
-        
-        // Set container height to show exactly 5 items
-        const containerHeight = calculateContainerHeight();
-        if (containerHeight > 0) {
-            workContainer.style.height = `${containerHeight}px`;
-            workContainer.style.maxHeight = `${containerHeight}px`;
+        var offset = 0;
+        for (var p = 0; p < currentIndex; p++) {
+            offset += getPageHeight(p) + 4;
+        }
+        workList.style.transform = 'translateY(-' + offset + 'px)';
+
+        var ch = getPageHeight(currentIndex);
+        if (ch > 0) {
+            workContainer.style.height = ch + 'px';
+            workContainer.style.maxHeight = ch + 'px';
         }
         workContainer.style.overflow = 'hidden';
-        
-        // Update button states
+
         prevBtn.disabled = currentIndex === 0;
         nextBtn.disabled = currentIndex >= totalPages - 1;
     }
-    
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
+
+    prevBtn.addEventListener('click', function() {
+        if (currentIndex > 0) { currentIndex--; updateCarousel(); }
     });
-    
-    nextBtn.addEventListener('click', () => {
-        if (currentIndex < totalPages - 1) {
-            currentIndex++;
-            updateCarousel();
-        }
+
+    nextBtn.addEventListener('click', function() {
+        if (currentIndex < totalPages - 1) { currentIndex++; updateCarousel(); }
     });
-    
-    // Initialize after items are rendered
-    setTimeout(() => {
-        // Calculate and set container height to show exactly 5 items
-        let totalHeight = 0;
-        const visibleItems = Math.min(itemsPerPage, items.length);
-        
-        for (let i = 0; i < visibleItems; i++) {
-            if (items[i]) {
-                const item = items[i];
-                const itemHeight = item.offsetHeight || item.getBoundingClientRect().height;
-                totalHeight += itemHeight;
-                if (i < visibleItems - 1) {
-                    totalHeight += 4; // gap
-                }
-            }
-        }
-        
-        if (totalHeight > 0) {
-            workContainer.style.height = `${totalHeight}px`;
-            workContainer.style.maxHeight = `${totalHeight}px`;
-            workContainer.style.overflow = 'hidden';
-        }
-        
-        updateCarousel();
-    }, 500);
-    
-    // Recalculate on window resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
+
+    setTimeout(updateCarousel, 300);
+
+    var resizeTimeout;
+    window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            updateCarousel();
-        }, 150);
+        resizeTimeout = setTimeout(updateCarousel, 150);
     });
 }
