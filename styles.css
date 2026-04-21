@@ -224,7 +224,7 @@ main {
         grid-row: 1;
     }
 
-    .hero-certs {
+    .cert-fold {
         grid-column: 1;
         grid-row: 2;
     }
@@ -632,6 +632,43 @@ main {
 
 .hero-certs {
     margin-bottom: var(--spacing-xs);
+}
+
+.cert-fold {
+    margin-bottom: var(--spacing-xs);
+}
+
+.cert-fold-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .cert-fold-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.5px;
+        padding: 8px 0;
+        list-style: none;
+    }
+
+    .cert-fold-toggle::-webkit-details-marker {
+        display: none;
+    }
+
+    .cert-fold-toggle::before {
+        content: '\25B6';
+        display: inline-block;
+        margin-right: 6px;
+        font-size: 10px;
+        transition: transform 0.2s ease;
+    }
+
+    .cert-fold[open] > .cert-fold-toggle::before {
+        transform: rotate(90deg);
+    }
 }
 
 .cert-break {
