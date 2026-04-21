@@ -976,8 +976,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: var(--spacing-md);
+    gap: 12px;
     margin-bottom: var(--spacing-lg);
 }
 
@@ -997,6 +996,221 @@ main {
     transition: all 0.3s ease;
     opacity: 1;
     letter-spacing: 0.2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tg-expand-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: btn-shine 1.5s ease-in-out infinite;
+}
+
+@keyframes btn-shine {
+    0% { left: -100%; }
+    40% { left: 150%; }
+    100% { left: 150%; }
+}
+
+.tg-inquire-btn {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: #15803d;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 28px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.tg-inquire-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: btn-shine 1.5s ease-in-out infinite;
+}
+
+.tg-inquire-btn:hover {
+    background: #166534;
+    box-shadow: 0 4px 16px rgba(21, 128, 61, 0.3);
+}
+
+.tg-inquire-btn.visible {
+    display: inline-flex;
+}
+
+/* Contact Modal */
+.contact-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-modal-overlay.open {
+    display: flex;
+}
+
+.contact-modal {
+    background: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 32px;
+    width: 90%;
+    max-width: 440px;
+    position: relative;
+    animation: modal-in 0.3s ease;
+}
+
+@keyframes modal-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.contact-modal-close:hover {
+    color: #fff;
+}
+
+.contact-modal-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.contact-modal-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    margin: 0 0 20px;
+}
+
+.contact-field {
+    margin-bottom: 14px;
+}
+
+.contact-field label {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.contact-field input,
+.contact-field textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 13px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+    outline: none;
+    border-color: #15803d;
+}
+
+.contact-field textarea {
+    resize: vertical;
+}
+
+.contact-submit-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #15803d;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.2px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.contact-submit-btn:hover {
+    background: #166534;
+    box-shadow: 0 4px 16px rgba(21, 128, 61, 0.3);
+}
+
+.contact-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.contact-status {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 10px;
+    min-height: 20px;
+}
+
+.contact-status.success {
+    color: #4ade80;
+}
+
+.contact-status.error {
+    color: #f87171;
+}
+
+.tg-inquire-btn:hover {
+    background: #15803d;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(21, 128, 61, 0.3);
 }
 
 .tg-expand-btn:hover {

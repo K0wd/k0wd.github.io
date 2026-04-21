@@ -257,12 +257,19 @@ function initTgToggle() {
     var demoStarted = false;
     if (!btn || !panel || !closeBtn) return;
 
+    var inquireBtn = document.querySelector('.tg-inquire-btn');
+
     function openDemo() {
         btn.classList.add('hidden');
         panel.classList.add('open');
         setTimeout(function() {
             closeBtn.classList.add('visible');
         }, 300);
+        if (inquireBtn) {
+            setTimeout(function() {
+                inquireBtn.classList.add('visible');
+            }, 400);
+        }
         if (!demoStarted) {
             demoStarted = true;
             setTimeout(initPipelineDemo, 800);
@@ -271,6 +278,7 @@ function initTgToggle() {
 
     function closeDemo() {
         closeBtn.classList.remove('visible');
+        if (inquireBtn) inquireBtn.classList.remove('visible');
         panel.classList.remove('open');
         setTimeout(function() {
             btn.classList.remove('hidden');
@@ -598,3 +606,81 @@ function initWorkCarousel() {
         resizeTimeout = setTimeout(updateCarousel, 150);
     });
 }
+
+function initContactModal() {
+    var modal = document.getElementById('contact-modal');
+    var openBtn = document.getElementById('inquire-open');
+    var closeBtn = document.getElementById('contact-close');
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('contact-status');
+    var submitBtn = document.getElementById('contact-submit');
+    if (!modal || !form) return;
+
+    var ak = document.getElementById('contact-ak');
+    if (ak) ak.value = ['99899ae5','a70f','426c','b17e','9625cee0faa6'].join('-');
+
+    function openModal() {
+        modal.classList.add('open');
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        status.textContent = '';
+        status.className = 'contact-status';
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    document.querySelectorAll('.contact-modal-trigger').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    });
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        status.textContent = '';
+        status.className = 'contact-status';
+
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+            if (data.success) {
+                status.textContent = 'Message sent! I\'ll get back to you soon.';
+                status.className = 'contact-status success';
+                form.reset();
+                setTimeout(closeModal, 2500);
+            } else {
+                status.textContent = 'Something went wrong. Please try again.';
+                status.className = 'contact-status error';
+            }
+        })
+        .catch(function() {
+            status.textContent = 'Network error. Please try again.';
+            status.className = 'contact-status error';
+        })
+        .finally(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initContactModal);
