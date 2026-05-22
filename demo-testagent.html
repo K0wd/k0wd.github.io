@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestAgent Demo — Kim E. Bandeleon</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0f1117; --bg2: #161920; --bg3: #1c1f28; --bg4: #222631;
+            --border: #2a2e3a; --border-s: #1f222c;
+            --t1: #eef0f4; --t2: #9ca3b0; --t3: #8b929e;
+            --accent: #4f8ff7; --accent-dim: rgba(79,143,247,0.1);
+            --green: #22c55e; --yellow: #eab308; --red: #ef4444;
+            --green-bg: #15803d;
+            --radius: 8px; --radius-lg: 12px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--t1); background: var(--bg); }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: #6ba1f9; }
+        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+        .demo-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(15,17,23,0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-s);
+            padding: 12px 24px; display: flex; align-items: center; gap: 16px;
+        }
+        .back-link { font-size: 0.875rem; font-weight: 500; color: var(--t2); display: flex; align-items: center; gap: 6px; }
+        .back-link:hover { color: var(--t1); }
+        .demo-title { font-size: 1rem; font-weight: 600; margin-left: auto; }
+        .demo-badge { font-size: 0.6875rem; font-weight: 600; background: var(--accent-dim); color: var(--accent); padding: 2px 10px; border-radius: 9999px; }
+
+        .demo-container { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+        .demo-intro { max-width: 640px; margin-bottom: 48px; }
+        .demo-intro h1 { font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+        .demo-intro p { color: var(--t2); font-size: 1.0625rem; line-height: 1.7; margin-bottom: 8px; }
+
+        .deploy-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .deploy-chip { font-size: 0.75rem; font-weight: 600; background: var(--bg3); border: 1px solid var(--border); color: var(--t2); padding: 4px 12px; border-radius: 9999px; }
+
+        /* Pipeline app mock */
+        .ta-app { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+        .ta-header {
+            display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+            border-bottom: 1px solid var(--border); flex-wrap: wrap;
+        }
+        .ta-logo { color: var(--accent); }
+        .ta-brand { font-size: 1rem; font-weight: 700; }
+        .ta-badge-pipe { font-size: 0.625rem; font-weight: 600; background: var(--accent-dim); color: var(--accent); padding: 2px 8px; border-radius: 4px; }
+        .ta-controls { display: flex; gap: 10px; align-items: center; margin-left: auto; flex-wrap: wrap; }
+        .ta-ctrl-group { display: flex; flex-direction: column; gap: 2px; }
+        .ta-ctrl-label { font-size: 0.5625rem; font-weight: 600; color: var(--t3); text-transform: uppercase; letter-spacing: 0.5px; }
+        .ta-ctrl-input { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; color: var(--t1); font-family: var(--mono); min-width: 80px; }
+        .ta-run-btn { background: var(--green-bg); color: #fff; border: none; border-radius: 6px; padding: 6px 16px; font-size: 0.8125rem; font-weight: 600; cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 6px; }
+        .ta-run-btn:hover { background: #166534; }
+
+        /* Pipeline grid */
+        .ta-pipeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; padding: 16px 20px; }
+        .ta-step { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; gap: 6px; min-height: 90px; }
+        .ta-step-header { display: flex; justify-content: space-between; align-items: center; }
+        .ta-step-label { font-size: 0.625rem; font-weight: 600; color: var(--t3); letter-spacing: 0.5px; font-family: var(--mono); }
+        .ta-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+        .ta-step-dot.pass { background: var(--green); }
+        .ta-step-dot.fail { background: var(--red); }
+        .ta-step-dot.processing { background: var(--yellow); animation: pulse 1.2s ease infinite; }
+        .ta-step-title { font-size: 0.8125rem; font-weight: 600; color: var(--t1); line-height: 1.3; }
+
+        /* Log panel */
+        .ta-log { border-top: 1px solid var(--border); }
+        .ta-log-tabs { display: flex; padding: 0 20px; border-bottom: 1px solid var(--border); }
+        .ta-log-tab { padding: 8px 12px; font-size: 0.75rem; font-weight: 500; color: var(--t3); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font); }
+        .ta-log-tab.active { color: var(--t1); border-bottom-color: var(--accent); }
+        .ta-log-body { padding: 12px 20px; max-height: 180px; overflow-y: auto; font-family: var(--mono); font-size: 0.75rem; line-height: 1.8; }
+        .ta-log-line { display: flex; gap: 8px; }
+        .ta-log-time { color: var(--t3); min-width: 70px; }
+        .ta-log-text { color: var(--t2); }
+        .ta-log-text.pass { color: var(--green); }
+        .ta-log-text.fail { color: var(--red); }
+        .ta-log-text.warn { color: var(--yellow); }
+        .ta-log-text.info { color: var(--accent); }
+
+        .demo-note { max-width: 640px; margin-top: 32px; padding: 16px 20px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.875rem; color: var(--t2); line-height: 1.6; }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-header">
+        <a href="index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Back to Portfolio
+        </a>
+        <span class="demo-title">TestAgent</span>
+        <span class="demo-badge">Demo</span>
+    </div>
+
+    <div class="demo-container">
+        <div class="demo-intro">
+            <h1>TestAgent</h1>
+            <p>AI-powered test platform that takes a ticket and turns it into executed tests with posted results. One platform, deployed across multiple client environments.</p>
+            <div class="deploy-chips">
+                <span class="deploy-chip">AJTickets</span>
+                <span class="deploy-chip">Service Management</span>
+                <span class="deploy-chip">AtMail</span>
+            </div>
+        </div>
+
+        <div class="ta-app">
+            <div class="ta-header">
+                <svg class="ta-logo" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                <span class="ta-brand">TestAgent</span>
+                <span class="ta-badge-pipe">QA Pipeline</span>
+                <div class="ta-controls">
+                    <div class="ta-ctrl-group">
+                        <span class="ta-ctrl-label">Ticket</span>
+                        <input class="ta-ctrl-input" value="SM-4827" readonly>
+                    </div>
+                    <div class="ta-ctrl-group">
+                        <span class="ta-ctrl-label">Steps</span>
+                        <input class="ta-ctrl-input" value="1 — 11" readonly style="min-width: 60px;">
+                    </div>
+                    <button class="ta-run-btn" id="ta-run">&#9654; Run</button>
+                </div>
+            </div>
+
+            <div class="ta-pipeline" id="ta-pipeline">
+                <!-- Filled by JS -->
+            </div>
+
+            <div class="ta-log">
+                <div class="ta-log-tabs">
+                    <button class="ta-log-tab active">Live Logs</button>
+                    <button class="ta-log-tab">Run History</button>
+                </div>
+                <div class="ta-log-body" id="ta-log-body">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-note">
+            This is a visual demo of the TestAgent pipeline. The live platform reads tickets from your tracker (Jira, Azure DevOps), generates test plans via AI, writes and executes Playwright tests, then posts results back to the tracker and Slack.
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var steps = [
+            { step: 1, title: "Verify Auth" },
+            { step: 2, title: "Find Ticket" },
+            { step: 3, title: "Review Ticket" },
+            { step: 4, title: "Review Code" },
+            { step: 5, title: "Draft Test Plan" },
+            { step: 6, title: "Write Gherkin" },
+            { step: 7, title: "Generate Tests" },
+            { step: 8, title: "Execute Tests" },
+            { step: 9, title: "Determine Results" },
+            { step: 10, title: "Post Results" },
+            { step: 11, title: "Transition Ticket" }
+        ];
+
+        var results = { 8: 'fail', 11: 'warn' };
+
+        var logs = [
+            [{ t: '> jira auth --token ****', c: 'info' }, { t: '  200 OK — session: usr_k0wd_4a82f', c: 'pass' }],
+            [{ t: '> find ticket SM-4827', c: 'info' }, { t: '  Found: SM-4827 "Login flow regression"', c: 'pass' }],
+            [{ t: '> review ticket SM-4827', c: 'info' }, { t: '  Acceptance Criteria: 4 items parsed', c: 'pass' }],
+            [{ t: '> review code --pr #1847', c: 'info' }, { t: '  Diff: +142 -38 across 6 files — no blockers', c: 'pass' }],
+            [{ t: '> draft test-plan --scenarios auto', c: 'info' }, { t: '  Test plan generated — 6 scenarios', c: 'pass' }],
+            [{ t: '> write gherkin --feature login', c: 'info' }, { t: '  14 steps across 3 feature files', c: 'pass' }],
+            [{ t: '> generate tests --framework playwright', c: 'info' }, { t: '  8 test cases generated', c: 'pass' }],
+            [{ t: '> execute tests --headless --parallel 4', c: 'info' }, { t: '  PASS  test_login_valid       420ms', c: 'pass' }, { t: '  PASS  test_oauth_state        280ms', c: 'pass' }, { t: '  FAIL  test_login_redirect    1240ms', c: 'fail' }, { t: '  Result: 6 passed, 2 failed   4.48s', c: 'fail' }],
+            [{ t: '> determine results', c: 'info' }, { t: '  Pass rate: 75% (6/8)', c: 'warn' }, { t: '  Root cause: callback.ts missing redirect', c: 'fail' }],
+            [{ t: '> post results --target jira,slack', c: 'info' }, { t: '  Comment posted to SM-4827', c: 'pass' }, { t: '  Slack #qa-alerts notified', c: 'pass' }],
+            [{ t: '> transition ticket SM-4827', c: 'info' }, { t: '  WARNING: 2 test failures', c: 'warn' }, { t: '  Ticket NOT transitioned — needs-fix', c: 'warn' }]
+        ];
+
+        var pipeline = document.getElementById('ta-pipeline');
+        var logBody = document.getElementById('ta-log-body');
+        var runBtn = document.getElementById('ta-run');
+        var running = false;
+
+        function renderPipeline() {
+            pipeline.innerHTML = steps.map(function(s) {
+                return '<div class="ta-step" id="step-' + s.step + '">'
+                    + '<div class="ta-step-header">'
+                    + '<span class="ta-step-label">STEP ' + String(s.step).padStart(2, '0') + '</span>'
+                    + '<span class="ta-step-dot" id="dot-' + s.step + '"></span>'
+                    + '</div>'
+                    + '<div class="ta-step-title">' + s.title + '</div>'
+                    + '</div>';
+            }).join('');
+        }
+
+        function timestamp() {
+            return new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        function addLog(text, cls) {
+            var line = document.createElement('div');
+            line.className = 'ta-log-line';
+            line.innerHTML = '<span class="ta-log-time">' + timestamp() + '</span>'
+                + '<span class="ta-log-text ' + (cls || '') + '">' + text + '</span>';
+            logBody.appendChild(line);
+            logBody.scrollTop = logBody.scrollHeight;
+        }
+
+        function runDemo() {
+            if (running) return;
+            running = true;
+            renderPipeline();
+            logBody.innerHTML = '';
+            var i = 0;
+
+            function processStep() {
+                if (i >= steps.length) {
+                    running = false;
+                    runBtn.textContent = '▶ Run';
+                    return;
+                }
+
+                var dot = document.getElementById('dot-' + steps[i].step);
+                dot.className = 'ta-step-dot processing';
+
+                var stepLogs = logs[i] || [];
+                var logIdx = 0;
+
+                function showNextLog() {
+                    if (logIdx >= stepLogs.length) {
+                        var result = results[steps[i].step] || 'pass';
+                        dot.className = 'ta-step-dot ' + result;
+                        i++;
+                        setTimeout(processStep, 300 + Math.random() * 300);
+                        return;
+                    }
+                    addLog(stepLogs[logIdx].t, stepLogs[logIdx].c);
+                    logIdx++;
+                    setTimeout(showNextLog, 120 + Math.random() * 200);
+                }
+
+                showNextLog();
+            }
+
+            runBtn.textContent = 'Running...';
+            processStep();
+        }
+
+        renderPipeline();
+        addLog('Waiting for run...', 'info');
+        runBtn.addEventListener('click', runDemo);
+
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (!prefersReduced.matches) {
+            setTimeout(runDemo, 1200);
+        }
+    })();
+    </script>
+</body>
+</html>

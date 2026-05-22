@@ -3,219 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kim E. Bandeleon - Quality and Automation Engineer">
-    <title>Kim E. Bandeleon</title>
+    <meta name="description" content="Kim E. Bandeleon — QA & AI Management Specialist. 15+ years building test automation, AI pipelines, and quality strategy.">
+    <title>Kim E. Bandeleon — QA & AI Management Specialist</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'galaxy');</script>
 </head>
 <body>
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content hero-grid">
-                    <div class="hero-intro">
-                        <div class="hero-badges">
-                            <span class="hero-badge">AI</span>
-                            <span class="hero-badge">Quality</span>
-                            <span class="hero-badge">Automation Engineer</span>
-                        </div>
-                        <h1>Kim E. Bandeleon</h1>
-                        <p class="hero-tagline">Bringing confidence to software, one test at a time.</p>
-                        <div class="hero-inline-row">
-                            <ul class="social-links">
-                                <li>
-                                    <a href="#" class="contact-modal-trigger" aria-label="Email">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                            <polyline points="22,6 12,13 2,6"></polyline>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://github.com/k0wd" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.linkedin.com/in/kim-bandeleon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                            <rect x="2" y="9" width="4" height="12"></rect>
-                                            <circle cx="4" cy="4" r="2"></circle>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="hero-stat-tile">15+ Years</div>
-                            <div class="hero-stat-tile">10+ Companies</div>
-                        </div>
-                    </div>
-                <details class="cert-fold" id="cert-fold">
-                    <summary class="cert-fold-toggle">Certifications</summary>
-                    <ul class="cert-row hero-certs" id="certifications-list">
-                        <!-- Certifications will be populated from data.js -->
-                    </ul>
-                </details>
-                    <div class="hero-right-col">
-                        <div class="hero-terminal" id="hero-terminal">
-                            <div class="hero-term-bar">
-                                <span class="hero-term-dot" style="background:#ef4444"></span>
-                                <span class="hero-term-dot" style="background:#eab308"></span>
-                                <span class="hero-term-dot" style="background:#22c55e"></span>
-                                <span class="hero-term-title">test-runner</span>
-                            </div>
-                            <div class="hero-term-body" id="hero-term-body"></div>
-                            <div class="hero-term-stamp">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                    <polyline points="9 12 11 14 15 10"/>
-                                </svg>
-                                <span>QA</span>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </section>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-        <!-- AI Testing Framework Showcase - collapsed by default -->
-        <section class="content-section tg-showcase tg-featured" id="testgenerator">
-            <div class="tg-section-header">
-                <button class="tg-expand-btn" id="tg-toggle" aria-label="See AI Framework In Action">
-                    <span class="tg-expand-text">See AI Framework In Action</span>
-                </button>
-                <button class="tg-inquire-btn" id="inquire-open">Inquire Now!</button>
-            </div>
-            <button class="tg-close-btn" id="tg-close" aria-label="Close Demo">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <div class="tg-collapsible" id="tg-collapsible">
-                <div class="tg-app">
-                    <!-- Header Bar -->
-                    <div class="tg-header">
-                        <div class="tg-brand">
-                            <svg class="tg-logo" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                            </svg>
-                            <span class="tg-title">TestGenerator</span>
-                            <span class="tg-badge">QA Pipeline</span>
-                        </div>
-                        <div class="tg-controls">
-                            <div class="tg-control-group">
-                                <label>TICKET</label>
-                                <input type="text" class="tg-input" value="SM-XXXX" readonly>
-                            </div>
-                            <div class="tg-control-group">
-                                <label>FILTER</label>
-                                <select class="tg-select" disabled>
-                                    <option>My Tickets</option>
-                                </select>
-                            </div>
-                            <div class="tg-control-group">
-                                <label>STEPS</label>
-                                <div class="tg-steps-range">
-                                    <input type="text" class="tg-input tg-input-sm" value="1" readonly>
-                                    <span>to</span>
-                                    <input type="text" class="tg-input tg-input-sm" value="1" readonly>
-                                </div>
-                            </div>
-                            <button class="tg-run-btn">
-                                <span class="tg-play">&#9654;</span> Run
-                            </button>
-                        </div>
-                    </div>
+    <header class="site-header" id="site-header">
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="#" class="nav-brand" aria-label="Kim Bandeleon — Home">
+                <img src="favicon.svg" alt="" width="36" height="36" class="nav-logo">
+                <div class="nav-brand-text">
+                    <span class="nav-name">Kim Bandeleon</span>
+                    <span class="nav-subtitle">QA & AI SPECIALIST</span>
+                </div>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Contact Me <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+        </nav>
+    </header>
 
-                    <!-- Pipeline Steps Grid -->
-                    <div class="tg-pipeline" id="tg-pipeline">
-                        <!-- Steps rendered by JS -->
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="section-badge">QA & AI SPECIALIST</span>
+                    <h1 class="hero-title">Kim E. <span class="gradient-text">Bandeleon</span></h1>
+                    <p class="hero-desc"><strong>Test automation</strong>, <strong>AI-driven pipelines</strong>, and <strong>QA strategy</strong>.</p>
+                    <p class="hero-value">I help engineering teams stay <a href="#services" class="gradient-link">confident</a>, <a href="#services" class="gradient-link">efficient</a>, and <a href="#services" class="gradient-link">shipping</a> — so you can focus on building great products.</p>
+                    <div class="hero-stats" id="hero-stats"></div>
+                    <div class="hero-ctas">
+                        <a href="#contact" class="btn btn-primary">Contact Me <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                        <a href="#services" class="btn btn-outline">View Services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+                        <a href="#about" class="btn btn-outline">Download CV</a>
                     </div>
-
-                    <!-- Log Panel -->
-                    <div class="tg-log-panel">
-                        <div class="tg-log-tabs">
-                            <button class="tg-log-tab">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                Live Logs
-                            </button>
-                            <button class="tg-log-tab active">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                Run History
-                            </button>
-                            <span class="tg-log-spacer"></span>
-                            <button class="tg-log-clear">Clear</button>
-                        </div>
-                        <div class="tg-log-body">
-                            <span class="tg-log-empty">No runs yet</span>
-                        </div>
+                    <div class="hero-availability">
+                        <span class="availability-dot"></span>
+                        Available for new projects — Bulacan, Philippines
+                    </div>
+                </div>
+                <div class="hero-photo">
+                    <div class="hero-photo-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
-        <section class="content-section" id="education">
-            <h2 class="section-title">Education</h2>
-            <ul class="item-list" id="education-list">
-                <!-- Education items will be populated from data.js -->
-            </ul>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="content-section" id="projects">
-            <h2 class="section-title">Projects</h2>
-            <ul class="item-list" id="projects-list">
-                <!-- Projects will be populated from data.js -->
-            </ul>
-        </section>
-
-        <!-- Work Section -->
-        <section class="content-section work-section" id="work">
-            <div class="work-header">
-                <h2 class="section-title">Work</h2>
-                <div class="work-nav">
-                    <button class="work-nav-btn" id="work-prev" aria-label="Previous">←</button>
-                    <button class="work-nav-btn" id="work-next" aria-label="Next">→</button>
+        <!-- About Me -->
+        <section class="section" id="about">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> ABOUT ME</span>
+                <h2 class="section-title">A passion for <span class="gradient-text">quality engineering</span></h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-photo">
+                    <div class="about-photo-placeholder">
+                        <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <p class="about-bio" id="about-bio"></p>
+                    <p class="about-bio2" id="about-bio2"></p>
+                    <div class="about-stats" id="about-stats"></div>
                 </div>
             </div>
-            <div class="work-container">
-                <ul class="item-list work-list" id="work-list">
-                    <!-- Work items will be populated from data.js -->
-                </ul>
+        </section>
+
+        <!-- Services -->
+        <section class="section section-alt" id="services">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> MY SERVICES</span>
+                <h2 class="section-title">Professional services <span class="gradient-text">tailored for you</span></h2>
+                <p class="section-subtitle">Everything you need to build confidence in your releases and scale your QA practice.</p>
+            </div>
+            <div class="services-grid" id="services-grid"></div>
+        </section>
+
+        <!-- Core Skills -->
+        <section class="section" id="skills">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> CORE SKILLS</span>
+                <h2 class="section-title">Strengths that drive <span class="gradient-text">real results</span></h2>
+                <p class="section-subtitle">Skills honed through real-world experience across enterprise and startup environments.</p>
+            </div>
+            <div class="skills-layout">
+                <div class="skills-bars" id="skills-bars"></div>
+                <div class="skills-traits" id="skills-traits"></div>
+            </div>
+        </section>
+
+        <!-- Tools & Software -->
+        <section class="section section-alt" id="tools">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> TOOLS & SOFTWARE</span>
+                <h2 class="section-title">The right tools, <span class="gradient-text">used right</span></h2>
+                <p class="section-subtitle">I work with official, safe, and industry-standard tools that modern QA teams trust.</p>
+            </div>
+            <div class="tools-grid" id="tools-grid"></div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section" id="experience">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> EXPERIENCE</span>
+                <h2 class="section-title">A track record of <span class="gradient-text">trusted delivery</span></h2>
+                <p class="section-subtitle">Selected highlights from 15+ years in quality engineering.</p>
+            </div>
+            <div class="timeline" id="timeline"></div>
+            <div class="timeline-nav" id="timeline-nav">
+                <button class="timeline-nav-btn" id="tl-prev" aria-label="Previous experiences"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg> Previous</button>
+                <span class="timeline-nav-info" id="tl-info"></span>
+                <button class="timeline-nav-btn" id="tl-next" aria-label="Next experiences">Next <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section section-alt" id="projects">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> AI PROJECTS</span>
+                <h2 class="section-title">Work that drives <span class="gradient-text">real impact</span></h2>
+                <p class="section-subtitle">A selection of products I've built to solve real QA problems.</p>
+            </div>
+            <div class="projects-grid" id="projects-grid"></div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section section-testimonials" id="testimonials">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> TESTIMONIALS</span>
+                <h2 class="section-title">What clients are <span class="gradient-text">saying</span></h2>
+            </div>
+            <div class="testimonials-carousel">
+                <div class="testimonial-card" id="testimonial-card"></div>
+                <div class="testimonial-nav">
+                    <button class="testimonial-btn" id="test-prev" aria-label="Previous testimonial"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                    <div class="testimonial-dots" id="testimonial-dots"></div>
+                    <button class="testimonial-btn" id="test-next" aria-label="Next testimonial"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Hire Me -->
+        <section class="section" id="why">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> WHY HIRE ME</span>
+                <h2 class="section-title">Reasons to <span class="gradient-text">work with me</span></h2>
+            </div>
+            <div class="why-grid" id="why-grid"></div>
+
+            <div class="info-cards">
+                <div class="info-card" id="edu-card"></div>
+                <div class="info-card" id="avail-card"></div>
+                <div class="info-card" id="lang-card"></div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section section-contact" id="contact">
+            <div class="section-header">
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> GET IN TOUCH</span>
+                <h2 class="section-title">Let's build <span class="gradient-text">something great</span></h2>
+                <p class="section-subtitle">I'm ready to help your team ship with confidence and quality.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info" id="contact-info"></div>
+                <div class="contact-form-wrapper">
+                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" id="contact-ak" value="">
+                        <input type="hidden" name="subject" value="Inquiry from Portfolio">
+                        <input type="hidden" name="from_name" value="Portfolio Contact Form">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="contact-name">YOUR NAME</label>
+                                <input type="text" id="contact-name" name="name" required placeholder="Your name">
+                            </div>
+                            <div class="form-field">
+                                <label for="contact-email">YOUR EMAIL</label>
+                                <input type="email" id="contact-email" name="email" required placeholder="you@company.com">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-subject">SUBJECT</label>
+                            <input type="text" id="contact-subject" name="subject_line" placeholder="QA Consulting / Test Automation inquiry">
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-message">MESSAGE</label>
+                            <textarea id="contact-message" name="message" required rows="5" placeholder="Tell me about your project and the quality challenges you're facing..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+                        <p class="form-note">I'll get back to you within 24 hours. For urgent matters, please email directly.</p>
+                        <div class="contact-status" id="contact-status"></div>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Contact Form Modal -->
-    <div class="contact-modal-overlay" id="contact-modal">
-        <div class="contact-modal">
-            <button class="contact-modal-close" id="contact-close" aria-label="Close">&times;</button>
-            <h3 class="contact-modal-title">Get In Touch</h3>
-            <p class="contact-modal-desc">Have a question or want to work together? Send me a message.</p>
-            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" id="contact-ak" value="">
-                <input type="hidden" name="subject" value="Inquiry about AI QA Pipeline">
-                <input type="hidden" name="from_name" value="Portfolio Contact Form">
-                <div class="contact-field">
-                    <label for="contact-name">Name</label>
-                    <input type="text" id="contact-name" name="name" required placeholder="Your name">
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-col-brand">
+                <div class="footer-brand">
+                    <div class="footer-avatar">K</div>
+                    <div>
+                        <div class="footer-name">Kim E. Bandeleon</div>
+                        <div class="footer-title">QA & AI SPECIALIST</div>
+                    </div>
                 </div>
-                <div class="contact-field">
-                    <label for="contact-email">Email</label>
-                    <input type="email" id="contact-email" name="email" required placeholder="your@email.com">
-                </div>
-                <div class="contact-field">
-                    <label for="contact-message">Message</label>
-                    <textarea id="contact-message" name="message" required rows="4" placeholder="Tell me about your project or question..."></textarea>
-                </div>
-                <button type="submit" class="contact-submit-btn" id="contact-submit">Send Message</button>
-                <div class="contact-status" id="contact-status"></div>
-            </form>
+                <p class="footer-desc">Helping engineering teams ship confidently through AI-augmented test automation and quality strategy.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Get In Touch</h4>
+                <div class="footer-contact" id="footer-contact"></div>
+            </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kim E. Bandeleon. All rights reserved.</p>
+            <div class="theme-switcher" id="theme-switcher">
+                <button class="theme-btn" data-theme="light" aria-label="Light theme"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg> Light</button>
+                <button class="theme-btn active" data-theme="galaxy" aria-label="Galaxy theme"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Galaxy</button>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
 
     <script src="data.js"></script>
     <script src="script.js"></script>

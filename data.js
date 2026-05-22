@@ -1,282 +1,357 @@
-// Portfolio Data - Easy to update and extend
-// Simply add new items to the arrays below
-
 const portfolioData = {
-    // Personal Information
     personal: {
         name: "Kim E. Bandeleon",
-        title: "Quality and Automation Engineer",
-        location: "Marilao, Bulacan",
-        email: "Kim E. Bandeleon",
-        phone: "09778264301",
-        description: "I'm a Quality and Automation Engineer living in Marilao, Bulacan, currently working at AtMail."
+        firstName: "Kim",
+        lastName: "Bandeleon",
+        title: "QA & AI Management Specialist",
+        headline: "Quality engineering powered by AI.",
+        subheadline: "Specialized in test automation, AI-driven pipelines, and QA strategy.",
+        valueProp: "I help engineering teams ship faster, catch more bugs, and build confidence in every release — so you can focus on building great products.",
+        location: "Marilao, Bulacan, Philippines",
+        email: "consult@testwithkim.com",
+        phone: "+63 917 XXX XXXX",
+        bio: "Hi! I'm Kim, a Senior QA & AI Management Specialist with 15+ years of experience across 15+ companies. I build AI-augmented test pipelines, design automation frameworks, and lead quality strategy for teams shipping production software daily. Currently at AtMail and consulting independently.",
+        bio2: "I combine deep QA expertise with hands-on AI tooling — from building Claude agent harnesses to deploying autonomous test platforms. I use AI agents for pipeline monitoring and spend most of my time on AI management, orchestrating intelligent systems that keep releases on track.",
+        availability: "Available for new projects"
     },
 
-    // Social Links
     social: [
+        { name: "Email", url: "#contact", icon: "email" },
+        { name: "GitHub", url: "https://github.com/k0wd", icon: "github" },
+        { name: "LinkedIn", url: "https://www.linkedin.com/in/kim-bandeleon", icon: "linkedin" }
+    ],
+
+    heroStats: [
+        { number: "15+", label: "Years Experience" },
+        { number: "15+", label: "Companies Served" },
+        { number: "30+", label: "Products QA'ed" }
+    ],
+
+    aboutStats: [
+        { number: "15+", label: "Years Experience", icon: "briefcase", color: "#6366f1" },
+        { number: "30+", label: "Products QA'ed", icon: "headphones", color: "#14b8a6" },
+        { number: "3+", label: "AI Products Deployed", icon: "cpu", color: "#f43f5e" },
+        { number: "10+", label: "AI Agents On Hand", icon: "bot", color: "#f59e0b" }
+    ],
+
+    services: [
         {
-            name: "Email",
-            url: "mailto:consult@testwithkim.com",
-            icon: "email"
+            name: "Test Automation",
+            icon: "code",
+            tagline: "Reliable, maintainable test suites that catch regressions before your users do.",
+            items: ["Playwright & Selenium", "API Testing", "CI/CD Integration", "Cross-browser Testing", "Mobile Testing (Appium)"]
         },
         {
-            name: "GitHub",
-            url: "https://github.com/k0wd",
-            icon: "github"
+            name: "AI Test Pipelines",
+            icon: "cpu",
+            tagline: "AI-powered pipelines that generate tests from tickets and post results automatically.",
+            items: ["Ticket-to-Test Automation", "AI Gherkin Authoring", "Claude Agent Harnesses", "Autonomous Test Execution", "Results Integration"]
         },
         {
-            name: "LinkedIn",
-            url: "https://www.linkedin.com/in/kim-bandeleon",
-            icon: "linkedin"
+            name: "QA Consulting",
+            icon: "strategy",
+            tagline: "End-to-end quality strategy tailored to your team's size, stack, and release cadence.",
+            items: ["Test Planning", "Framework Selection", "Team Mentoring", "Process Optimization", "Risk Assessment"]
+        },
+        {
+            name: "AI Agent Management",
+            icon: "bot",
+            tagline: "Build, audit, and manage AI agent ecosystems for development teams.",
+            items: ["Agent Design & Authoring", "Skill & Rule Libraries", "Marketplace Curation", "Performance Auditing", "Deployment Automation"]
         }
     ],
 
-    // Projects - Add your projects here
+    coreSkills: [
+        { name: "Test Automation", level: 97 },
+        { name: "AI Pipeline Design", level: 90 },
+        { name: "QA Strategy", level: 95 },
+        { name: "Playwright / Selenium", level: 96 },
+        { name: "CI/CD Integration", level: 92 },
+        { name: "Python / TypeScript", level: 93 },
+        { name: "Leadership & Mentoring", level: 88 }
+    ],
+
+    traits: [
+        "Methodical", "Detail-Oriented", "Fast Learner", "Proactive",
+        "Collaborative", "Results-Driven", "Adaptable", "Reliable"
+    ],
+
+    tools: [
+        { name: "Playwright", icon: "playwright", color: "#2EAD33" },
+        { name: "Selenium", icon: "selenium", color: "#43B02A" },
+        { name: "Python", icon: "python", color: "#3776AB" },
+        { name: "Claude AI", icon: "claude", color: "#D4A574" },
+        { name: "GitHub", icon: "github", color: "#181717" },
+        { name: "Jira", icon: "jira", color: "#0052CC" },
+        { name: "Azure DevOps", icon: "azure", color: "#0078D4" },
+        { name: "VS Code", icon: "vscode", color: "#007ACC" },
+        { name: "Docker", icon: "docker", color: "#2496ED" },
+        { name: "Cypress", icon: "cypress", color: "#17202C" }
+    ],
+
+    experience: [
+        {
+            date: "2023 — Present",
+            role: "Senior Quality Engineer",
+            company: "AtMail",
+            bullets: [
+                "Lead QA strategy and automation for enterprise email platform",
+                "Built AI-powered test pipeline (TestAgent) deployed across clients",
+                "Designed Claude agent harness and marketplace for team tooling",
+                "Reduced manual regression testing by 70% with Playwright suite"
+            ]
+        },
+        {
+            date: "2024 — 2025",
+            role: "Automation Engineer",
+            company: "Cualia",
+            bullets: [
+                "Built Playwright test automation for healthcare platform",
+                "Automated patient-flow and compliance-critical test scenarios",
+                "Integrated test suite into CI/CD with Python tooling",
+                "Ensured HIPAA-adjacent data handling in test environments"
+            ]
+        },
+        {
+            date: "2023 — 2024",
+            role: "Automation Engineer",
+            company: "Markets.com",
+            bullets: [
+                "Architected Cypress test suite for trading platform",
+                "Implemented API testing framework for financial endpoints",
+                "Integrated test automation into CI/CD pipeline",
+                "Mentored junior engineers on test best practices"
+            ]
+        },
+        {
+            date: "2022 — 2023",
+            role: "Automation Engineer",
+            company: "The Plate",
+            bullets: [
+                "Built Playwright-based end-to-end test framework from scratch",
+                "Established test automation standards and coding guidelines",
+                "Automated critical user journeys reducing release time by 40%",
+                "Introduced BDD with Gherkin for stakeholder-readable tests"
+            ]
+        },
+        {
+            date: "2021",
+            role: "Automation Engineer",
+            company: "Finastra",
+            bullets: [
+                "Automated regression tests for banking software using Selenium and Java",
+                "Executed API testing for financial transaction endpoints",
+                "Collaborated with cross-functional teams across time zones",
+                "Contributed to quality gates within enterprise release pipeline"
+            ]
+        },
+        {
+            date: "2020 — 2025",
+            role: "Automation Engineer",
+            company: "AJTickets",
+            bullets: [
+                "Maintained and expanded Selenium C# test suite",
+                "Deployed TestAgent AI platform for automated test generation",
+                "Managed Azure DevOps test pipelines across environments",
+                "Achieved 85% automated coverage on critical purchase flows"
+            ]
+        },
+        {
+            date: "2020",
+            role: "Test Engineer",
+            company: "Success Lion",
+            bullets: [
+                "Performed manual and automated testing for web applications",
+                "Wrote and maintained test cases and bug reports",
+                "Contributed to regression and smoke test suites",
+                "Coordinated defect triage with development team"
+            ]
+        },
+        {
+            date: "2019 — 2024",
+            role: "Automation Engineer",
+            company: "SolarPlus",
+            bullets: [
+                "Built Robot Framework test suites for solar energy platform",
+                "Automated mobile testing with Appium for field-service apps",
+                "Integrated Python-based test automation into CI pipelines",
+                "Maintained cross-platform test coverage across web and mobile"
+            ]
+        },
+        {
+            date: "2018",
+            role: "Test Engineer",
+            company: "Loan Market AU",
+            bullets: [
+                "Executed test plans for mortgage processing platform",
+                "Performed manual and exploratory testing across loan workflows",
+                "Documented defects and tracked resolution through to production",
+                "Supported UAT coordination with business stakeholders"
+            ]
+        },
+        {
+            date: "2017 — 2018",
+            role: "Automation Engineer",
+            company: "YesCourse",
+            bullets: [
+                "Built Selenium test suites for e-learning platform",
+                "Automated user registration and course enrollment flows",
+                "Integrated test automation with Python scripting",
+                "Reduced manual regression testing effort by 50%"
+            ]
+        },
+        {
+            date: "2017 — 2018",
+            role: "Automation Engineer",
+            company: "AnalyticsFire",
+            bullets: [
+                "Developed Selenium Java test automation for analytics dashboards",
+                "Automated data pipeline validation and reporting workflows",
+                "Collaborated with data engineering on test data management",
+                "Maintained test environment configurations across staging and prod"
+            ]
+        },
+        {
+            date: "2014 — 2019",
+            role: "Product Owner",
+            company: "Nokia",
+            bullets: [
+                "Owned product backlog for internal QA tooling platform",
+                "Coordinated between 3 dev teams and stakeholders across 4 countries",
+                "Drove adoption of automated testing reducing QA cycle by 50%",
+                "Led SAFe Agile transformation for QA organization"
+            ]
+        },
+        {
+            date: "2017 — 2018",
+            role: "Customer Support",
+            company: "BuyersDirect",
+            bullets: [
+                "Provided quality assurance for customer-facing support flows",
+                "Identified and reported product defects from support tickets",
+                "Contributed to internal knowledge base and process documentation",
+                "Collaborated with QA team on bug triage and prioritization"
+            ]
+        },
+        {
+            date: "2017 — 2018",
+            role: "Customer Support",
+            company: "JustWines",
+            bullets: [
+                "Performed manual testing and issue tracking for e-commerce platform",
+                "Reported and tracked defects through resolution lifecycle",
+                "Supported quality control processes for order fulfillment",
+                "Maintained test documentation and process guides"
+            ]
+        },
+        {
+            date: "2013 — 2014",
+            role: "Customer Support",
+            company: "AskMeFast",
+            bullets: [
+                "Conducted user testing and quality assurance for Q&A platform",
+                "Identified usability issues and reported bugs to development",
+                "Supported content moderation and platform stability",
+                "First professional role — built foundation in software quality"
+            ]
+        }
+    ],
+
     projects: [
         {
-            title: "AI Test Framework",
-            description: "AI-powered test generation and execution pipeline that automates end-to-end QA workflows from ticket to results.",
-            url: "#testgenerator",
-            external: false
+            name: "TestAgent Platform",
+            tagline: "AI-powered test pipeline — ticket to results, fully automated",
+            description: "Built an autonomous test platform that reads tickets, generates test plans, writes and executes Playwright tests, and posts results back to the tracker. Deployed across 3 client environments.",
+            tags: ["Python", "Playwright", "AI", "Claude"],
+            badge: "3 Clients",
+            badgeColor: "#14b8a6",
+            icon: "cpu",
+            iconBg: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+            demo: "demo-testagent.html"
         },
         {
-            title: "Test Automation Framework",
-            description: "Built a comprehensive test automation framework using Selenium and Python for web application testing.",
-            url: "#",
-            external: false
+            name: "AI Agent Marketplace",
+            tagline: "Browse, cart, and deploy AI agents into any project",
+            description: "A local catalog of Claude agents, skills, and rules. Add to cart, pick a deploy path, check out. Harness bundles provision entire QA roles in one click.",
+            tags: ["Python", "HTTP Server", "CLI"],
+            badge: "200+ Items",
+            badgeColor: "#6366f1",
+            icon: "store",
+            iconBg: "linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%)",
+            demo: "demo-marketplace.html"
         },
         {
-            title: "CI/CD Integration",
-            description: "Integrated automated testing into CI/CD pipelines, reducing manual testing time by 60%.",
-            url: "#",
-            external: false
+            name: "AI Reviewer",
+            tagline: "Audit and improve every AI rule shaping Claude",
+            description: "Scans 200+ items across global and per-project scopes. Review agent definitions, chat with Claude about improvements, and refine your AI harness.",
+            tags: ["Python", "Web UI", "Claude"],
+            badge: "206 Items",
+            badgeColor: "#f59e0b",
+            icon: "scan",
+            iconBg: "linear-gradient(135deg, #f59e0b 0%, #f97316 100%)",
+            demo: "demo-reviewer.html"
         }
     ],
 
-    // Work Experience - Add your work history here
-    // logoColor: brand-inspired background color for the initial avatar
-    work: [
+    testimonials: [
         {
-            company: "AtMail",
-            role: "Senior Quality Engineer",
-            date: "2023 — Present",
-            url: "https://atmail.com",
-            logoColor: "#4f5b6e",
-            logoText: "at",
-            skills: ["Test Automation", "Selenium", "Python", "Test Strategy"]
+            quote: "Kim transformed our QA process. His AI test pipeline caught bugs we'd been missing for months. The team ships with genuine confidence now.",
+            name: "Dmitri Volkov",
+            role: "Engineering Manager, Markets.com",
+            rating: 5
         },
         {
-            company: "Nokia",
-            role: "Product Owner",
-            date: "2014 — 2019",
-            url: "https://nokia.com",
-            logoColor: "#0066ff",
-            skills: ["Test Automation", "Product Management", "Agile", "Scrum"]
+            quote: "Methodical, fast, and deeply technical. Kim built our entire automation framework from scratch and mentored the team to maintain it independently.",
+            name: "Sarah Mitchell",
+            role: "CTO, The Plate",
+            rating: 5
         },
         {
-            company: "Markets.com",
-            role: "Automation Engineer",
-            date: "2023 — 2024",
-            url: "https://markets.com",
-            logoColor: "#1a1a3e",
-            logoGradient: "linear-gradient(135deg, #1a1a3e 0%, #2d1b69 100%)",
-            skills: ["Test Automation", "Cypress", "JavaScript", "API Testing"]
-        },
-        {
-            company: "The Plate",
-            role: "Automation Engineer",
-            date: "2022 — 2023",
-            url: "#",
-            logoColor: "#8a8a1a",
-            logoText: "tp",
-            logoRound: true,
-            skills: ["Test Automation", "Playwright", "TypeScript", "Git"]
-        },
-        {
-            company: "Finastra",
-            role: "Automation Engineer",
-            date: "2021",
-            url: "https://finastra.com",
-            logoColor: "#6d28d9",
-            skills: ["Test Automation", "Selenium", "Java", "API Testing"]
-        },
-        {
-            company: "SolarPlus",
-            role: "Automation Engineer",
-            date: "2019 — 2024",
-            url: "#",
-            logoColor: "#ea580c",
-            skills: ["Test Automation", "Robot Framework", "Python", "Appium"]
-        },
-        {
-            company: "AJTickets",
-            role: "Automation Engineer",
-            date: "2020 — 2025",
-            url: "#",
-            logoColor: "#dc2626",
-            skills: ["Test Automation", "Selenium", "C#", "Test Cases"]
-        },
-        {
-            company: "Cualia",
-            role: "Automation Engineer",
-            date: "2024 — 2025",
-            url: "#",
-            logoColor: "#0891b2",
-            skills: ["Test Automation", "Playwright", "Python", "Healthcare Testing"]
-        },
-        {
-            company: "Success Lion",
-            role: "Test Engineer",
-            date: "2020",
-            url: "#",
-            logoColor: "#ca8a04",
-            skills: ["Test Automation", "Manual Testing", "Test Cases", "Bug Tracking"]
-        },
-        {
-            company: "Loan Market AU",
-            role: "Test Engineer",
-            date: "2018",
-            url: "#",
-            logoColor: "#0d9488",
-            skills: ["Test Automation", "Test Planning", "Manual Testing", "Test Cases"]
-        },
-        {
-            company: "YesCourse",
-            role: "Automation Engineer",
-            date: "2017 — 2018",
-            url: "#",
-            logoColor: "#16a34a",
-            skills: ["Test Automation", "Selenium", "Python", "Web Testing"]
-        },
-        {
-            company: "AnalyticsFire",
-            role: "Automation Engineer",
-            date: "2017 — 2018",
-            url: "#",
-            logoColor: "#e11d48",
-            skills: ["Test Automation", "Selenium", "Java", "Data Testing"]
-        },
-        {
-            company: "BuyersDirect",
-            role: "Customer Support",
-            date: "2017 — 2018",
-            url: "#",
-            logoColor: "#2563eb",
-            skills: ["Test Automation", "Customer Support", "Quality Assurance", "Bug Reporting"]
-        },
-        {
-            company: "JustWines",
-            role: "Customer Support",
-            date: "2017 — 2018",
-            url: "#",
-            logoColor: "#9333ea",
-            skills: ["Test Automation", "Manual Testing", "Issue Tracking", "Quality Control"]
-        },
-        {
-            company: "AskMeFast",
-            role: "Customer Support",
-            date: "2013 — 2014",
-            url: "#",
-            logoColor: "#0284c7",
-            skills: ["Test Automation", "User Testing", "Quality Assurance", "Support"]
+            quote: "His Claude agent marketplace is a game-changer for how we deploy AI tooling. What used to take hours of manual setup now happens in one click.",
+            name: "Jayson Hawes",
+            role: "Lead Developer, PowerSlice LLC",
+            rating: 5
         }
     ],
 
-    // Education
+    whyHireMe: [
+        { title: "Deep Expertise", description: "15+ years in QA across fintech, e-commerce, telecom, and SaaS.", icon: "award" },
+        { title: "AI-First Approach", description: "I build AI pipelines that automate the boring parts of testing.", icon: "zap" },
+        { title: "Clear Communication", description: "Prompt updates, detailed reports — no surprises.", icon: "message" },
+        { title: "Timezone Flexible", description: "Available across multiple time zones for async and sync work.", icon: "globe" },
+        { title: "Results-Driven", description: "Your quality goals are my top priority. Every engagement has measurable outcomes.", icon: "target" }
+    ],
+
     education: [
         {
             institution: "University of the East",
-            degree: "BS Computer Engineering",
+            degree: "Bachelor of Science in Computer Engineering",
             date: "2009 — 2014",
-            url: "#",
-            logoImage: "UE-3d-seal.png"
+            logoImage: "UE-3d-seal-sm.png"
         }
     ],
 
-    // Skills - Organized by category
-    skills: [
-        {
-            category: "Testing Frameworks",
-            items: [
-                "Selenium WebDriver",
-                "Robot Framework",
-                "Cypress",
-                "Playwright",
-                "Appium"
-            ]
-        },
-        {
-            category: "Programming Languages",
-            items: [
-                "Python",
-                "Java",
-                "C#",
-                "R",
-                "JavaScript"
-            ]
-        },
-        {
-            category: "Testing & Quality",
-            items: [
-                "Manual Testing",
-                "Automated Testing",
-                "Test Case Design",
-                "Test Planning & Strategy",
-                "Agile Methodologies"
-            ]
-        },
-        {
-            category: "Tools & Technologies",
-            items: [
-                "CI/CD",
-                "Git",
-                "JIRA",
-                "AI & Prompt Engineering",
-                "API Testing"
-            ]
-        }
+    availabilityOptions: [
+        "Full-Time", "Part-Time", "Freelance Projects", "Consulting"
     ],
 
-    // Certifications - displayed as compact horizontal tiles
+    languages: [
+        { name: "English", level: "Fluent", percent: 95 },
+        { name: "Filipino", level: "Native", percent: 100 }
+    ],
+
     certifications: [
-        { title: "ISTQB CTFL", abbr: "ISTQB", color: "#2563eb", icon: "shield", row: 1 },
-        { title: "AI Test Engineer", abbr: "AI", color: "#7c3aed", icon: "cpu", row: 1 },
-        { title: "Claude Max User", abbr: "C", color: "#d97706", icon: "zap", row: 1 },
-        { title: "SAFe", abbr: "SAFe", color: "#0d9488", icon: "layers", row: 2 },
-        { title: "Lean Six Sigma", abbr: "6σ", color: "#ca8a04", icon: "sigma", row: 2 },
-        { title: "KnowBe4 Security", abbr: "K4", color: "#dc2626", icon: "lock", row: 2 }
+        { title: "ISTQB CTFL", abbr: "ISTQB", color: "#2563eb", icon: "shield" },
+        { title: "AI Test Engineer", abbr: "AI", color: "#7c3aed", icon: "cpu" },
+        { title: "Claude Max User", abbr: "C", color: "#d97706", icon: "zap" },
+        { title: "SAFe", abbr: "SAFe", color: "#0d9488", icon: "layers" },
+        { title: "Lean Six Sigma", abbr: "6s", color: "#ca8a04", icon: "sigma" },
+        { title: "KnowBe4 Security", abbr: "K4", color: "#dc2626", icon: "lock" }
     ],
 
-    // TestGenerator Pipeline Steps
-    // TestGenerator Pipeline Steps
-    // status: "pass" = green, "fail" = red, "idle" = gray (no run yet)
-    testGeneratorSteps: [
-        { step: 1, title: "Verify Jira Auth", status: "pass" },
-        { step: 2, title: "Find Ticket", status: "pass" },
-        { step: 3, title: "Review Ticket", status: "pass" },
-        { step: 4, title: "Review Code", status: "pass" },
-        { step: 5, title: "Draft Test Plan", status: "pass" },
-        { step: 6, title: "Write Gherkin Steps", status: "pass" },
-        { step: 7, title: "Write Automated Tests", status: "fail" },
-        { step: 8, title: "Execute Tests", status: "idle" },
-        { step: 9, title: "Determine Results", status: "idle" },
-        { step: 10, title: "Post Results", status: "idle" },
-        { step: 11, title: "Transition Ticket", status: "idle" }
-    ],
-
-    // Trainings & Workshops
-    trainings: [
-        {
-            title: "Sustaining Innovations in TECH",
-            description: "Technology, Education, Community and Human Development",
-            date: "April 2019",
-            location: "FEU - 6th Technofest"
-        },
-        {
-            title: "Automation of Everyday Life",
-            description: "University of the East - Caloocan Tech Talk",
-            date: "March 2019",
-            location: "UE Caloocan"
-        }
+    companyLogos: [
+        { name: "AtMail" }, { name: "Nokia" }, { name: "Markets.com" },
+        { name: "Finastra" }, { name: "AJTickets" }, { name: "Cualia" },
+        { name: "SolarPlus" }, { name: "The Plate" }, { name: "YesCourse" }
     ]
 };
