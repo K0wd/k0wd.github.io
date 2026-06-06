@@ -1,0 +1,87 @@
+{
+  "mcpServers": {
+    "figma-dev-mode": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp"
+    },
+    "figma-context": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--figma-api-key=${FIGMA_API_KEY}", "--stdio"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    },
+    "magic-21st": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest", "API_KEY=${TWENTYFIRST_API_KEY}"]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "shadcn@latest", "mcp"]
+    },
+    "lighthouse": {
+      "command": "npx",
+      "args": ["-y", "@danielsogl/lighthouse-mcp@latest"]
+    },
+    "posthog": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.posthog.com/mcp", "--header", "Authorization:${POSTHOG_AUTH_HEADER}"]
+    },
+    "google-analytics": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-google-analytics"],
+      "env": {
+        "GOOGLE_CLIENT_EMAIL": "${GOOGLE_CLIENT_EMAIL}",
+        "GOOGLE_PRIVATE_KEY": "${GOOGLE_PRIVATE_KEY}",
+        "GA_PROPERTY_ID": "${GA_PROPERTY_ID}"
+      }
+    },
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.sentry.dev/mcp"]
+    },
+    "browserstack": {
+      "command": "npx",
+      "args": ["-y", "@browserstack/mcp-server@latest"],
+      "env": {
+        "BROWSERSTACK_USERNAME": "${BROWSERSTACK_USERNAME}",
+        "BROWSERSTACK_ACCESS_KEY": "${BROWSERSTACK_ACCESS_KEY}"
+      }
+    },
+    "hubspot": {
+      "command": "npx",
+      "args": ["-y", "@hubspot/mcp-server"],
+      "env": {
+        "PRIVATE_APP_ACCESS_TOKEN": "${HUBSPOT_PRIVATE_APP_ACCESS_TOKEN}"
+      }
+    },
+    "stripe": {
+      "command": "npx",
+      "args": ["-y", "@stripe/mcp", "--tools=all", "--api-key=${STRIPE_SECRET_KEY}"]
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.notion.com/mcp"]
+    },
+    "dataforseo": {
+      "command": "npx",
+      "args": ["-y", "dataforseo-mcp-server"],
+      "env": {
+        "DATAFORSEO_USERNAME": "${DATAFORSEO_USERNAME}",
+        "DATAFORSEO_PASSWORD": "${DATAFORSEO_PASSWORD}"
+      }
+    },
+    "jsonresume": {
+      "command": "npx",
+      "args": ["-y", "@jsonresume/mcp"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+      }
+    }
+  }
+}

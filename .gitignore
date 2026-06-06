@@ -9,6 +9,7 @@ tmp/
 # Secrets
 .env
 .env.local
+.envrc
 *.key
 *Accounts.ini
 !*Accounts.ini.cpt

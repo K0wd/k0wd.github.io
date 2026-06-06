@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestAgent — embedded demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg2: #161920; --bg3: #1c1f28;
+            --border: #2a2e3a;
+            --t1: #eef0f4; --t2: #9ca3b0; --t3: #8b929e;
+            --accent: #4f8ff7; --accent-dim: rgba(79,143,247,0.1);
+            --green: #22c55e; --yellow: #eab308; --red: #ef4444; --green-bg: #15803d;
+            --radius: 8px; --radius-lg: 12px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+        }
+        body { font-family: var(--font); font-size: 16px; line-height: 1.6; color: var(--t1); background: transparent; padding: 2px; }
+
+        .ta-app { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+        .ta-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .ta-logo { color: var(--accent); }
+        .ta-brand { font-size: 1rem; font-weight: 700; }
+        .ta-badge-pipe { font-size: 0.625rem; font-weight: 600; background: var(--accent-dim); color: var(--accent); padding: 2px 8px; border-radius: 4px; }
+        .ta-controls { display: flex; gap: 10px; align-items: center; margin-left: auto; flex-wrap: wrap; }
+        .ta-ctrl-group { display: flex; flex-direction: column; gap: 2px; }
+        .ta-ctrl-label { font-size: 0.5625rem; font-weight: 600; color: var(--t3); text-transform: uppercase; letter-spacing: 0.5px; }
+        .ta-ctrl-input { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; color: var(--t1); font-family: var(--mono); min-width: 80px; }
+        .ta-run-btn { background: var(--green-bg); color: #fff; border: none; border-radius: 6px; padding: 6px 16px; font-size: 0.8125rem; font-weight: 600; cursor: pointer; font-family: var(--font); display: flex; align-items: center; gap: 6px; }
+        .ta-run-btn:hover { background: #166534; }
+
+        .ta-pipeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; padding: 16px 20px; }
+        .ta-step { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; gap: 6px; min-height: 90px; }
+        .ta-step-header { display: flex; justify-content: space-between; align-items: center; }
+        .ta-step-label { font-size: 0.625rem; font-weight: 600; color: var(--t3); letter-spacing: 0.5px; font-family: var(--mono); }
+        .ta-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+        .ta-step-dot.pass { background: var(--green); }
+        .ta-step-dot.fail { background: var(--red); }
+        .ta-step-dot.processing { background: var(--yellow); animation: pulse 1.2s ease infinite; }
+        .ta-step-title { font-size: 0.8125rem; font-weight: 600; color: var(--t1); line-height: 1.3; }
+
+        .ta-log { border-top: 1px solid var(--border); }
+        .ta-log-tabs { display: flex; padding: 0 20px; border-bottom: 1px solid var(--border); }
+        .ta-log-tab { padding: 8px 12px; font-size: 0.75rem; font-weight: 500; color: var(--t3); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-family: var(--font); }
+        .ta-log-tab.active { color: var(--t1); border-bottom-color: var(--accent); }
+        .ta-log-body { padding: 12px 20px; max-height: 180px; overflow-y: auto; font-family: var(--mono); font-size: 0.75rem; line-height: 1.8; }
+        .ta-log-line { display: flex; gap: 8px; }
+        .ta-log-time { color: var(--t3); min-width: 70px; }
+        .ta-log-text { color: var(--t2); }
+        .ta-log-text.pass { color: var(--green); }
+        .ta-log-text.fail { color: var(--red); }
+        .ta-log-text.warn { color: var(--yellow); }
+        .ta-log-text.info { color: var(--accent); }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ta-app">
+        <div class="ta-header">
+            <svg class="ta-logo" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            <span class="ta-brand">TestAgent</span>
+            <span class="ta-badge-pipe">QA Pipeline</span>
+            <div class="ta-controls">
+                <div class="ta-ctrl-group">
+                    <span class="ta-ctrl-label">Ticket</span>
+                    <input class="ta-ctrl-input" value="SM-4827" readonly>
+                </div>
+                <div class="ta-ctrl-group">
+                    <span class="ta-ctrl-label">Steps</span>
+                    <input class="ta-ctrl-input" value="1 — 11" readonly style="min-width: 60px;">
+                </div>
+                <button class="ta-run-btn" id="ta-run">&#9654; Run</button>
+            </div>
+        </div>
+        <div class="ta-pipeline" id="ta-pipeline"></div>
+        <div class="ta-log">
+            <div class="ta-log-tabs">
+                <button class="ta-log-tab active">Live Logs</button>
+                <button class="ta-log-tab">Run History</button>
+            </div>
+            <div class="ta-log-body" id="ta-log-body"></div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var steps = [
+            { step: 1, title: "Verify Auth" }, { step: 2, title: "Find Ticket" },
+            { step: 3, title: "Review Ticket" }, { step: 4, title: "Review Code" },
+            { step: 5, title: "Draft Test Plan" }, { step: 6, title: "Write Gherkin" },
+            { step: 7, title: "Generate Tests" }, { step: 8, title: "Execute Tests" },
+            { step: 9, title: "Determine Results" }, { step: 10, title: "Post Results" },
+            { step: 11, title: "Transition Ticket" }
+        ];
+        var results = { 8: 'fail', 11: 'warn' };
+        var logs = [
+            [{ t: '> jira auth --token ****', c: 'info' }, { t: '  200 OK — session: usr_k0wd_4a82f', c: 'pass' }],
+            [{ t: '> find ticket SM-4827', c: 'info' }, { t: '  Found: SM-4827 "Login flow regression"', c: 'pass' }],
+            [{ t: '> review ticket SM-4827', c: 'info' }, { t: '  Acceptance Criteria: 4 items parsed', c: 'pass' }],
+            [{ t: '> review code --pr #1847', c: 'info' }, { t: '  Diff: +142 -38 across 6 files — no blockers', c: 'pass' }],
+            [{ t: '> draft test-plan --scenarios auto', c: 'info' }, { t: '  Test plan generated — 6 scenarios', c: 'pass' }],
+            [{ t: '> write gherkin --feature login', c: 'info' }, { t: '  14 steps across 3 feature files', c: 'pass' }],
+            [{ t: '> generate tests --framework playwright', c: 'info' }, { t: '  8 test cases generated', c: 'pass' }],
+            [{ t: '> execute tests --headless --parallel 4', c: 'info' }, { t: '  PASS  test_login_valid       420ms', c: 'pass' }, { t: '  PASS  test_oauth_state        280ms', c: 'pass' }, { t: '  FAIL  test_login_redirect    1240ms', c: 'fail' }, { t: '  Result: 6 passed, 2 failed   4.48s', c: 'fail' }],
+            [{ t: '> determine results', c: 'info' }, { t: '  Pass rate: 75% (6/8)', c: 'warn' }, { t: '  Root cause: callback.ts missing redirect', c: 'fail' }],
+            [{ t: '> post results --target jira,slack', c: 'info' }, { t: '  Comment posted to SM-4827', c: 'pass' }, { t: '  Slack #qa-alerts notified', c: 'pass' }],
+            [{ t: '> transition ticket SM-4827', c: 'info' }, { t: '  WARNING: 2 test failures', c: 'warn' }, { t: '  Ticket NOT transitioned — needs-fix', c: 'warn' }]
+        ];
+
+        var pipeline = document.getElementById('ta-pipeline');
+        var logBody = document.getElementById('ta-log-body');
+        var runBtn = document.getElementById('ta-run');
+        var running = false;
+
+        function postHeight() {
+            try { parent.postMessage({ taHeight: document.body.scrollHeight }, '*'); } catch (e) {}
+        }
+
+        function renderPipeline() {
+            pipeline.innerHTML = steps.map(function(s) {
+                return '<div class="ta-step" id="step-' + s.step + '">'
+                    + '<div class="ta-step-header">'
+                    + '<span class="ta-step-label">STEP ' + String(s.step).padStart(2, '0') + '</span>'
+                    + '<span class="ta-step-dot" id="dot-' + s.step + '"></span>'
+                    + '</div>'
+                    + '<div class="ta-step-title">' + s.title + '</div>'
+                    + '</div>';
+            }).join('');
+            postHeight();
+        }
+
+        function timestamp() {
+            return new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        function addLog(text, cls) {
+            var line = document.createElement('div');
+            line.className = 'ta-log-line';
+            line.innerHTML = '<span class="ta-log-time">' + timestamp() + '</span>'
+                + '<span class="ta-log-text ' + (cls || '') + '">' + text + '</span>';
+            logBody.appendChild(line);
+            logBody.scrollTop = logBody.scrollHeight;
+        }
+
+        function runDemo() {
+            if (running) return;
+            running = true;
+            renderPipeline();
+            logBody.innerHTML = '';
+            var i = 0;
+
+            function processStep() {
+                if (i >= steps.length) { running = false; runBtn.innerHTML = '&#9654; Run'; return; }
+                var dot = document.getElementById('dot-' + steps[i].step);
+                dot.className = 'ta-step-dot processing';
+                var stepLogs = logs[i] || [];
+                var logIdx = 0;
+                function showNextLog() {
+                    if (logIdx >= stepLogs.length) {
+                        var result = results[steps[i].step] || 'pass';
+                        dot.className = 'ta-step-dot ' + result;
+                        i++;
+                        setTimeout(processStep, 300 + Math.random() * 300);
+                        return;
+                    }
+                    addLog(stepLogs[logIdx].t, stepLogs[logIdx].c);
+                    logIdx++;
+                    setTimeout(showNextLog, 120 + Math.random() * 200);
+                }
+                showNextLog();
+            }
+            runBtn.textContent = 'Running...';
+            processStep();
+        }
+
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        // Reduced-motion users get the finished pipeline instantly (no animation) — the demo
+        // still "runs" on load, it just doesn't auto-play motion they didn't ask for.
+        function renderFinalState() {
+            renderPipeline();
+            steps.forEach(function(s) {
+                var dot = document.getElementById('dot-' + s.step);
+                if (dot) dot.className = 'ta-step-dot ' + (results[s.step] || 'pass');
+            });
+            logBody.innerHTML = '';
+            logs.forEach(function(group) { group.forEach(function(l) { addLog(l.t, l.c); }); });
+            running = false;
+            runBtn.innerHTML = '&#9654; Run';
+            postHeight();
+        }
+
+        function autoRun() {
+            if (prefersReduced.matches) { renderFinalState(); } else { runDemo(); }
+        }
+
+        renderPipeline();
+        addLog('Waiting for run...', 'info');
+        runBtn.addEventListener('click', runDemo);
+        window.addEventListener('load', postHeight);
+        window.addEventListener('resize', postHeight);
+        setTimeout(postHeight, 300);
+
+        // Run when the parent reports the section is in view (fires on every reload / revisit).
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.taRun) { autoRun(); }
+        });
+
+        // Announce readiness to the parent; also auto-run when opened standalone (not embedded).
+        function announceReady() { try { parent.postMessage({ taReady: true }, '*'); } catch (e) {} }
+        window.addEventListener('load', announceReady);
+        announceReady();
+        if (window.parent === window) { autoRun(); }
+    })();
+    </script>
+</body>
+</html>

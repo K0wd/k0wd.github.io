@@ -3,16 +3,18 @@ const portfolioData = {
         name: "Kim E. Bandeleon",
         firstName: "Kim",
         lastName: "Bandeleon",
-        title: "QA & AI Management Specialist",
+        title: "QA Consultant & AI Tools Builder",
+        photo: "assets/images/kim-headshot.jpg",
+        photoFull: "assets/images/kim-portrait.jpg",
         headline: "Quality engineering powered by AI.",
-        subheadline: "Specialized in test automation, AI-driven pipelines, and QA strategy.",
-        valueProp: "I help engineering teams ship faster, catch more bugs, and build confidence in every release — so you can focus on building great products.",
+        subheadline: "I build AI-powered QA tools and consult on test automation strategy.",
+        valueProp: "I build tools that automate the boring parts of QA — from ticket-to-test pipelines to AI agent marketplaces — so your team ships with confidence.",
         location: "Marilao, Bulacan, Philippines",
         email: "consult@testwithkim.com",
-        phone: "+63 917 XXX XXXX",
-        bio: "Hi! I'm Kim, a Senior QA & AI Management Specialist with 15+ years of experience across 15+ companies. I build AI-augmented test pipelines, design automation frameworks, and lead quality strategy for teams shipping production software daily. Currently at AtMail and consulting independently.",
-        bio2: "I combine deep QA expertise with hands-on AI tooling — from building Claude agent harnesses to deploying autonomous test platforms. I use AI agents for pipeline monitoring and spend most of my time on AI management, orchestrating intelligent systems that keep releases on track.",
-        availability: "Available for new projects"
+        phone: "",
+        bio: "13+ years in QA across 15 companies. I build AI-augmented test pipelines, ship QA tools as products, and consult on automation strategy for teams shipping production software daily.",
+        bio2: "I combine deep QA expertise with hands-on AI tooling — from building Claude agent harnesses to deploying autonomous test platforms. Five products currently in production.",
+        availability: "Available for consulting & contracts"
     },
 
     social: [
@@ -22,13 +24,13 @@ const portfolioData = {
     ],
 
     heroStats: [
-        { number: "15+", label: "Years Experience" },
-        { number: "15+", label: "Companies Served" },
-        { number: "30+", label: "Products QA'ed" }
+        { number: "13+", label: "Years in QA" },
+        { number: "15", label: "Companies" },
+        { number: "5", label: "Products Shipped" }
     ],
 
     aboutStats: [
-        { number: "15+", label: "Years Experience", icon: "briefcase", color: "#6366f1" },
+        { number: "13+", label: "Years Experience", icon: "briefcase", color: "#6366f1" },
         { number: "30+", label: "Products QA'ed", icon: "headphones", color: "#14b8a6" },
         { number: "3+", label: "AI Products Deployed", icon: "cpu", color: "#f43f5e" },
         { number: "10+", label: "AI Agents On Hand", icon: "bot", color: "#f59e0b" }
@@ -36,28 +38,16 @@ const portfolioData = {
 
     services: [
         {
-            name: "Test Automation",
-            icon: "code",
-            tagline: "Reliable, maintainable test suites that catch regressions before your users do.",
-            items: ["Playwright & Selenium", "API Testing", "CI/CD Integration", "Cross-browser Testing", "Mobile Testing (Appium)"]
+            tagline: "Custom test automation frameworks — Playwright, Selenium, Cypress, or API-level"
         },
         {
-            name: "AI Test Pipelines",
-            icon: "cpu",
-            tagline: "AI-powered pipelines that generate tests from tickets and post results automatically.",
-            items: ["Ticket-to-Test Automation", "AI Gherkin Authoring", "Claude Agent Harnesses", "Autonomous Test Execution", "Results Integration"]
+            tagline: "AI pipeline builds — ticket-to-test, autonomous execution, results integration"
         },
         {
-            name: "QA Consulting",
-            icon: "strategy",
-            tagline: "End-to-end quality strategy tailored to your team's size, stack, and release cadence.",
-            items: ["Test Planning", "Framework Selection", "Team Mentoring", "Process Optimization", "Risk Assessment"]
+            tagline: "QA strategy audits — framework selection, process optimization, team mentoring"
         },
         {
-            name: "AI Agent Management",
-            icon: "bot",
-            tagline: "Build, audit, and manage AI agent ecosystems for development teams.",
-            items: ["Agent Design & Authoring", "Skill & Rule Libraries", "Marketplace Curation", "Performance Auditing", "Deployment Automation"]
+            tagline: "AI agent ecosystems — design, deploy, and manage Claude agent harnesses"
         }
     ],
 
@@ -261,7 +251,7 @@ const portfolioData = {
         {
             name: "TestAgent Platform",
             tagline: "AI-powered test pipeline — ticket to results, fully automated",
-            description: "Built an autonomous test platform that reads tickets, generates test plans, writes and executes Playwright tests, and posts results back to the tracker. Deployed across 3 client environments.",
+            description: "Reads tickets, generates test plans, writes and executes Playwright tests, posts results back to the tracker. Deployed across 3 client environments.",
             tags: ["Python", "Playwright", "AI", "Claude"],
             badge: "3 Clients",
             badgeColor: "#14b8a6",
@@ -272,7 +262,7 @@ const portfolioData = {
         {
             name: "AI Agent Marketplace",
             tagline: "Browse, cart, and deploy AI agents into any project",
-            description: "A local catalog of Claude agents, skills, and rules. Add to cart, pick a deploy path, check out. Harness bundles provision entire QA roles in one click.",
+            description: "A local catalog of 200+ Claude agents, skills, and rules. Add to cart, pick a deploy path, check out. Harness bundles provision entire QA roles in one click.",
             tags: ["Python", "HTTP Server", "CLI"],
             badge: "200+ Items",
             badgeColor: "#6366f1",
@@ -290,29 +280,31 @@ const portfolioData = {
             icon: "scan",
             iconBg: "linear-gradient(135deg, #f59e0b 0%, #f97316 100%)",
             demo: "demo-reviewer.html"
+        },
+        {
+            name: "AJT Tools",
+            tagline: "Automation suite for ticket marketplace operations",
+            description: "End-to-end test automation and ops tooling for AJTickets — Selenium C# suite, Azure DevOps pipelines, and AI-assisted test generation covering 85% of critical purchase flows.",
+            tags: ["C#", "Selenium", "Azure DevOps", "AI"],
+            badge: "85% Coverage",
+            badgeColor: "#3b82f6",
+            icon: "code",
+            iconBg: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)"
+        },
+        {
+            name: "Atmail Tools",
+            tagline: "QA platform for enterprise email infrastructure",
+            description: "Full QA harness for AtMail — Playwright suite that cut manual regression by 70%, Claude agent harness for team tooling, and AI pipeline deployed across client environments.",
+            tags: ["Playwright", "Python", "Claude", "CI/CD"],
+            badge: "70% Less Manual",
+            badgeColor: "#0ea5e9",
+            icon: "mail",
+            iconBg: "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)"
         }
     ],
 
-    testimonials: [
-        {
-            quote: "Kim transformed our QA process. His AI test pipeline caught bugs we'd been missing for months. The team ships with genuine confidence now.",
-            name: "Dmitri Volkov",
-            role: "Engineering Manager, Markets.com",
-            rating: 5
-        },
-        {
-            quote: "Methodical, fast, and deeply technical. Kim built our entire automation framework from scratch and mentored the team to maintain it independently.",
-            name: "Sarah Mitchell",
-            role: "CTO, The Plate",
-            rating: 5
-        },
-        {
-            quote: "His Claude agent marketplace is a game-changer for how we deploy AI tooling. What used to take hours of manual setup now happens in one click.",
-            name: "Jayson Hawes",
-            role: "Lead Developer, PowerSlice LLC",
-            rating: 5
-        }
-    ],
+    // Testimonials removed until real, referenceable quotes are available.
+    testimonials: [],
 
     whyHireMe: [
         { title: "Deep Expertise", description: "15+ years in QA across fintech, e-commerce, telecom, and SaaS.", icon: "award" },
@@ -352,6 +344,8 @@ const portfolioData = {
     companyLogos: [
         { name: "AtMail" }, { name: "Nokia" }, { name: "Markets.com" },
         { name: "Finastra" }, { name: "AJTickets" }, { name: "Cualia" },
-        { name: "SolarPlus" }, { name: "The Plate" }, { name: "YesCourse" }
+        { name: "SolarPlus" }, { name: "The Plate" }, { name: "YesCourse" },
+        { name: "Success Lion" }, { name: "Loan Market AU" }, { name: "AnalyticsFire" },
+        { name: "BuyersDirect" }, { name: "JustWines" }, { name: "AskMeFast" }
     ]
 };
