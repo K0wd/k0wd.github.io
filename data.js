@@ -303,6 +303,19 @@ const portfolioData = {
         }
     ],
 
+    // Live CI pipeline surfaced in the "CI Runs" section. The history feed is
+    // published by the pipeline itself (same origin as this site) on every run.
+    ciRuns: {
+        name: "ecaenterprise",
+        subtitle: "SauceDemo E2E — Playwright + Cucumber (BDD)",
+        repo: "K0wd/ecaenterprise-demo",
+        workflowFile: "playwright.yml",
+        pagesUrl: "https://kimbandeleon.pro/ecaenterprise-demo/",
+        historyUrl: "https://kimbandeleon.pro/ecaenterprise-demo/history.json",
+        actionsUrl: "https://github.com/K0wd/ecaenterprise-demo/actions",
+        repoUrl: "https://github.com/K0wd/ecaenterprise-demo"
+    },
+
     // Testimonials removed until real, referenceable quotes are available.
     testimonials: [],
 

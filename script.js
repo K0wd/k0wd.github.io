@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderConsulting();
     initTimeline();
     renderProjects();
+    renderCiRuns();
     renderExpertise();
     renderTools();
     renderContactInfo();
@@ -40,7 +41,8 @@ var icons = {
     phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
     mappin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
     github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
-    linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>'
+    linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
+    activity: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>'
 };
 
 function getIcon(name, size) {
@@ -182,6 +184,112 @@ function renderProjects() {
             + '</div>'
             + '</div>';
     }).join('');
+}
+
+// --- CI Runs (live pipeline: status badge, links, per-test flakiness sticks) ---
+
+function renderCiRuns() {
+    var el = document.getElementById('ci-runs-panel');
+    var cfg = portfolioData.ciRuns;
+    if (!el || !cfg) return;
+
+    var badge = 'https://github.com/' + cfg.repo + '/actions/workflows/' + cfg.workflowFile + '/badge.svg';
+    var links =
+        '<a class="ci-link" href="' + cfg.pagesUrl + '" target="_blank" rel="noopener">' + getIcon('scan', 15) + ' Latest report</a>'
+      + '<a class="ci-link" href="' + cfg.actionsUrl + '" target="_blank" rel="noopener">' + getIcon('activity', 15) + ' Actions history</a>'
+      + '<a class="ci-link" href="' + cfg.repoUrl + '" target="_blank" rel="noopener">' + getIcon('github', 15) + ' Source</a>';
+
+    el.innerHTML =
+        '<div class="ci-head">'
+      +   '<div class="ci-title-wrap"><div class="ci-name">' + cfg.name + '</div>'
+      +     '<div class="ci-sub">' + cfg.subtitle + '</div></div>'
+      +   '<a class="ci-badge" href="' + cfg.actionsUrl + '" target="_blank" rel="noopener"><img src="' + badge + '" alt="CI status" loading="lazy"></a>'
+      + '</div>'
+      + '<div class="ci-links">' + links + '</div>'
+      + '<div class="ci-history" id="ci-history"><div class="ci-empty">Loading run history…</div></div>';
+
+    fetch(cfg.historyUrl, { cache: 'no-store' })
+        .then(function(r) { if (!r.ok) throw new Error('no history'); return r.json(); })
+        .then(function(h) { renderCiHistory(h); })
+        .catch(function() {
+            var box = document.getElementById('ci-history');
+            if (box) box.innerHTML = '<div class="ci-empty">Run history appears here once the first pipeline has published to Pages. '
+                + '<a href="' + cfg.actionsUrl + '" target="_blank" rel="noopener">View live runs →</a></div>';
+        });
+}
+
+function ciEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderCiHistory(history) {
+    var box = document.getElementById('ci-history');
+    if (!box) return;
+    if (!Array.isArray(history) || !history.length) {
+        box.innerHTML = '<div class="ci-empty">No runs recorded yet.</div>';
+        return;
+    }
+
+    var runs = history.slice(-24);            // most recent window, oldest -> newest
+    var latest = runs[runs.length - 1];
+    var repo = (portfolioData.ciRuns && portfolioData.ciRuns.repo) || '';
+
+    // Stable test ordering: latest run first, then any tests seen only in older runs.
+    var order = [], seen = {};
+    var addNames = function(run) {
+        (run.tests || []).forEach(function(t) { if (!seen[t.name]) { seen[t.name] = 1; order.push(t.name); } });
+    };
+    addNames(latest);
+    runs.forEach(addNames);
+
+    var maps = runs.map(function(run) {
+        var m = {};
+        (run.tests || []).forEach(function(t) { m[t.name] = t.status; });
+        return m;
+    });
+
+    var stick = function(status, title, href) {
+        var inner = '<span class="ci-stick ci-' + (status || 'absent') + '" title="' + ciEsc(title) + '"></span>';
+        return href ? '<a class="ci-stick-link" href="' + href + '" target="_blank" rel="noopener">' + inner + '</a>' : inner;
+    };
+
+    // Per-run summary row (one stick per run, coloured by conclusion).
+    var summary = runs.map(function(run) {
+        var href = run.runId ? 'https://github.com/' + (run.repo || repo) + '/actions/runs/' + run.runId : null;
+        var title = 'Run #' + run.run + ' · ' + run.conclusion
+            + (run.shortSha ? ' · ' + run.shortSha : '')
+            + (run.date ? ' · ' + run.date.slice(0, 10) : '')
+            + ' · ' + (run.failed || 0) + ' failed, ' + (run.flaky || 0) + ' flaky';
+        return stick(run.conclusion === 'success' ? 'passed' : 'failed', title, href);
+    }).join('');
+
+    // One row per test — sticks across runs make flaky/drifting tests obvious.
+    var rows = order.map(function(name) {
+        var sticks = maps.map(function(m, i) {
+            var st = m[name] || 'absent';
+            return stick(st, name + ' — run #' + runs[i].run + ': ' + st);
+        }).join('');
+        var last = maps[maps.length - 1][name] || 'absent';
+        var flag = last === 'failed' ? ' ci-row-bad' : (last === 'flaky' ? ' ci-row-warn' : '');
+        var short = name.split(' › ').pop();
+        return '<div class="ci-row' + flag + '"><div class="ci-row-label" title="' + ciEsc(name) + '">' + ciEsc(short) + '</div>'
+            + '<div class="ci-row-sticks">' + sticks + '</div></div>';
+    }).join('');
+
+    var legend = '<div class="ci-legend">'
+        + '<span><i class="ci-stick ci-passed"></i> pass</span>'
+        + '<span><i class="ci-stick ci-failed"></i> fail</span>'
+        + '<span><i class="ci-stick ci-flaky"></i> flaky</span>'
+        + '<span><i class="ci-stick ci-skipped"></i> skipped</span>'
+        + '</div>';
+
+    box.innerHTML =
+        '<div class="ci-meta">Last ' + runs.length + ' run' + (runs.length === 1 ? '' : 's')
+        + ' · latest #' + latest.run + ' (' + latest.conclusion + ') · ' + latest.total + ' tests</div>'
+        + '<div class="ci-row ci-row-summary"><div class="ci-row-label">All runs</div>'
+        + '<div class="ci-row-sticks">' + summary + '</div></div>'
+        + '<div class="ci-matrix">' + rows + '</div>'
+        + legend;
 }
 
 // --- Expertise (skills tags, certs, credentials line) ---
