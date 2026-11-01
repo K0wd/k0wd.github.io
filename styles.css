@@ -30,9 +30,17 @@
     --mono: 'SF Mono', Monaco, Inconsolata, monospace;
     --z-nav: 100;
     --z-scroll: 90;
+    /* Fluid layout tokens — one shell width, one gutter, scaled by viewport */
+    --container: 1200px;
+    --gutter: clamp(18px, 4vw, 32px);
 }
 
+/* Wider shell on big / ultrawide screens (reading blocks keep their own caps) */
+@media (min-width: 1440px) { :root { --container: 1320px; } }
+@media (min-width: 1800px) { :root { --container: 1440px; } }
+
 html { scroll-behavior: smooth; }
+html, body { overflow-x: clip; max-width: 100%; }
 
 body {
     font-family: var(--font);
@@ -94,12 +102,13 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; bo
 }
 
 .site-nav {
-    max-width: 1200px;
+    max-width: var(--container);
     margin: 0 auto;
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 12px 24px;
+    padding: 12px var(--gutter);
+    position: relative;
 }
 
 .nav-brand {
@@ -139,18 +148,69 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; bo
 }
 .nav-cta:hover { background: #4f46e5; box-shadow: 0 4px 16px rgba(99,102,241,0.3); color: #fff; }
 
+/* ----- Mobile menu toggle (hamburger) ----- */
+.nav-toggle {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.nav-toggle:hover { border-color: var(--accent); }
+.nav-toggle-close { display: none; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-open { display: none; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-close { display: block; }
+
+/* On phones the inline CTA is replaced by the menu's own Contact link */
+.nav-cta { display: none; }
+
+/* Dropdown panel when the menu is open (mobile only) */
+.nav-links.open {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 6px var(--gutter) 14px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+}
+.nav-links.open li { width: 100%; }
+.nav-links.open a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 6px 2px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 1rem;
+}
+.nav-links.open li:last-child a { border-bottom: none; }
+
 @media (min-width: 768px) {
-    .nav-links { display: flex; }
-    .nav-cta { margin-left: 0; }
+    .nav-links { display: flex; position: static; flex-direction: row; box-shadow: none; padding: 0; border: none; background: none; }
+    .nav-toggle { display: none; }
+    .nav-cta { display: inline-flex; margin-left: 0; }
 }
 
 /* ===== SECTION BASE ===== */
 main { overflow-x: hidden; }
 
 .section {
-    max-width: 1200px;
+    max-width: var(--container);
     margin: 0 auto;
-    padding: 80px 24px;
+    padding: clamp(60px, 8vw, 104px) var(--gutter);
 }
 
 .section-alt {
@@ -170,7 +230,7 @@ main { overflow-x: hidden; }
 .section-alt > .cred-line,
 .section-alt > .what-grid,
 .section-alt > .what-cta {
-    max-width: 1200px;
+    max-width: var(--container);
     margin-left: auto;
     margin-right: auto;
     padding-left: 24px;
@@ -196,7 +256,7 @@ main { overflow-x: hidden; }
 
 .section-title {
     font-family: var(--font-serif);
-    font-size: 2.25rem;
+    font-size: clamp(1.85rem, 1rem + 3vw, 3rem);
     font-weight: 700;
     line-height: 1.2;
     color: var(--text);
@@ -210,16 +270,13 @@ main { overflow-x: hidden; }
     margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-    .section-title { font-size: 3rem; }
-    .section { padding: 100px 24px; }
-}
+/* Section title + padding now scale fluidly via clamp() — no breakpoint needed */
 
 /* ===== HERO ===== */
 .hero {
-    max-width: 1200px;
+    max-width: var(--container);
     margin: 0 auto;
-    padding: 60px 24px 40px;
+    padding: clamp(48px, 7vw, 80px) var(--gutter) clamp(32px, 5vw, 60px);
     background: linear-gradient(180deg, #f0f0ff 0%, #e8faf7 50%, #ffffff 100%);
 }
 
@@ -229,12 +286,14 @@ main { overflow-x: hidden; }
     gap: 40px;
     align-items: center;
 }
+/* Let grid/flex children shrink below their content width — kills mobile overflow */
+.hero-inner > * { min-width: 0; }
 
 .hero-text .section-badge { margin-bottom: 20px; }
 
 .hero-title {
     font-family: var(--font-serif);
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 1.2rem + 5vw, 3.75rem);
     font-weight: 700;
     line-height: 1.15;
     color: var(--text);
@@ -258,7 +317,8 @@ main { overflow-x: hidden; }
 
 .hero-stats {
     display: flex;
-    gap: 40px;
+    flex-wrap: wrap;
+    gap: clamp(20px, 6vw, 40px);
     margin-bottom: 32px;
 }
 
@@ -308,9 +368,7 @@ main { overflow-x: hidden; }
 }
 
 @media (min-width: 768px) {
-    .hero { padding: 80px 24px 60px; }
     .hero-inner { grid-template-columns: 1fr 1fr; }
-    .hero-title { font-size: 3.75rem; }
     .hero-photo-placeholder { width: 400px; height: 500px; }
 }
 
@@ -779,7 +837,7 @@ main { overflow-x: hidden; }
 }
 .section-contact > .section-header,
 .section-contact > .contact-grid {
-    max-width: 1200px;
+    max-width: var(--container);
     margin-left: auto;
     margin-right: auto;
 }
@@ -910,7 +968,7 @@ main { overflow-x: hidden; }
 }
 
 .footer-inner {
-    max-width: 1200px;
+    max-width: var(--container);
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -955,7 +1013,7 @@ main { overflow-x: hidden; }
     border-top: 1px solid rgba(255,255,255,0.08);
     padding: 20px 0;
     text-align: center;
-    max-width: 1200px;
+    max-width: var(--container);
     margin: 0 auto;
 }
 .footer-bottom p { font-size: 0.8125rem; color: #666; }
@@ -1255,7 +1313,7 @@ main { overflow-x: hidden; }
 .term-accent { color: var(--accent); font-weight: 600; }
 
 /* Proof strip */
-.proof { max-width: 1200px; margin: 0 auto; padding: 28px 24px 8px; text-align: center; }
+.proof { max-width: var(--container); margin: 0 auto; padding: 28px 24px 8px; text-align: center; }
 .proof-caption { font-size: 0.8125rem; color: var(--text-muted); letter-spacing: 0.4px; margin-bottom: 18px; }
 .proof-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .proof-chip {
