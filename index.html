@@ -148,9 +148,17 @@
             <div class="section-header">
                 <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> CI RUNS</span>
                 <h2 class="section-title">Live pipeline for <span class="gradient-text">ecaenterprise</span></h2>
-                <p class="section-subtitle">Every push runs the Playwright + BDD suite. The report and per-test history publish automatically — so flaky or drifting tests show up at a glance.</p>
+                <p class="section-subtitle">A SauceDemo E2E suite (Playwright + Cucumber BDD) runs on every push. The HTML report and per-test pass/fail/flaky history publish automatically — so a drifting or flaky test is visible at a glance, not discovered in production.</p>
             </div>
-            <div class="ci-panel" id="ci-runs-panel"></div>
+            <div class="ci-panel" id="ci-runs-panel" aria-live="polite" aria-busy="true">
+                <noscript>
+                    <div class="ci-links">
+                        <a class="ci-link" href="https://kimbandeleon.pro/ecaenterprise-demo/" target="_blank" rel="noopener">Latest report</a>
+                        <a class="ci-link" href="https://github.com/K0wd/ecaenterprise-demo/actions" target="_blank" rel="noopener">Actions history</a>
+                        <a class="ci-link" href="https://github.com/K0wd/ecaenterprise-demo" target="_blank" rel="noopener">Source</a>
+                    </div>
+                </noscript>
+            </div>
         </section>
 
         <!-- What I do (dual track) -->
