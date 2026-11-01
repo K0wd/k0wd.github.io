@@ -78,10 +78,10 @@
             <div class="hero-inner">
                 <div class="hero-text">
                     <img class="hero-avatar" src="assets/images/kim-headshot.jpg" alt="Kim E. Bandeleon" width="76" height="76">
-                    <span class="section-badge">QA CONSULTANT &amp; AI TOOLS BUILDER</span>
+                    <span class="section-badge">AI-ASSISTED QA TEST AUTOMATION ENGINEER</span>
                     <h1 class="hero-title">Kim E. <span class="gradient-text">Bandeleon</span></h1>
-                    <p class="hero-desc">I build <strong>AI-powered QA tools</strong> and consult on <strong>test automation strategy</strong>.</p>
-                    <p class="hero-value">From ticket-to-test pipelines to AI agent marketplaces — five products in production, 13+ years of QA behind them.</p>
+                    <p class="hero-desc">I automate testing with <strong>AI-assisted pipelines</strong> — from ticket to running <strong>Playwright suite</strong>.</p>
+                    <p class="hero-value">Five products in production, backed by 13+ years of QA and test automation.</p>
                     <div class="hero-stats" id="hero-stats"></div>
                     <div class="hero-ctas">
                         <a href="#projects" class="btn btn-primary">See my products <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
@@ -114,7 +114,8 @@
         </section>
 
         <!-- Proof strip -->
-        <section class="proof" id="proof" aria-label="Companies worked with">
+        <section class="proof" id="proof" aria-labelledby="proof-heading">
+            <h2 id="proof-heading" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">Where my QA work has shipped</h2>
             <p class="proof-caption">13+ years across 15 companies — fintech, e-commerce, telecom &amp; SaaS</p>
             <div class="proof-strip" id="proof-strip"></div>
         </section>
@@ -124,20 +125,20 @@
             <div class="section-header">
                 <span class="section-badge live-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> LIVE DEMO</span>
                 <h2 class="section-title">Don't take my word — <span class="gradient-text">watch it run</span></h2>
-                <p class="section-subtitle">TestAgent reads a ticket, writes the tests, runs them, and posts results back. Here it is, working.</p>
+                <p class="section-subtitle" id="demo-desc">TestAgent reads a ticket, writes the tests, runs them, and posts results back — the whole loop, automated. Watch it below.</p>
             </div>
             <div class="demo-embed">
-                <iframe id="demo-frame" title="TestAgent live pipeline demo" src="demo-testagent-embed.html" loading="lazy" scrolling="no"></iframe>
+                <iframe id="demo-frame" title="TestAgent live pipeline demo" aria-describedby="demo-desc" src="demo-testagent-embed.html" width="1000" height="520" loading="lazy" scrolling="no"></iframe>
             </div>
-            <p class="demo-fallback"><a href="demo-testagent.html" target="_blank" rel="noopener">Open the full demo in a new tab <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></p>
+            <p class="demo-fallback"><a href="demo-testagent.html" target="_blank" rel="noopener">See the full run in a new tab <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></p>
         </section>
 
         <!-- Products -->
-        <section class="section" id="projects">
+        <section class="section" id="projects" aria-labelledby="projects-title">
             <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg> PRODUCTS</span>
-                <h2 class="section-title">Tools I've <span class="gradient-text">built and shipped</span></h2>
-                <p class="section-subtitle">Five products in production — each solving a real QA problem.</p>
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg> AUTOMATION TOOLING</span>
+                <h2 class="section-title" id="projects-title">QA tools I've <span class="gradient-text">built and shipped</span></h2>
+                <p class="section-subtitle">Five in production — manual regression cut 70%, 85% critical-flow coverage, an AI test pipeline live across 3 client environments.</p>
             </div>
             <div class="projects-grid" id="projects-grid"></div>
         </section>
@@ -147,41 +148,49 @@
             <div class="section-header">
                 <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> CI RUNS</span>
                 <h2 class="section-title">Live pipeline for <span class="gradient-text">ecaenterprise</span></h2>
-                <p class="section-subtitle">Every push runs the Playwright + BDD suite. The report and per-test history publish automatically — so flaky or drifting tests show up at a glance.</p>
+                <p class="section-subtitle">A SauceDemo E2E suite (Playwright + Cucumber BDD) runs on every push. The HTML report and per-test pass/fail/flaky history publish automatically — so a drifting or flaky test is visible at a glance, not discovered in production.</p>
             </div>
-            <div class="ci-panel" id="ci-runs-panel"></div>
+            <div class="ci-panel" id="ci-runs-panel" aria-live="polite" aria-busy="true">
+                <noscript>
+                    <div class="ci-links">
+                        <a class="ci-link" href="https://kimbandeleon.pro/ecaenterprise-demo/" target="_blank" rel="noopener">Latest report</a>
+                        <a class="ci-link" href="https://github.com/K0wd/ecaenterprise-demo/actions" target="_blank" rel="noopener">Actions history</a>
+                        <a class="ci-link" href="https://github.com/K0wd/ecaenterprise-demo" target="_blank" rel="noopener">Source</a>
+                    </div>
+                </noscript>
+            </div>
         </section>
 
         <!-- What I do (dual track) -->
         <section class="section section-alt" id="what">
             <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> WHAT I DO</span>
-                <h2 class="section-title">Two ways to <span class="gradient-text">work together</span></h2>
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> WHAT I DO</span>
+                <h2 class="section-title">AI-assisted QA automation, <span class="gradient-text">two ways to engage</span></h2>
             </div>
             <div class="what-grid">
                 <div class="track-col">
                     <div class="track-head">
-                        <span class="track-icon" style="background:#6366f118;color:#7c6cf0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+                        <span class="track-icon" style="background:#6366f118;color:#7c6cf0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
                         <div>
                             <h3>Embedded QA — lead your team's quality function</h3>
-                            <p class="track-sub">I join as a senior QA lead, own the automation strategy, and ship AI-integrated pipelines.</p>
+                            <p class="track-sub">I join as a senior QA lead, own the automation strategy, and ship AI-integrated test pipelines that make every release reproducible.</p>
                         </div>
                     </div>
                     <ul class="track-list" id="hiring-list"></ul>
                 </div>
                 <div class="track-col">
                     <div class="track-head">
-                        <span class="track-icon" style="background:#14b8a618;color:#06d6a0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
+                        <span class="track-icon" style="background:#14b8a618;color:#06d6a0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
                         <div>
                             <h3>Consulting — build the tool, audit the pipeline</h3>
-                            <p class="track-sub">Scoped engagements: tool builds, pipeline audits, framework selection, and AI integration.</p>
+                            <p class="track-sub">Scoped engagements: tool builds, pipeline audits, framework selection, and AI integration — with evidence you can act on.</p>
                         </div>
                     </div>
                     <ul class="track-list" id="consulting-list"></ul>
                 </div>
             </div>
             <div class="what-cta">
-                <a href="#contact" class="btn btn-primary">Let's talk <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
+                <a href="#contact" class="btn btn-primary">Tell me about your QA gap <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
             </div>
         </section>
 
@@ -189,13 +198,13 @@
         <section class="section" id="work">
             <div class="section-header">
                 <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> EXPERIENCE</span>
-                <h2 class="section-title">A track record of <span class="gradient-text">trusted delivery</span></h2>
-                <p class="section-subtitle">13+ years across 15 companies in fintech, e-commerce, telecom, and SaaS.</p>
+                <h2 class="section-title">13+ years of <span class="gradient-text">release confidence</span></h2>
+                <p class="section-subtitle">Test automation and AI-assisted QA across 15 companies in fintech, e-commerce, telecom, and SaaS.</p>
             </div>
             <div class="timeline" id="timeline"></div>
             <div class="timeline-nav" id="timeline-nav">
                 <button class="timeline-nav-btn" id="tl-prev" aria-label="Previous experiences"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg> Previous</button>
-                <span class="timeline-nav-info" id="tl-info"></span>
+                <span class="timeline-nav-info" id="tl-info" aria-live="polite"></span>
                 <button class="timeline-nav-btn" id="tl-next" aria-label="Next experiences">Next <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
             </div>
         </section>
@@ -204,19 +213,20 @@
         <section class="section section-alt" id="expertise">
             <div class="section-header">
                 <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> EXPERTISE</span>
-                <h2 class="section-title">The tools and skills <span class="gradient-text">I work with</span></h2>
+                <h2 class="section-title">Skills and tools, <span class="gradient-text">proven in production</span></h2>
+                <p class="section-subtitle">13+ years across 15 companies. The automation behind these tools cut manual regression 70% and holds 85% coverage on critical flows.</p>
             </div>
             <div class="expertise-block">
-                <h4 class="expertise-label">Core skills</h4>
-                <div class="tag-row" id="skills-tags"></div>
+                <h3 class="expertise-label">Core skills</h3>
+                <div class="tag-row" id="skills-tags" aria-label="Core skills"></div>
             </div>
             <div class="expertise-block">
-                <h4 class="expertise-label">Tools &amp; software</h4>
-                <div class="tools-grid" id="tools-grid"></div>
+                <h3 class="expertise-label">Tools &amp; software</h3>
+                <div class="tools-grid" id="tools-grid" aria-label="Tools and software"></div>
             </div>
             <div class="expertise-block">
-                <h4 class="expertise-label">Certifications</h4>
-                <div class="tag-row" id="certs-row"></div>
+                <h3 class="expertise-label">Certifications</h3>
+                <div class="tag-row" id="certs-row" aria-label="Certifications"></div>
             </div>
             <p class="cred-line" id="cred-line"></p>
         </section>
@@ -224,8 +234,8 @@
         <!-- Contact -->
         <section class="section section-contact" id="contact">
             <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> GET IN TOUCH</span>
-                <h2 class="section-title">Let's build <span class="gradient-text">something great</span></h2>
+                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> GET IN TOUCH</span>
+                <h2 class="section-title">Let's close your <span class="gradient-text">QA gap</span></h2>
                 <p class="section-subtitle">Need a QA tool built, a pipeline audited, or an automation strategy? Tell me what you're working on.</p>
             </div>
             <div class="contact-grid">
@@ -253,7 +263,7 @@
                             <label for="contact-message">MESSAGE</label>
                             <textarea id="contact-message" name="message" required rows="5" placeholder="Tell me about the QA challenge you're facing or the tool you need built..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+                        <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
                         <p class="form-note">I'll get back to you within 24 hours.</p>
                         <div class="contact-status" id="contact-status"></div>
                     </form>
