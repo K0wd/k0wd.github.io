@@ -13,7 +13,33 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initScrollTop();
     initDemoEmbed();
+    initNav();
 });
+
+// --- Mobile menu toggle ---
+function initNav() {
+    var toggle = document.getElementById('nav-toggle');
+    var links = document.getElementById('nav-links');
+    if (!toggle || !links) return;
+
+    function close() {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function() {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Close after tapping a link, or on Escape
+    links.addEventListener('click', function(e) {
+        if (e.target.closest('a')) close();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') close();
+    });
+}
 
 // --- SVG Icon Helper ---
 
