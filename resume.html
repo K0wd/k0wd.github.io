@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kim E. Bandeleon — Résumé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--ink:#14181f;--sub:#525a6b;--muted:#7b8293;--line:#e5e7ee;--accent:#4338ca;--accent2:#0ea5e9;--panel:#f6f7fa;--page:#ffffff}
+  html,body{background:#eceef3;color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;
+    -webkit-user-select:none;-moz-user-select:none;user-select:none}
+  img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
+  .viewtag{max-width:1040px;margin:0 auto;padding:14px 4px 0;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+    font-size:.74rem;color:#8b92a3}
+  .viewtag .lock{display:inline-flex;align-items:center;gap:6px}
+  .sheet{max-width:1040px;margin:10px auto 40px;background:var(--page);border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 18px 50px rgba(20,24,40,.12);overflow:hidden}
+  .top{padding:38px 44px 26px;border-bottom:3px solid var(--accent);position:relative}
+  .top .row{display:flex;gap:22px;align-items:center}
+  .mono-av{flex:0 0 auto;width:74px;height:74px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;font-weight:800;font-size:1.7rem;display:flex;align-items:center;justify-content:center;letter-spacing:1px}
+  h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+  .role{color:var(--accent);font-weight:700;font-size:.98rem;margin-top:3px}
+  .contact{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.82rem;color:var(--sub)}
+  .contact span{display:inline-flex;align-items:center;gap:6px}
+  .contact b{color:var(--muted);font-weight:600}
+  .updated{position:absolute;top:20px;right:24px;font-size:.72rem;color:var(--muted);text-align:right}
+  .updated b{display:block;color:var(--accent);font-weight:700;font-size:.8rem}
+  .intro{display:grid;grid-template-columns:1.7fr 1fr;gap:30px;padding:20px 44px;border-bottom:1px solid var(--line);align-items:start}
+  .summary{color:var(--sub);font-size:.92rem}
+  .focus h3{font-size:.72rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
+  .focus ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .focus li{font-size:.82rem;color:var(--sub);padding-left:16px;position:relative;line-height:1.45}
+  .focus li::before{content:"▸";position:absolute;left:0;color:var(--accent2)}
+  .statstrip{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line)}
+  .statstrip .s{flex:1 1 0;min-width:120px;padding:14px 44px;border-right:1px solid var(--line)}
+  .statstrip .s:last-child{border-right:0}
+  .statstrip .v{font-size:1.3rem;font-weight:800;color:var(--ink)}
+  .statstrip .k{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+  .cols{display:grid;grid-template-columns:1fr 2.15fr}
+  .side{padding:26px 28px;background:var(--panel);border-right:1px solid var(--line)}
+  .main{padding:26px 36px}
+  h2{font-size:.78rem;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  .side section+section{margin-top:24px}
+  .scloud{display:flex;flex-wrap:wrap;gap:6px}
+  .scloud span{font-size:.72rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub);background:#fff;line-height:1.3}
+  .scloud .f{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chips span{font-size:.74rem;color:var(--sub);background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 9px}
+  .chips .f{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;font-weight:700}
+  .certs{display:flex;flex-direction:column;gap:8px}
+  .cert{display:flex;gap:9px;align-items:flex-start;font-size:.82rem}
+  .cert .d{width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:6px;flex:0 0 auto}
+  .edu .inst{font-weight:700;font-size:.86rem}
+  .edu .deg{font-size:.82rem;color:var(--sub)}
+  .edu .dt{font-size:.76rem;color:var(--muted);margin-top:2px}
+  .lang{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:5px}
+  .lang b{color:var(--sub);font-weight:600}.lang span{color:var(--muted)}
+  .job{padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+  .job:last-child{border-bottom:0;margin-bottom:0}
+  .job .jh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+  .job .jr{font-weight:700;font-size:.98rem}
+  .job .jc{color:var(--accent);font-weight:600;font-size:.9rem}
+  .job .jd{font-size:.76rem;color:var(--muted);white-space:nowrap;font-weight:600}
+  .job ul{margin:7px 0 0 17px}
+  .job li{font-size:.84rem;color:var(--sub);margin-bottom:3px}
+  .compact{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.84rem;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .compact:last-child{border-bottom:0}
+  .compact .c-role{font-weight:600}.compact .c-co{color:var(--accent);font-weight:600}.compact .c-dt{color:var(--muted);font-size:.76rem}
+  .prod{margin-bottom:10px;font-size:.84rem}
+  .prod b{font-weight:700}.prod span{color:var(--sub)}
+  .older-h{font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:6px 0 8px}
+  footer{padding:16px 44px;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid var(--line)}
+    .intro{grid-template-columns:1fr;gap:18px}
+    .top,.intro,.statstrip .s{padding-left:24px;padding-right:24px}.updated{position:static;text-align:left;margin-top:12px}}
+  @media print{html,body{background:#fff}.viewtag{display:none}.sheet{box-shadow:none;border:0;margin:0;border-radius:0}
+    @page{margin:14mm}}
+</style>
+</head>
+<body>
+  <div class="viewtag">
+    <span class="lock">🔒 View-only — right-click, copy &amp; download disabled</span>
+    <span>kimbandeleon.pro</span>
+  </div>
+  <div class="sheet">
+    <div class="top">
+      <div class="updated">updated<b>Nov 2, 2026</b></div>
+      <div class="row">
+        <div class="mono-av">KB</div>
+        <div>
+          <h1>Kim E. Bandeleon</h1>
+          <div class="role">AI-Assisted QA Test Automation Engineer · QA Consultant</div>
+          <div class="contact">
+            <span><b>📍</b> Marilao, Bulacan, Philippines</span>
+            <span><b>✉</b> consult@testwithkim.com</span>
+            <span><b>🌐</b> kimbandeleon.pro</span>
+            <span><b>⌨</b> github.com/k0wd</span>
+            <span><b>in</b> linkedin.com/in/kim-bandeleon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro">
+      <p class="summary">I'm an AI-assisted QA and test-automation engineer. Since 2013 I've worked with 15 companies,
+        building test pipelines powered by AI and turning my QA tools into real products. A lot of my time goes into
+        helping teams that ship software every day get their test automation right. I've done this across fintech,
+        e-commerce, telecom, healthcare and SaaS. I build frameworks in Playwright, Selenium and Cypress, connect them to
+        CI/CD, and pair them with AI agents that take a ticket and run it through to tested, documented results. I also set
+        QA standards and review how teams test. The point of all of it is simple: faster releases, less time spent on
+        regressions, and clear proof the software works.</p>
+      <div class="focus">
+        <h3>Focus Areas</h3>
+        <ul>
+          <li>Faster releases, with automation that keeps pace with daily shipping</li>
+          <li>Fewer regressions, so no time is lost re-checking what already worked</li>
+          <li>Clear proof it works, with every run leaving evidence you can trust</li>
+          <li>QA that scales, with standards that hold as the team grows</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="statstrip">
+      <div class="s"><div class="v">15</div><div class="k">Companies</div></div>
+      <div class="s"><div class="v">25+</div><div class="k">Client-years</div></div>
+      <div class="s"><div class="v">18</div><div class="k">Tools &amp; agents</div></div>
+      <div class="s"><div class="v">ISTQB</div><div class="k">CTFL certified</div></div>
+    </div>
+
+    <div class="cols">
+      <aside class="side">
+        <section>
+          <h2>Core Skills</h2>
+          <div class="scloud">
+            <span class="f">Test Automation</span>
+            <span class="f">AI-Assisted QA</span>
+            <span class="f">QA Strategy</span>
+            <span class="f">Manual Testing</span>
+            <span class="f">Self-Healing Locators</span>
+            <span class="f">Ticket-to-Test Pipelines</span>
+            <span class="f">LLM Test Generation</span>
+            <span class="f">Defect Triage</span>
+            <span>Exploratory Testing</span>
+            <span>API Testing</span>
+            <span>Regression Testing</span>
+            <span>E2E Testing</span>
+            <span>CI/CD Integration</span>
+            <span>AI Pipeline Design</span>
+            <span>BDD / Gherkin</span>
+            <span>Risk-Based Testing</span>
+            <span>Leadership &amp; Mentoring</span>
+          </div>
+        </section>
+        <section>
+          <h2>Tools &amp; Tech</h2>
+          <div class="chips">
+            <span class="f">Playwright</span><span class="f">Selenium</span><span class="f">Cypress</span><span class="f">Cucumber</span>
+            <span class="f">Behave</span><span>pytest</span><span>Python</span><span>TypeScript</span><span>Claude AI</span>
+            <span>Azure DevOps</span><span>Jira</span><span>Docker</span><span>Locust</span><span>CI/CD</span>
+          </div>
+        </section>
+        <section>
+          <h2>Certifications</h2>
+          <div class="certs">
+            <div class="cert"><span class="d"></span><span>ISTQB Certified Tester (CTFL)</span></div>
+            <div class="cert"><span class="d"></span><span>AI Test Engineer</span></div>
+            <div class="cert"><span class="d"></span><span>SAFe Agile</span></div>
+            <div class="cert"><span class="d"></span><span>Lean Six Sigma</span></div>
+            <div class="cert"><span class="d"></span><span>KnowBe4 Security Awareness</span></div>
+          </div>
+        </section>
+        <section>
+          <h2>Education</h2>
+          <div class="edu">
+            <div class="inst">University of the East</div>
+            <div class="deg">B.S. Computer Engineering</div>
+            <div class="dt">2009 — 2014</div>
+          </div>
+        </section>
+        <section>
+          <h2>Languages</h2>
+          <div class="lang"><b>English</b><span>Fluent</span></div>
+          <div class="lang"><b>Filipino</b><span>Native</span></div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <section>
+          <h2>Experience</h2>
+
+          <div class="job">
+            <div class="jh"><span class="jr">Senior Quality Engineer — <span class="jc">AtMail</span></span><span class="jd">2023 — Present</span></div>
+            <ul>
+              <li>Lead QA strategy and automation for an enterprise email platform.</li>
+              <li>Built an AI-powered test pipeline (TestAgent) deployed across client environments.</li>
+              <li>Cut manual regression effort ~70% with a Playwright suite.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Automation Engineer — <span class="jc">AJTickets</span></span><span class="jd">2020 — 2025</span></div>
+            <ul>
+              <li>Maintained and expanded a Selenium C# suite; managed Azure DevOps pipelines across environments.</li>
+              <li>Deployed the TestAgent AI platform for automated test generation; ~85% coverage on critical purchase flows.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Automation Engineer — <span class="jc">SolarPlus</span></span><span class="jd">2019 — 2024</span></div>
+            <ul>
+              <li>Built Robot Framework suites and Appium mobile tests for a solar-energy platform.</li>
+              <li>Integrated Python test automation into CI; kept cross-platform web + mobile coverage.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Automation Engineer — <span class="jc">Cualia</span></span><span class="jd">2024 — 2025</span></div>
+            <ul>
+              <li>Built Playwright automation for a healthcare platform; automated patient-flow and compliance-critical scenarios.</li>
+              <li>Integrated the suite into CI/CD with Python tooling and careful test-data handling.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Automation Engineer — <span class="jc">Markets.com</span></span><span class="jd">2023 — 2024</span></div>
+            <ul>
+              <li>Architected a Cypress suite and an API testing framework for a trading platform.</li>
+              <li>Integrated automation into CI/CD; mentored junior engineers on test practices.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Automation Engineer — <span class="jc">The Plate</span></span><span class="jd">2022 — 2023</span></div>
+            <ul>
+              <li>Built a Playwright end-to-end framework from scratch and set automation standards.</li>
+              <li>Automated critical journeys, cutting release time ~40%; introduced BDD with Gherkin.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Automation Engineer — <span class="jc">Finastra</span></span><span class="jd">2021</span></div>
+            <ul>
+              <li>Automated regression for banking software (Selenium + Java); API testing for transaction endpoints.</li>
+              <li>Contributed quality gates within an enterprise release pipeline, across time zones.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="jh"><span class="jr">Product Owner — <span class="jc">Nokia</span></span><span class="jd">2014 — 2019</span></div>
+            <ul>
+              <li>Owned the backlog for an internal QA tooling platform; coordinated 3 dev teams across 4 countries.</li>
+              <li>Drove automated-testing adoption (~50% faster QA cycle); led a SAFe Agile transformation for QA.</li>
+            </ul>
+          </div>
+
+          <div class="older-h">Earlier roles</div>
+          <div class="compact"><span class="c-role">Test Engineer — <span class="c-co">Success Lion</span></span><span class="c-dt">2020</span></div>
+          <div class="compact"><span class="c-role">Automation Engineer — <span class="c-co">YesCourse</span></span><span class="c-dt">2017 — 2018</span></div>
+          <div class="compact"><span class="c-role">Automation Engineer — <span class="c-co">AnalyticsFire</span></span><span class="c-dt">2017 — 2018</span></div>
+          <div class="compact"><span class="c-role">Test Engineer — <span class="c-co">Loan Market AU</span></span><span class="c-dt">2018</span></div>
+          <div class="compact"><span class="c-role">QA / Customer Support — <span class="c-co">BuyersDirect</span></span><span class="c-dt">2017 — 2018</span></div>
+          <div class="compact"><span class="c-role">QA / Customer Support — <span class="c-co">JustWines</span></span><span class="c-dt">2017 — 2018</span></div>
+          <div class="compact"><span class="c-role">QA / Customer Support — <span class="c-co">AskMeFast</span></span><span class="c-dt">2013 — 2014</span></div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <span>Kim E. Bandeleon · AI-Assisted QA Test Automation Engineer</span>
+      <span>Résumé updated November 2, 2026 · view-only</span>
+    </footer>
+  </div>
+
+  <script>
+  // View-only: block right-click, selection, copy, drag, and save/view-source shortcuts.
+  ['contextmenu','selectstart','dragstart','copy','cut'].forEach(function(evt){
+    document.addEventListener(evt,function(e){e.preventDefault();return false;});
+  });
+  document.addEventListener('keydown',function(e){
+    var k=(e.key||'').toLowerCase();
+    if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u'||k==='c'||k==='a')){e.preventDefault();return false;}
+    if(k==='f12'){e.preventDefault();return false;}
+  });
+  </script>
+</body>
+</html>

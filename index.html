@@ -1,317 +1,587 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-palette="ink">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kim E. Bandeleon — QA Consultant & AI Tools Builder. 13+ years in QA, five products shipped. AI-powered test pipelines, automation frameworks, and quality consulting.">
-    <title>Kim E. Bandeleon — QA Consultant & AI Tools Builder</title>
-    <link rel="canonical" href="https://k0wd.github.io/">
-    <meta name="robots" content="index, follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kim Bandeleon · AI-Assisted QA Test Automation Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0a0c12;--panel:#141824;--panel2:#1a1f30;--border:#242a3d;
+    --text:#f2f4ff;--t2:#aab0c8;--muted:#7e84a0;
+    --accent:#2b6fff;--accent2:#c6ff3a;--cta:#c6ff3a;--cta-text:#0a0c12;
+    --grad:linear-gradient(135deg,#2b6fff,#c6ff3a);--glow:rgba(43,111,255,.14);
+    --code-bg:#070910;--code-fg:#c3c9e0;--code-border:#1d2142;--prompt:#2b6fff;
+    --green:#22c55e;--amber:#f59e0b;--red:#ef4444;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+  [data-palette="sunset"]{
+    --bg:#140d10;--panel:#20141a;--panel2:#271820;--border:#3a2630;
+    --text:#fff3ee;--t2:#d7a99e;--muted:#9c7a72;
+    --accent:#ff5c38;--accent2:#ffb020;--cta:#ff5c38;--cta-text:#fff;
+    --grad:linear-gradient(135deg,#ff2d78,#ff5c38 55%,#ffb020);--glow:rgba(255,92,56,.14);
+    --code-bg:#120a0d;--code-fg:#e8cfc8;--code-border:#3a2630;--prompt:#ff5c38}
+  [data-palette="ink"]{
+    --bg:#f1f1ee;--panel:#ffffff;--panel2:#f4f4ee;--border:#dcdcd3;
+    --text:#0a0a0a;--t2:#3a3a42;--muted:#6a6a74;
+    --accent:#4338ca;--accent2:#0ea5e9;--cta:#4338ca;--cta-text:#fff;
+    --grad:linear-gradient(135deg,#4338ca,#0ea5e9);--glow:rgba(67,56,202,.07);
+    --code-bg:#0f1117;--code-fg:#c7ccda;--code-border:#23262f;--prompt:#8b80ff}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;
+    background:radial-gradient(ellipse at 85% -5%,var(--glow),transparent 45%),var(--bg);transition:background .25s,color .25s}
+  .mono{font-family:var(--mono)}
+  a{color:inherit;text-decoration:none}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .wrap{max-width:1180px;margin:0 auto;padding:clamp(18px,3.5vw,34px)}
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Kim E. Bandeleon — QA Consultant & AI Tools Builder">
-    <meta property="og:description" content="I build AI-powered QA tools and consult on test automation strategy. 13+ years, 15 companies, five products in production.">
-    <meta property="og:type" content="profile">
-    <meta property="og:url" content="https://k0wd.github.io/">
-    <meta property="og:image" content="https://k0wd.github.io/assets/images/og-card.png">
-    <meta property="og:image:alt" content="Kim E. Bandeleon — QA Consultant and AI Tools Builder">
+  .mb{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:9px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.82rem;flex-wrap:wrap}
+  .mb b{color:var(--accent2)}.mb .lnk{color:var(--accent);font-weight:700}.mb .right{display:flex;align-items:center;gap:12px}
+  .pal-switch{display:inline-flex;gap:3px;background:var(--panel2);border:1px solid var(--border);border-radius:999px;padding:3px}
+  .pal-switch button{font:inherit;font-size:.72rem;font-weight:700;color:var(--muted);background:none;border:0;padding:5px 12px;border-radius:999px;cursor:pointer}
+  .pal-switch button[aria-pressed="true"]{background:var(--accent);color:var(--cta-text)}
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kim E. Bandeleon — QA Consultant & AI Tools Builder">
-    <meta name="twitter:description" content="I build AI-powered QA tools and consult on test automation strategy. 13+ years, 15 companies, five products in production.">
-    <meta name="twitter:image" content="https://k0wd.github.io/assets/images/og-card.png">
+  .topline{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.8rem;font-family:var(--mono);margin-bottom:14px;flex-wrap:wrap}
+  .topline .ok{color:var(--green)}
+  .hero{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .hero .bar{display:flex;align-items:center;gap:7px;padding:11px 15px;background:var(--panel2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+  .hero .bar i{width:11px;height:11px;border-radius:50%;display:block}
+  .hero .body{padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:center}
+  .hero h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.08;margin-bottom:14px}
+  .hero .role{font-family:var(--mono);font-size:.8rem;color:var(--accent);margin-bottom:18px;letter-spacing:.5px}
+  .hero p{color:var(--t2);max-width:46ch}
+  .runbox{font-family:var(--mono);font-size:.82rem;background:var(--code-bg);border:1px solid var(--code-border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:7px;color:var(--code-fg)}
+  .runbox .pr{color:var(--prompt);font-weight:700}.runbox .pass{color:var(--green)}.runbox .dim{color:color-mix(in srgb,var(--code-fg) 55%,transparent)}
+  /* autoplay reveal */
+  .runbox .tl{opacity:0;transform:translateY(5px)}
+  .runbox .tl.show{opacity:1;transform:none;transition:opacity .22s ease,transform .22s ease}
+  .runbox::after{content:"▋";color:var(--prompt);animation:caret 1s step-end infinite;margin-top:2px}
+  @keyframes caret{50%{opacity:0}}
+  /* hero terminal always autoplays (decorative), even under reduced-motion, per request */
+  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+  .cta{display:inline-flex;gap:8px;padding:12px 22px;border-radius:8px;background:var(--cta);color:var(--cta-text);font-weight:700;font-size:.9rem;font-family:var(--mono)}
+  .cta.ghost{background:var(--panel);color:var(--accent);border:1px solid var(--border);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  .cta.ghost:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
 
-    <!-- JSON-LD Person Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Kim E. Bandeleon",
-        "jobTitle": "QA Consultant & AI Tools Builder",
-        "description": "I build AI-powered QA tools and consult on test automation strategy. 13+ years across 15 companies.",
-        "url": "https://k0wd.github.io/",
-        "image": "https://k0wd.github.io/assets/images/kim-headshot.jpg",
-        "email": "consult@testwithkim.com",
-        "sameAs": [
-            "https://github.com/k0wd",
-            "https://www.linkedin.com/in/kim-bandeleon"
-        ],
-        "knowsAbout": ["Test Automation", "AI-Augmented QA", "Playwright", "Selenium", "CI/CD", "AI Agent Management", "QA Strategy"]
-    }
-    </script>
-
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script>document.documentElement.setAttribute('data-theme', 'galaxy');</script>
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);margin-top:14px}
+  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px}
+  .kpi .v{font-size:1.9rem;font-weight:700;font-family:var(--mono)}
+  .kpi .k{color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:14px}
+  .phead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+  .phead h3{font-family:var(--mono);font-size:.92rem;font-weight:700}
+  .phead .tag{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+  .cloud{display:flex;flex-wrap:wrap;gap:9px}
+  .cloud span{font-family:'Inter',system-ui,sans-serif;font-size:.84rem;font-weight:500;line-height:1;white-space:nowrap;
+    padding:8px 15px;border-radius:999px;border:1px solid var(--border);color:var(--t2);
+    background:color-mix(in srgb,var(--panel2) 65%,transparent);transition:transform .16s ease,border-color .16s ease,color .16s ease}
+  .cloud span:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));color:var(--text)}
+  .cloud .pri{color:var(--text);font-weight:600;border-color:color-mix(in srgb,var(--accent) 30%,var(--border))}
+  .cloud .feat{font-weight:700;font-size:.9rem;padding:9px 17px;color:var(--cta-text);background:var(--grad);border-color:transparent}
+  .cloud .feat:hover{color:var(--cta-text);transform:translateY(-2px)}
+  .st{width:9px;height:22px;border-radius:2px;background:var(--border)}
+  .st.p{background:var(--green)}.st.f{background:var(--red)}
+  /* weekly deliverables — animated timeline */
+  .wk-agg{display:flex;gap:10px 22px;flex-wrap:wrap;font-family:var(--mono);font-size:.82rem;margin-bottom:12px}
+  .wk-legend{display:flex;gap:8px 16px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-bottom:16px}
+  .wk-legend span{display:inline-flex;align-items:center;gap:6px}
+  .wk-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+  .live-wrap{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px 15px;margin-bottom:18px}
+  .live-head{font-family:var(--mono);font-size:.76rem;color:var(--t2);margin-bottom:9px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .live-head b{color:var(--text)}
+  .live-bar{display:flex;height:18px;border-radius:5px;overflow:hidden;gap:2px}
+  .live-bar i{display:block;height:100%;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+  .live-leg{display:flex;gap:8px 16px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--t2);margin-top:10px}
+  .live-leg span{display:inline-flex;align-items:center;gap:6px}
+  .live-leg i{width:9px;height:9px;border-radius:2px;display:inline-block}
+  @media (prefers-reduced-motion: reduce){.live-bar i{transition:none}}
+  .wk-timeline{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px}
+  @media(max-width:720px){.wk-timeline{grid-template-columns:1fr}}
+  .wk{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+  .wk.in{opacity:1;transform:none}
+  .wk-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:.78rem;margin-bottom:7px}
+  .wk-date{color:var(--text);font-weight:700}.wk-tag{color:var(--muted)}.wk-ct{color:var(--accent);margin-left:auto;font-weight:700}
+  .wk-tiles{display:flex;gap:3px;flex-wrap:wrap}
+  .wk-tiles .st{opacity:0;transform:scale(.3);transition:opacity .25s ease,transform .25s ease}
+  .wk-tiles .st.in{opacity:1;transform:none}
+  .wk-sub{color:var(--muted);font-family:var(--mono);font-size:.72rem;margin-top:7px}
+  @media (prefers-reduced-motion: reduce){.wk,.wk-tiles .st{opacity:1!important;transform:none!important}}
+  .prods{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);margin-top:14px}
+  .repo{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px}
+  .repo .n{font-family:var(--mono);font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .repo .n::before{content:"▸";color:var(--accent2)}
+  .repo .d{color:var(--muted);font-size:.84rem;line-height:1.5}
+  .repo .m{margin-top:12px;display:flex;gap:14px;color:var(--t2);font-family:var(--mono);font-size:.74rem;flex-wrap:wrap}
+  @media(max-width:860px){.hero .body{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.prods{grid-template-columns:1fr}}
+  @media(max-width:520px){.grid{grid-template-columns:1fr}}
+  /* résumé popup modal */
+  .modal{position:fixed;inset:0;z-index:200;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+  .modal.open{opacity:1;visibility:visible}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(5,8,16,.62);backdrop-filter:blur(3px)}
+  .modal-card{position:absolute;inset:0;margin:auto;width:min(1120px,96vw);height:min(92vh,100%);background:var(--panel);
+    border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .modal.open .modal-card{animation:modalin .28s ease}
+  @keyframes modalin{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+  .modal-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+  .modal-x{background:none;border:0;color:var(--t2);font-size:1rem;cursor:pointer;padding:4px 9px;border-radius:6px;line-height:1}
+  .modal-x:hover{background:var(--border);color:var(--text)}
+  .modal-frame{flex:1;width:100%;border:0;background:#fff}
+  /* inline mini terminal under each product — autoplays on loop, like the hero */
+  .prods .repo{display:flex;flex-direction:column}
+  .prods .repo .d{flex:1 0 auto}
+  .demo-mini{margin-top:12px;background:var(--code-bg);border:1px solid var(--code-border);border-radius:8px;overflow:hidden}
+  .demo-mini .dm-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 11px;border-bottom:1px solid var(--code-border);font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+  .demo-mini .dm-run{color:var(--muted);font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+  .demo-mini .dm-run i{width:6px;height:6px;border-radius:50%;background:currentColor;display:none}
+  .demo-mini.running .dm-run{color:var(--accent2)} .demo-mini.running .dm-run i{display:inline-block}
+  .demo-mini.done .dm-run{color:var(--green)}
+  .demo-mini .dm-body{position:relative;font-family:var(--mono);font-size:.74rem;line-height:1.65;padding:10px 11px;height:156px;overflow:hidden;display:flex;flex-direction:column;gap:2px}
+  .demo-mini .dm-body::after{content:"▋";color:var(--prompt);margin-top:2px;align-self:flex-start;opacity:0}
+  .demo-mini.running .dm-body::after{opacity:1;animation:caret 1s step-end infinite}
+  .demo-mini .ln{opacity:0;transform:translateY(5px);white-space:pre-wrap;word-break:break-word}
+  .demo-mini .ln.show{opacity:1;transform:none;transition:opacity .22s ease,transform .22s ease}
+  .demo-mini.queued .ln{opacity:0}
+  .dm-wait{display:none;position:absolute;inset:0;padding:10px 12px;align-items:center;gap:7px;color:var(--muted);font-family:var(--mono);font-size:.72rem}
+  .dm-wait::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);flex:0 0 auto}
+  .demo-mini.queued .dm-wait{display:flex;animation:waitblink 1.2s ease-in-out infinite}
+  @keyframes waitblink{0%,100%{opacity:1}50%{opacity:.32}}
+  .dm-body .cmd{color:var(--prompt)}
+  .dm-body .ok{color:var(--green)}
+  .dm-body .warn{color:var(--amber)}
+  .dm-body .info{color:var(--t2)}
+  .dm-body .comment,.dm-body .idle{color:var(--muted)}
+  .dm-body .out{color:var(--code-fg)}
+  @media (prefers-reduced-motion: reduce){.modal-card{animation:none}.modal{transition:none}}
+  /* agent workspace — animated fleet intro above the product groups */
+  .ws-sub{color:var(--t2);font-size:.88rem;max-width:66ch;margin-bottom:16px}
+  .ws-flow{font-family:var(--mono);font-size:.76rem;color:var(--muted);margin-bottom:16px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+  .ws-flow .step{opacity:.4;transition:opacity .3s ease,color .3s ease}
+  .ws-flow .step.on{opacity:1;color:var(--text)}
+  .ws-flow .step b{color:var(--accent)}
+  .ws-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+  @media(max-width:860px){.ws-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.ws-grid{grid-template-columns:1fr}}
+  .ws-node{background:var(--code-bg);border:1px solid var(--code-border);border-radius:9px;padding:12px 13px;
+    display:flex;flex-direction:column;gap:9px;color:var(--code-fg);font-family:var(--mono)}
+  .ws-node .nh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.82rem}
+  .ws-node .nm{color:var(--code-fg);font-weight:700;display:flex;align-items:center;gap:7px}
+  .ws-node .nm::before{content:"▸";color:var(--muted)}
+  .ws-node.run .nm{color:#fff}.ws-node.run .nm::before{color:var(--accent2)}
+  .ws-node.done .nm::before{content:"✓";color:var(--green)}
+  .ws-chip{font-size:.64rem;text-transform:uppercase;letter-spacing:.9px;color:var(--muted)}
+  .ws-node.run .ws-chip{color:var(--accent2)}
+  .ws-node.done .ws-chip{color:var(--green)}
+  .ws-task{font-size:.73rem;color:var(--muted);line-height:1.4}
+  .ws-prog{height:4px;border-radius:3px;background:color-mix(in srgb,var(--code-fg) 16%,transparent);overflow:hidden}
+  .ws-prog i{display:block;height:100%;width:0;background:var(--grad);transition:width 1.3s linear}
+  .ws-node.done .ws-prog i{background:var(--green)}
+</style>
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="site-header" id="site-header">
-        <nav class="site-nav" aria-label="Main navigation">
-            <a href="#home" class="nav-brand" aria-label="Kim Bandeleon — Home">
-                <img src="favicon.svg" alt="" width="36" height="36" class="nav-logo">
-                <div class="nav-brand-text">
-                    <span class="nav-name">Kim Bandeleon</span>
-                    <span class="nav-subtitle">QA CONSULTANT &amp; AI TOOLS BUILDER</span>
-                </div>
-            </a>
-            <ul class="nav-links" id="nav-links" role="list">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#demo">Live Demo</a></li>
-                <li><a href="#projects">Products</a></li>
-                <li><a href="#ci-runs">CI Runs</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-                <svg class="nav-toggle-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                <svg class="nav-toggle-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <a href="#contact" class="nav-cta">Contact Me <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-        </nav>
-    </header>
-
-    <main id="main">
-        <!-- Hero -->
-        <section class="hero" id="home">
-            <div class="hero-inner">
-                <div class="hero-text">
-                    <img class="hero-avatar" src="assets/images/kim-headshot.jpg" alt="Kim E. Bandeleon" width="76" height="76">
-                    <span class="section-badge">AI-ASSISTED QA TEST AUTOMATION ENGINEER</span>
-                    <h1 class="hero-title">Kim E. <span class="gradient-text">Bandeleon</span></h1>
-                    <p class="hero-desc">I automate testing with <strong>AI-assisted pipelines</strong> — from ticket to running <strong>Playwright suite</strong>.</p>
-                    <p class="hero-value">Five products in production, backed by 13+ years of QA and test automation.</p>
-                    <div class="hero-stats" id="hero-stats"></div>
-                    <div class="hero-ctas">
-                        <a href="#projects" class="btn btn-primary">See my products <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
-                        <a href="#contact" class="btn btn-outline">Work with me <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-                    </div>
-                    <div class="hero-availability">
-                        <span class="availability-dot"></span>
-                        Available for consulting &amp; contracts — Bulacan, Philippines
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="terminal-card" role="img" aria-label="Terminal showing a Playwright test suite with 247 tests passing, and an AI pipeline turning a ticket into generated, executed tests.">
-                        <div class="term-bar">
-                            <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
-                            <span class="term-title">testagent — pipeline</span>
-                        </div>
-                        <div class="term-body" aria-hidden="true">
-                            <span class="term-line"><span class="term-prompt">$</span> npx playwright test</span>
-                            <span class="term-line term-dim">Running 247 tests across 5 projects…</span>
-                            <span class="term-line term-pass">✓ 247 passed <span class="term-dim">· 0 failed · 2.1s</span></span>
-                            <span class="term-line">&nbsp;</span>
-                            <span class="term-line"><span class="term-prompt">$</span> testagent run --from-ticket QA-1284</span>
-                            <span class="term-line term-dim">reading ticket → drafting plan → authoring tests…</span>
-                            <span class="term-line term-pass">✓ 12 tests generated, executed, results posted</span>
-                            <span class="term-line term-accent">▸ ticket → tests → shipped ✓</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Proof strip -->
-        <section class="proof" id="proof" aria-labelledby="proof-heading">
-            <h2 id="proof-heading" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;">Where my QA work has shipped</h2>
-            <p class="proof-caption">13+ years across 15 companies — fintech, e-commerce, telecom &amp; SaaS</p>
-            <div class="proof-strip" id="proof-strip"></div>
-        </section>
-
-        <!-- Live Demo -->
-        <section class="section section-alt" id="demo">
-            <div class="section-header">
-                <span class="section-badge live-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> LIVE DEMO</span>
-                <h2 class="section-title">Don't take my word — <span class="gradient-text">watch it run</span></h2>
-                <p class="section-subtitle" id="demo-desc">TestAgent reads a ticket, writes the tests, runs them, and posts results back — the whole loop, automated. Watch it below.</p>
-            </div>
-            <div class="demo-embed">
-                <iframe id="demo-frame" title="TestAgent live pipeline demo" aria-describedby="demo-desc" src="demo-testagent-embed.html" width="1000" height="520" loading="lazy" scrolling="no"></iframe>
-            </div>
-            <p class="demo-fallback"><a href="demo-testagent.html" target="_blank" rel="noopener">See the full run in a new tab <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></p>
-        </section>
-
-        <!-- Products -->
-        <section class="section" id="projects" aria-labelledby="projects-title">
-            <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg> AUTOMATION TOOLING</span>
-                <h2 class="section-title" id="projects-title">QA tools I've <span class="gradient-text">built and shipped</span></h2>
-                <p class="section-subtitle">Five in production — manual regression cut 70%, 85% critical-flow coverage, an AI test pipeline live across 3 client environments.</p>
-            </div>
-            <div class="projects-grid" id="projects-grid"></div>
-        </section>
-
-        <!-- CI Runs -->
-        <section class="section" id="ci-runs">
-            <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> CI RUNS</span>
-                <h2 class="section-title">Live pipeline for <span class="gradient-text">ecaenterprise</span></h2>
-                <p class="section-subtitle">A SauceDemo E2E suite (Playwright + Cucumber BDD) runs on every push. The HTML report and per-test pass/fail/flaky history publish automatically — so a drifting or flaky test is visible at a glance, not discovered in production.</p>
-            </div>
-            <div class="ci-panel" id="ci-runs-panel" aria-live="polite" aria-busy="true">
-                <noscript>
-                    <div class="ci-links">
-                        <a class="ci-link" href="https://kimbandeleon.pro/ecaenterprise-demo/" target="_blank" rel="noopener">Latest report</a>
-                        <a class="ci-link" href="https://github.com/K0wd/ecaenterprise-demo/actions" target="_blank" rel="noopener">Actions history</a>
-                        <a class="ci-link" href="https://github.com/K0wd/ecaenterprise-demo" target="_blank" rel="noopener">Source</a>
-                    </div>
-                </noscript>
-            </div>
-        </section>
-
-        <!-- What I do (dual track) -->
-        <section class="section section-alt" id="what">
-            <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg> WHAT I DO</span>
-                <h2 class="section-title">AI-assisted QA automation, <span class="gradient-text">two ways to engage</span></h2>
-            </div>
-            <div class="what-grid">
-                <div class="track-col">
-                    <div class="track-head">
-                        <span class="track-icon" style="background:#6366f118;color:#7c6cf0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
-                        <div>
-                            <h3>Embedded QA — lead your team's quality function</h3>
-                            <p class="track-sub">I join as a senior QA lead, own the automation strategy, and ship AI-integrated test pipelines that make every release reproducible.</p>
-                        </div>
-                    </div>
-                    <ul class="track-list" id="hiring-list"></ul>
-                </div>
-                <div class="track-col">
-                    <div class="track-head">
-                        <span class="track-icon" style="background:#14b8a618;color:#06d6a0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
-                        <div>
-                            <h3>Consulting — build the tool, audit the pipeline</h3>
-                            <p class="track-sub">Scoped engagements: tool builds, pipeline audits, framework selection, and AI integration — with evidence you can act on.</p>
-                        </div>
-                    </div>
-                    <ul class="track-list" id="consulting-list"></ul>
-                </div>
-            </div>
-            <div class="what-cta">
-                <a href="#contact" class="btn btn-primary">Tell me about your QA gap <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-            </div>
-        </section>
-
-        <!-- Selected Work -->
-        <section class="section" id="work">
-            <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> EXPERIENCE</span>
-                <h2 class="section-title">13+ years of <span class="gradient-text">release confidence</span></h2>
-                <p class="section-subtitle">Test automation and AI-assisted QA across 15 companies in fintech, e-commerce, telecom, and SaaS.</p>
-            </div>
-            <div class="timeline" id="timeline"></div>
-            <div class="timeline-nav" id="timeline-nav">
-                <button class="timeline-nav-btn" id="tl-prev" aria-label="Previous experiences"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg> Previous</button>
-                <span class="timeline-nav-info" id="tl-info" aria-live="polite"></span>
-                <button class="timeline-nav-btn" id="tl-next" aria-label="Next experiences">Next <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-            </div>
-        </section>
-
-        <!-- Expertise -->
-        <section class="section section-alt" id="expertise">
-            <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> EXPERTISE</span>
-                <h2 class="section-title">Skills and tools, <span class="gradient-text">proven in production</span></h2>
-                <p class="section-subtitle">13+ years across 15 companies. The automation behind these tools cut manual regression 70% and holds 85% coverage on critical flows.</p>
-            </div>
-            <div class="expertise-block">
-                <h3 class="expertise-label">Core skills</h3>
-                <div class="tag-row" id="skills-tags" aria-label="Core skills"></div>
-            </div>
-            <div class="expertise-block">
-                <h3 class="expertise-label">Tools &amp; software</h3>
-                <div class="tools-grid" id="tools-grid" aria-label="Tools and software"></div>
-            </div>
-            <div class="expertise-block">
-                <h3 class="expertise-label">Certifications</h3>
-                <div class="tag-row" id="certs-row" aria-label="Certifications"></div>
-            </div>
-            <p class="cred-line" id="cred-line"></p>
-        </section>
-
-        <!-- Contact -->
-        <section class="section section-contact" id="contact">
-            <div class="section-header">
-                <span class="section-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> GET IN TOUCH</span>
-                <h2 class="section-title">Let's close your <span class="gradient-text">QA gap</span></h2>
-                <p class="section-subtitle">Need a QA tool built, a pipeline audited, or an automation strategy? Tell me what you're working on.</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info" id="contact-info"></div>
-                <div class="contact-form-wrapper">
-                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" id="contact-ak" value="">
-                        <input type="hidden" name="subject" value="Inquiry from Portfolio">
-                        <input type="hidden" name="from_name" value="Portfolio Contact Form">
-                        <div class="form-row">
-                            <div class="form-field">
-                                <label for="contact-name">YOUR NAME</label>
-                                <input type="text" id="contact-name" name="name" required placeholder="Your name">
-                            </div>
-                            <div class="form-field">
-                                <label for="contact-email">YOUR EMAIL</label>
-                                <input type="email" id="contact-email" name="email" required placeholder="you@company.com">
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <label for="contact-subject">SUBJECT</label>
-                            <input type="text" id="contact-subject" name="subject_line" placeholder="Tool build / pipeline audit / QA consulting">
-                        </div>
-                        <div class="form-field">
-                            <label for="contact-message">MESSAGE</label>
-                            <textarea id="contact-message" name="message" required rows="5" placeholder="Tell me about the QA challenge you're facing or the tool you need built..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">Send message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
-                        <p class="form-note">I'll get back to you within 24 hours.</p>
-                        <div class="contact-status" id="contact-status"></div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-col-brand">
-                <div class="footer-brand">
-                    <div class="footer-avatar">K</div>
-                    <div>
-                        <div class="footer-name">Kim E. Bandeleon</div>
-                        <div class="footer-title">QA CONSULTANT &amp; AI TOOLS BUILDER</div>
-                    </div>
-                </div>
-                <p class="footer-desc">QA tools and consulting — AI-powered test pipelines, automation frameworks, and quality strategy.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#projects">Products</a></li>
-                    <li><a href="#work">Work</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Get In Touch</h4>
-                <div class="footer-contact" id="footer-contact"></div>
-            </div>
+  <div class="mb">
+    <span>🧪 <b>kim bandeleon</b> · ai-assisted qa test automation engineer</span>
+    <span class="right">
+      <span class="pal-switch" role="group" aria-label="Colour palette">
+        <button data-pal="cobalt">Cobalt</button><button data-pal="sunset">Sunset</button><button data-pal="ink">Ink</button>
+      </span>
+    </span>
+  </div>
+  <div class="wrap">
+    <div class="topline">kim@portfolio:~$ <span>status</span> <span class="ok">● all systems green</span> · 18 products &amp; tools shipped</div>
+    <section class="hero">
+      <div class="bar"><i style="background:#ef4444"></i><i style="background:#eab308"></i><i style="background:#22c55e"></i>&nbsp; kim-bandeleon — qa-automation-engineer</div>
+      <div class="body">
+        <div>
+          <div class="role mono">// AI-ASSISTED QA TEST AUTOMATION ENGINEER</div>
+          <h1>Kim E. <span class="grad">Bandeleon</span></h1>
+          <p>I build AI-powered QA tools and consult on test automation strategy. Ticket-to-test pipelines, autonomous execution, results you can trust.</p>
+          <div class="ctas">
+            <a class="cta" href="./resume.html" id="resume-btn">./resume.sh →</a>
+            <a class="cta ghost" href="#products" id="demos-btn">See works in action →</a>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Kim E. Bandeleon. All rights reserved.</p>
+        <div class="runbox" id="runbox" role="img" aria-label="Terminal: Playwright 247 passed; TestAgent turns ticket QA-1284 into tests, executed and shipped.">
+          <span class="tl"><span class="pr">$</span> npx playwright test</span>
+          <span class="tl dim">Running 247 tests across 5 projects…</span>
+          <span class="tl pass">✓ 247 passed <span class="dim">· 0 failed · 2.1s</span></span>
+          <span class="tl">&nbsp;</span>
+          <span class="tl"><span class="pr">$</span> testagent run --from-ticket QA-1284</span>
+          <span class="tl dim">reading ticket → drafting plan → authoring…</span>
+          <span class="tl pass">✓ 12 tests generated, executed, posted</span>
+          <span class="tl" style="color:var(--accent2)">▸ ticket → tests → shipped ✓</span>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-    </button>
+    <div class="panel" id="ws-panel">
+      <div class="phead"><h3 class="mono">the agent workspace</h3><span class="tag">watch the fleet work · one job at a time</span></div>
+      <div class="ws-flow" id="ws-flow" aria-hidden="true">
+        <span class="step" data-i="0"><b>ticket</b></span><span>→</span>
+        <span class="step" data-i="1">tests</span><span>→</span>
+        <span class="step" data-i="2">run</span><span>→</span>
+        <span class="step" data-i="3">proof</span><span>→</span>
+        <span class="step" data-i="4">sync</span><span>→</span>
+        <span class="step" data-i="5">report</span>
+      </div>
+      <div class="ws-grid" id="ws-grid" role="img" aria-label="Agent workspace: a crew of QA bots pick up a ticket in sequence — read the context, write and run the tests, file the proof, keep the board honest, build the weekly report — looping.">
+        <!-- agent nodes injected by script -->
+      </div>
+    </div>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+    <div class="grid">
+      <div class="kpi"><div class="v grad">25+</div><div class="k">client-years</div></div>
+      <div class="kpi"><div class="v grad">15</div><div class="k">companies</div></div>
+      <div class="kpi"><div class="v grad">18</div><div class="k">tools &amp; agents</div></div>
+      <div class="kpi"><div class="v grad">45</div><div class="k">tickets QA'd / wk</div></div>
+    </div>
+
+    <div class="panel" id="wk-panel">
+      <div class="phead"><h3>How I deliver, week after week</h3><span class="tag">9 weeks · 300 tickets · client details removed</span></div>
+      <div class="live-wrap">
+        <div class="live-head"><span><b>Where the work stands now</b> · live Jira · 2026-11-02</span><span>434 tracked tickets</span></div>
+        <div class="live-bar" role="img" aria-label="Live status of 434 tracked tickets: 404 shipped or verified, 16 in QA, 11 open defects, 3 cancelled.">
+          <i data-w="93.1" style="background:var(--green)"></i><i data-w="3.7" style="background:var(--amber)"></i><i data-w="2.5" style="background:var(--red)"></i><i data-w="0.7" style="background:var(--muted)"></i>
+        </div>
+        <div class="live-leg">
+          <span><i style="background:var(--green)"></i> 404 shipped / verified</span>
+          <span><i style="background:var(--amber)"></i> 16 in QA</span>
+          <span><i style="background:var(--red)"></i> 11 open defects</span>
+          <span><i style="background:var(--muted)"></i> 3 cancelled</span>
+        </div>
+      </div>
+      <div id="wk-timeline" class="wk-timeline" role="img" aria-label="Weekly QA delivery grid: nine weeks of tiles — green verified in-week, teal held then since resolved, red defect caught, blue executed."></div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h3>skill cloud</h3><span class="tag">testing · automation · manual · AI</span></div>
+      <div class="cloud">
+        <span class="feat">Test Automation</span>
+        <span class="feat">AI-Assisted QA</span>
+        <span class="feat">Playwright</span>
+        <span class="feat">QA Strategy</span>
+        <span class="feat">Manual Testing</span>
+        <span class="feat">Self-Healing Locators</span>
+        <span class="feat">Ticket-to-Test Pipelines</span>
+        <span class="feat">ISTQB</span>
+        <span class="feat">LLM Test Generation</span>
+        <span class="feat">Defect Triage</span>
+        <span class="pri">Selenium</span>
+        <span class="pri">Python</span>
+        <span class="pri">Cucumber</span>
+        <span class="pri">CI/CD</span>
+        <span class="pri">playwright-bdd</span>
+        <span class="pri">API Testing</span>
+        <span class="pri">Exploratory Testing</span>
+        <span>Cypress</span>
+        <span>Behave</span>
+        <span>pytest</span>
+        <span>TypeScript</span>
+        <span>Regression Testing</span>
+        <span>Azure DevOps</span>
+        <span>Gherkin / BDD</span>
+        <span>Page Object Model</span>
+        <span>E2E Testing</span>
+        <span>Smoke Testing</span>
+        <span>Test Planning</span>
+        <span>Accessibility · WCAG</span>
+        <span>Performance · Locust</span>
+        <span>Docker</span>
+        <span>Prompt Engineering</span>
+        <span>Boundary Value Analysis</span>
+        <span>Risk-Based Testing</span>
+        <span>Cross-Browser</span>
+        <span>Usability Testing</span>
+        <span>Autonomous Test Execution</span>
+      </div>
+    </div>
+
+    <p id="products" style="color:var(--t2);font-size:.9rem;margin:30px 0 4px;max-width:70ch;scroll-margin-top:70px">Real tools I actually use. <b style="color:var(--accent)">Here's a quick sample of each.</b></p>
+
+    <div class="phead" style="margin-top:20px"><h3 class="mono">ship-it-qa/ <span style="color:var(--muted)">(8)</span></h3><span class="tag">testing that runs itself</span></div>
+    <div class="prods">
+      <div class="repo"><div class="n">Ticket-to-Done</div><div class="d">Hand it a ticket. It writes the tests, runs them, and brings back the proof.</div><div class="m"><span>● prod</span><span>TestAgent</span><span>playwright</span></div></div>
+      <div class="repo"><div class="n">The QA Crew</div><div class="d">A team of bots that test your apps one job at a time, and always show their work.</div><div class="m"><span>● prod</span><span>agent fleet</span><span>playwright</span></div></div>
+      <div class="repo"><div class="n">The Monday Report</div><div class="d">Turns a whole week of testing into one clean report a client can actually read.</div><div class="m"><span>● prod</span><span>reporting</span></div></div>
+      <div class="repo"><div class="n">Receipts</div><div class="d">Drops the screenshots and proof right into the ticket, double-checked before it posts.</div><div class="m"><span>● prod</span><span>evidence</span><span>jira</span></div></div>
+      <div class="repo"><div class="n">Always In Sync</div><div class="d">Keeps the status board honest. Finished work quietly drops off by itself.</div><div class="m"><span>● prod</span><span>live sync</span><span>jira/ado</span></div></div>
+      <div class="repo"><div class="n">API Watchdog</div><div class="d">Quietly checks an email platform's plumbing across every environment, all day.</div><div class="m"><span>● prod</span><span>BDD</span><span>playwright</span></div></div>
+      <div class="repo"><div class="n">The Unblocker</div><div class="d">Sorts the stuck pile and tells you exactly what's holding each one up.</div><div class="m"><span>● prod</span><span>triage</span><span>claude</span></div></div>
+      <div class="repo"><div class="n">The Full Run</div><div class="d">Walks login, cart and checkout end to end — reusable any time you need it.</div><div class="m"><span>● prod</span><span>e2e</span><span>cucumber</span></div></div>
+    </div>
+
+    <div class="phead" style="margin-top:22px"><h3 class="mono">ai-toolbelt/ <span style="color:var(--muted)">(5)</span></h3><span class="tag">less busywork, more thinking</span></div>
+    <div class="prods">
+      <div class="repo"><div class="n">Second Brain</div><div class="d">Gives my AI helpers full memory of my code and notes — all on my own machine.</div><div class="m"><span>● prod</span><span>agent-context</span><span>mcp</span></div></div>
+      <div class="repo"><div class="n">Mission Control</div><div class="d">A little virtual office where I watch every bot work in one place.</div><div class="m"><span>● prod</span><span>office-guys</span></div></div>
+      <div class="repo"><div class="n">Bot Blueprints</div><div class="d">Keeps all my AI skills saved and version-tracked, so a fresh setup takes one step.</div><div class="m"><span>● prod</span><span>claude-kit</span></div></div>
+      <div class="repo"><div class="n">The Critic</div><div class="d">Reads and sharpens the rules that guide my AI, so it keeps getting better.</div><div class="m"><span>● prod</span><span>AI reviewer</span></div></div>
+      <div class="repo"><div class="n">The Cozy Office</div><div class="d">A cute, game-like view of my bots working away at their desks.</div><div class="m"><span>◦ wip</span><span>Opsffice</span><span>web</span></div></div>
+    </div>
+
+    <div class="phead" style="margin-top:22px"><h3 class="mono">handy-robots/ <span style="color:var(--muted)">(5)</span></h3><span class="tag">little bots for real chores</span></div>
+    <div class="prods">
+      <div class="repo"><div class="n">Job Hunter</div><div class="d">A quiet bot that finds jobs, applies, and watches for replies while I sleep.</div><div class="m"><span>● prod</span><span>applicant</span><span>playwright</span></div></div>
+      <div class="repo"><div class="n">Inbox Helper</div><div class="d">Reads my email for me, and only sends anything when I say the word.</div><div class="m"><span>● prod</span><span>gmail-auto</span><span>python</span></div></div>
+      <div class="repo"><div class="n">Auto-Promoter</div><div class="d">Posts products to Facebook pages on its own — no copy-paste.</div><div class="m"><span>◦ wip</span><span>marketer</span><span>node</span></div></div>
+      <div class="repo"><div class="n">Support Sorter</div><div class="d">Sorts support mail into neat piles and quietly handles the easy ones.</div><div class="m"><span>◦ wip</span><span>triage</span><span>claude</span></div></div>
+      <div class="repo"><div class="n">Car Loader</div><div class="d">Beams Android apps onto a car's screen over the air — no cables.</div><div class="m"><span>◦ wip</span><span>buddy-load</span></div></div>
+    </div>
+
+    <div class="phead" style="margin-top:22px"><h3 class="mono">in-the-lab/ <span style="color:var(--muted)">(4)</span></h3><span class="tag">ideas I'm itching to build next</span></div>
+    <div class="prods">
+      <div class="repo"><div class="n">Flake Finder</div><div class="d">Spots the flaky tests that waste your morning — before they get the chance.</div><div class="m"><span>○ idea</span><span>reliability</span></div></div>
+      <div class="repo"><div class="n">Release Radar</div><div class="d">One glance tells you whether it's safe to hit deploy.</div><div class="m"><span>○ idea</span><span>health check</span></div></div>
+      <div class="repo"><div class="n">Test Scribe</div><div class="d">Turn a plain-English user story straight into ready-to-run tests.</div><div class="m"><span>○ idea</span><span>ai</span></div></div>
+      <div class="repo"><div class="n">Bug Narrator</div><div class="d">Writes a crisp, repeatable bug report from a failed run, automatically.</div><div class="m"><span>○ idea</span><span>ai</span></div></div>
+    </div>
+
+    <p style="color:var(--muted);font-size:.78rem;margin-top:34px;border-top:1px solid var(--border);padding-top:16px;font-family:var(--mono)">
+      // Ink palette (switch top-right) · the delivery log is 9 real QA weeks (Jun–Sep 2026), genericised — no client, ticket, project or dev names. Green = shipped/verified, red = defects caught — same key as the live-status bar. All 263 tickets are resolved in live Jira (0 still open, 2026-11-02). The grid and live bar animate in on scroll.</p>
+  </div>
+
+  <div class="modal" id="resume-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Résumé — Kim E. Bandeleon">
+      <div class="modal-bar"><span>~/resume.sh — Kim E. Bandeleon · résumé</span><button class="modal-x" data-close aria-label="Close résumé">✕</button></div>
+      <iframe class="modal-frame" title="Résumé" src="about:blank" data-src="./resume.html"></iframe>
+    </div>
+  </div>
+
+  <script>
+  // Palette: default Ink, switcher still works.
+  (function(){var h=document.documentElement;h.dataset.palette='ink';
+   function sync(){document.querySelectorAll('[data-pal]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.pal===h.dataset.palette);});}
+   document.addEventListener('click',function(e){var b=e.target.closest('[data-pal]');if(!b)return;h.dataset.palette=b.dataset.pal;localStorage.setItem('pf-pal',b.dataset.pal);sync();});sync();})();
+  // Autoplay terminal: reveal lines in sequence, pause, loop.
+  (function(){var box=document.getElementById('runbox');if(!box)return;
+   var lines=[].slice.call(box.querySelectorAll('.tl'));
+   function play(){lines.forEach(function(l){l.classList.remove('show');});var i=0;
+     (function step(){if(i>=lines.length){setTimeout(play,2000);return;}
+       var blank=lines[i].textContent.trim()==='';lines[i].classList.add('show');i++;setTimeout(step,blank?120:460);})();}
+   play();})();
+  // Weekly deliverables: build the timeline from real (genericised) QA cycles, animate on scroll.
+  (function(){
+   var WEEKS=[
+     {d:"2026-06-08 → 06-12", t:"full week",          v:9,  h:18, f:1 },
+     {d:"2026-06-13 → 06-17", t:"triage week",        v:1,  h:20, f:1 },
+     {d:"2026-06-22 → 06-26", t:"stage verification", v:44, h:7,  f:1 },
+     {d:"2026-06-29 → 07-05", t:"time-logged",        n:32 },
+     {d:"2026-07-06 → 07-12", t:"activity log",       n:26 },
+     {d:"2026-07-20 → 07-24", t:"stage priority run", v:8,  h:5,  f:2 },
+     {d:"2026-07-27 → 07-31", t:"status sweep",       v:34, h:15, f:15},
+     {d:"2026-08-24 → 08-29", t:"cross-project week", v:29, h:14, f:2 },
+     {d:"2026-09-14 → 09-18", t:"sprint status",      v:3,  h:12, f:1 }
+   ];
+   var tl=document.getElementById('wk-timeline');if(!tl)return;var allTiles=[];
+   WEEKS.forEach(function(w){
+     var activity=(w.n!=null);
+     var row=document.createElement('div');row.className='wk';
+     var tot=activity?w.n:(w.v+w.h+w.f);
+     var top=document.createElement('div');top.className='wk-top';
+     top.innerHTML='<span class="wk-date">'+w.d+'</span><span class="wk-ct">'+tot+' tickets</span>';
+     var tiles=document.createElement('div');tiles.className='wk-tiles';
+     function add(n,cls){for(var i=0;i<n;i++){var s=document.createElement('span');s.className='st '+cls;tiles.appendChild(s);allTiles.push(s);}}
+     var sub=document.createElement('div');sub.className='wk-sub';
+     if(activity){add(w.n,'p');sub.textContent=w.n+' delivered · time-logged';}
+     else{add(w.v,'p');add(w.h,'p');add(w.f,'f');
+       sub.textContent=(w.v+w.h)+' shipped/verified · '+w.f+' defect'+(w.f===1?'':'s')+' caught → dev';}
+     row.appendChild(top);row.appendChild(tiles);row.appendChild(sub);tl.appendChild(row);
+   });
+   function fillLiveBar(){document.querySelectorAll('.live-bar i').forEach(function(b){b.style.width=b.dataset.w+'%';});}
+   var rows=[].slice.call(tl.querySelectorAll('.wk'));
+   if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+     rows.forEach(function(r){r.classList.add('in');});allTiles.forEach(function(t){t.classList.add('in');});fillLiveBar();return;}
+   var played=false;
+   function reveal(){if(played)return;played=true;
+     fillLiveBar();
+     rows.forEach(function(r,ri){setTimeout(function(){r.classList.add('in');},ri*180);});
+     var base=rows.length*180;
+     allTiles.forEach(function(t,i){setTimeout(function(){t.classList.add('in');},base+i*9);});}
+   var panel=document.getElementById('wk-panel');
+   if('IntersectionObserver' in window){
+     var io=new IntersectionObserver(function(es){es.forEach(function(e){
+       if(e.isIntersecting||e.boundingClientRect.top<window.innerHeight){reveal();io.disconnect();}
+     });},{threshold:0});
+     io.observe(panel);
+     // reloaded already scrolled past the panel: reveal on next tick
+     setTimeout(function(){if(panel.getBoundingClientRect().top<window.innerHeight)reveal();},60);
+   }else{reveal();}
+  })();
+  // Résumé popup: open the resume in an in-page modal (not a new tab).
+  (function(){
+   var btn=document.getElementById('resume-btn'),modal=document.getElementById('resume-modal');if(!btn||!modal)return;
+   var frame=modal.querySelector('.modal-frame');
+   function open(e){if(e)e.preventDefault();if(frame.getAttribute('src')!==frame.dataset.src)frame.setAttribute('src',frame.dataset.src);
+     modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+   function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+   btn.addEventListener('click',open);
+   modal.addEventListener('click',function(e){if(e.target.hasAttribute('data-close'))close();});
+   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+  })();
+
+  // "See works in action" + per-product sample-run popup (same page).
+  (function(){
+   var DEMOS={
+    "Ticket-to-Done":{sub:"ticket → tests → proof",lines:["$ ticket-to-done run DEMO-142","› reading ticket: reset password","› drafting 6 scenarios · 3 pos · 3 neg","▸ playwright running… headed","✓ 6/6 passed · evidence posted"]},
+    "The QA Crew":{sub:"a team of bots, one job each",lines:["$ qa-crew start --app shop-demo","› agent-1 → checkout flow","› agent-2 → sign-in flow","▸ one ticket at a time, headed","✓ 2 issues found · screenshots posted"]},
+    "The Monday Report":{sub:"a week of QA, one clean page",lines:["$ monday-report --week","› gathering runs across 4 projects","› 128 checks · 5 bugs · 3 fixes verified","▸ building client-ready summary","✓ report.html ready to send"]},
+    "Receipts":{sub:"proof, straight into the ticket",lines:["$ receipts post DEMO-142","› capturing screenshots","› rendering before / after","▸ verifying it shows in the ticket","✓ inline evidence posted"]},
+    "Always In Sync":{sub:"the status board, kept honest",lines:["$ sync --watch","› 312 tickets tracked","› DEMO-98 moved to Done → removed","▸ dashboard refreshed","✓ board matches reality"]},
+    "API Watchdog":{sub:"the plumbing, checked all day",lines:["$ watchdog run --all-envs","› GET /messages … 200 ✓","› POST /send … 200 ✓","▸ 48 checks across 8 environments","✓ all green"]},
+    "The Unblocker":{sub:"the stuck pile, sorted",lines:["$ unblocker scan","› 91 blocked tickets found","› grouping by real blocker","▸ 6 groups: env · data · spec …","✓ each one labelled with its cause"]},
+    "The Full Run":{sub:"login → cart → checkout",lines:["$ full-run demo-shop","› login ✓","› add to cart ✓","› checkout ✓","✓ journey passed · reusable anytime"]},
+    "Second Brain":{sub:"memory for my AI, on my machine",lines:["$ brain ask \"where is login tested?\"","› searching code + notes locally","▸ nothing leaves the machine","✓ found: tests/auth/login.spec"]},
+    "Mission Control":{sub:"all my bots, one window",lines:["$ office open","› 7 agents online","› 2 running · 5 idle","▸ drift check… clean","✓ fleet healthy"]},
+    "Bot Blueprints":{sub:"AI skills, version-tracked",lines:["$ kit deploy","› 23 skills · 11 agents","▸ one step, no manual edits","✓ synced to a fresh machine"]},
+    "The Critic":{sub:"sharpening my AI's rules",lines:["$ critic review","› reading 14 rule files","› 3 contradictions found","▸ suggesting fixes","✓ rules tightened"]},
+    "The Cozy Office":{sub:"a tiny game of my bots at work",lines:["$ opsffice preview","› rendering isometric desks","▸ work in progress","✓ cozy view streaming"]},
+    "Job Hunter":{sub:"applies while I sleep",lines:["$ hunter run","› scanning 6 job boards","› 4 roles matched","▸ applying… one at a time","✓ 4 applied · watching for replies"]},
+    "Inbox Helper":{sub:"reads free, writes on my word",lines:["$ inbox triage","› 38 new emails","› 5 need action","▸ drafts ready, nothing sent","✓ waiting for my ok"]},
+    "Auto-Promoter":{sub:"posts on its own",lines:["$ promoter post","› 3 products queued","▸ posting to pages","✓ scheduled"]},
+    "Support Sorter":{sub:"sorts mail, handles the easy ones",lines:["$ sorter run","› 60 support emails","› refund · bug · how-to · spam","▸ auto-replying to the safe ones","✓ 22 handled · rest escalated"]},
+    "Car Loader":{sub:"apps to your car, no cables",lines:["$ carload send maps.apk","› connecting over wireless ADB","▸ pushing to the head unit","✓ installed on the dash"]},
+    "Flake Finder":{sub:"concept · catching flaky tests early",lines:["// idea","› watch test history for wobble","› flag the ones that fail at random","▸ fix them before they waste a morning","○ not built yet — on the list"]},
+    "Release Radar":{sub:"concept · safe-to-ship at a glance",lines:["// idea","› one screen: tests · bugs · coverage","› green means go","○ not built yet — on the list"]},
+    "Test Scribe":{sub:"concept · story → tests",lines:["// idea","› paste a plain-English user story","› get ready-to-run tests back","○ not built yet — on the list"]},
+    "Bug Narrator":{sub:"concept · failed run → bug report",lines:["// idea","› read the failed run","› write clear steps to reproduce","○ not built yet — on the list"]}
+   };
+   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   function cls(s){s=s.trim();
+     if(s.indexOf('$')===0)return'cmd';
+     if(s.indexOf('✓')===0)return'ok';
+     if(s.indexOf('⚠')===0||s.indexOf('✗')===0)return'warn';
+     if(s.indexOf('//')===0)return'comment';
+     if(s.indexOf('○')===0)return'idle';
+     if(s.indexOf('›')===0||s.indexOf('▸')===0)return'info';
+     return'out';}
+   function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+   var minis=[];
+   // build an inline mini terminal under every product card
+   document.querySelectorAll('.prods .repo').forEach(function(card){
+     var name=card.querySelector('.n').textContent.trim();var d=DEMOS[name];if(!d)return;
+     var mini=document.createElement('div');mini.className='demo-mini';mini.setAttribute('aria-hidden','true');
+     var bar=document.createElement('div');bar.className='dm-bar';
+     var t=document.createElement('span');t.textContent='~/'+slug(name);
+     var run=document.createElement('span');run.className='dm-run';run.textContent='queued';
+     bar.appendChild(t);bar.appendChild(run);
+     var body=document.createElement('div');body.className='dm-body';
+     var wait=document.createElement('div');wait.className='dm-wait';wait.textContent='waiting to start…';
+     body.appendChild(wait);
+     var nodes=d.lines.map(function(s){var el=document.createElement('div');el.className='ln '+cls(s);el.textContent=s;body.appendChild(el);return el;});
+     mini.appendChild(bar);mini.appendChild(body);card.appendChild(mini);
+     minis.push({mini:mini,run:run,nodes:nodes,wait:wait,name:name});
+   });
+   var timers=[];
+   function later(fn,ms){var id=setTimeout(fn,ms);timers.push(id);return id;}
+   // Dependency graph: each tool waits only for its logical inputs. Independent tools
+   // run together (2, 3 or more at a time); dependents start as their inputs finish.
+   var DEPS={
+    "Second Brain":[], "Bot Blueprints":[],
+    "Ticket-to-Done":["Second Brain","Bot Blueprints"],
+    "The QA Crew":["Second Brain","Bot Blueprints"],
+    "API Watchdog":["Bot Blueprints"],
+    "Mission Control":["Bot Blueprints"],
+    "Inbox Helper":["Second Brain"],
+    "Receipts":["Ticket-to-Done","The QA Crew"],
+    "The Full Run":["The QA Crew"],
+    "The Critic":["Bot Blueprints","Mission Control"],
+    "The Cozy Office":["Mission Control"],
+    "Job Hunter":["Inbox Helper"],
+    "Support Sorter":["Inbox Helper"],
+    "Flake Finder":["The QA Crew"],
+    "Test Scribe":["Ticket-to-Done"],
+    "Auto-Promoter":["Mission Control"],
+    "Car Loader":["Mission Control"],
+    "Always In Sync":["Receipts"],
+    "Bug Narrator":["Receipts"],
+    "The Unblocker":["Always In Sync"],
+    "The Monday Report":["Receipts","Always In Sync","The Full Run","API Watchdog"],
+    "Release Radar":["The Monday Report"]
+   };
+   // scheduled stagger so a wave of ready tools doesn't all pop at the same instant
+   var DELAY={"The QA Crew":500,"Mission Control":300,"API Watchdog":700,"Inbox Helper":1000,
+    "The Full Run":400,"Support Sorter":600,"Auto-Promoter":900,"Car Loader":1300,
+    "Flake Finder":500,"Test Scribe":1000,"Bug Narrator":700};
+   var done={},started={},running={};
+   function count(o){var n=0;for(var k in o)if(o[k])n++;return n;}
+   function depsMet(name){return (DEPS[name]||[]).every(function(d){return done[d];});}
+   function setQueued(st){st.mini.className='demo-mini queued';st.run.innerHTML='queued';
+     st.nodes.forEach(function(el){el.classList.remove('show');});}
+   function setDone(st){st.mini.className='demo-mini done';st.run.innerHTML='✓ done';
+     st.nodes.forEach(function(el){el.classList.add('show');});}
+   // each queued terminal names the input it's actually blocked behind
+   function refreshWaits(){minis.forEach(function(st){
+     if(!st.mini.classList.contains('queued'))return;
+     var unmet=(DEPS[st.name]||[]).filter(function(d){return !done[d];});
+     var runningDep=unmet.filter(function(d){return running[d];})[0];
+     st.wait.textContent=runningDep?('waiting for '+runningDep+' to finish…')
+       :(unmet.length?('waiting for '+unmet[0]+' to finish…'):'queued — starting…');});}
+   function runOne(st){
+     running[st.name]=true;st.mini.className='demo-mini running';st.run.innerHTML='<i></i>live';
+     refreshWaits();
+     var i=0;(function step(){
+       if(i>=st.nodes.length){later(function(){finish(st);},760);return;}
+       st.nodes[i].classList.add('show');i++;later(step,460);
+     })();
+   }
+   function finish(st){setDone(st);running[st.name]=false;done[st.name]=true;
+     if(count(done)>=minis.length){later(restart,1700);return;}
+     schedule();refreshWaits();}
+   function schedule(){minis.forEach(function(st){
+     if(started[st.name]||!depsMet(st.name))return;
+     started[st.name]=true;later(function(){runOne(st);},DELAY[st.name]||0);});
+     refreshWaits();}
+   function restart(){done={};started={};running={};minis.forEach(setQueued);later(schedule,700);}
+   minis.forEach(setQueued);refreshWaits();
+   // always autoplay (decorative), even under reduced-motion — same as the hero terminal
+   later(schedule,500);
+   // "See works in action" — scroll to the grid
+   var seeBtn=document.getElementById('demos-btn');
+   if(seeBtn)seeBtn.addEventListener('click',function(e){e.preventDefault();
+     var anchor=document.getElementById('products');
+     if(anchor)anchor.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});});
+  })();
+
+  // Agent workspace: the fleet picks up a ticket in sequence, overlapping like real work, on a loop.
+  (function(){
+   var NODES=[
+     {n:"Second Brain",      t:"reading code + notes",  step:0},
+     {n:"Ticket-to-Done",    t:"QA-1284 → 12 tests", step:1},
+     {n:"The QA Crew",       t:"running, headed",        step:2},
+     {n:"Receipts",          t:"proof into the ticket",  step:3},
+     {n:"Always In Sync",    t:"board kept honest",      step:4},
+     {n:"The Monday Report", t:"week → one page",    step:5}
+   ];
+   var grid=document.getElementById('ws-grid');if(!grid)return;
+   var flow=document.getElementById('ws-flow');
+   var steps=flow?[].slice.call(flow.querySelectorAll('.step')):[];
+   var items=NODES.map(function(d){
+     var el=document.createElement('div');el.className='ws-node';
+     el.innerHTML='<div class="nh"><span class="nm">'+d.n+'</span><span class="ws-chip">queued</span></div>'+
+       '<div class="ws-task">'+d.t+'</div>'+
+       '<div class="ws-prog"><i></i></div>';
+     grid.appendChild(el);
+     return {d:d,el:el,chip:el.querySelector('.ws-chip'),bar:el.querySelector('.ws-prog i')};
+   });
+   var timers=[];function later(fn,ms){var id=setTimeout(fn,ms);timers.push(id);return id;}
+   function reset(){steps.forEach(function(s){s.classList.remove('on');});
+     items.forEach(function(it){it.el.className='ws-node';it.chip.textContent='queued';
+       it.bar.style.transition='none';it.bar.style.width='0';});}
+   var RUN=1500,STAG=850;
+   function play(){reset();
+     items.forEach(function(it,i){
+       later(function(){it.el.className='ws-node run';it.chip.textContent='running';
+         requestAnimationFrame(function(){it.bar.style.transition='';it.bar.style.width='100%';});
+       },i*STAG);
+       later(function(){it.el.className='ws-node done';it.chip.textContent='done';
+         if(steps[it.d.step])steps[it.d.step].classList.add('on');
+       },i*STAG+RUN);
+     });
+     later(play,items.length*STAG+RUN+1700);
+   }
+   // always autoplay (decorative), even under reduced-motion — same as the hero terminal
+   play();
+  })();
+  </script>
 </body>
 </html>
