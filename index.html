@@ -306,15 +306,17 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
 .cs-ln.out{color:var(--term-fg)}
 .cs-note{margin-top:14px;font-size:11px;color:var(--dim);font-family:var(--mono)}
 
-/* ---------- Squiggly "case studies" bubble ---------- */
-.cs-bubble{position:relative;width:218px;min-height:96px;flex-shrink:0;align-self:flex-start;
-  display:flex;align-items:flex-start;justify-content:center;padding:17px 20px 34px;
-  transform:rotate(-3deg);animation:csbob 2.8s ease-in-out infinite}
+/* ---------- Squiggly "case studies" bubble — anchored to the end of the headline ---------- */
+.cs-anchor{position:relative;display:inline-block;width:0;height:0;vertical-align:top}
+.cs-bubble{position:absolute;left:-22px;bottom:-4px;width:198px;min-height:86px;
+  display:flex;align-items:flex-start;justify-content:center;padding:14px 17px 30px;
+  transform:rotate(-3deg);transform-origin:bottom left;animation:csbob 2.8s ease-in-out infinite;
+  pointer-events:none;letter-spacing:normal}
 .cs-bubble .squiggle{position:absolute;inset:0;width:100%;height:100%;color:var(--mint)}
 .cs-bubble .squiggle path{vector-effect:non-scaling-stroke}
-.cs-bubble p{position:relative;margin:0;font-size:13px;line-height:1.45;font-weight:600;color:var(--mint);text-align:center}
-.cs-bubble p b{font-weight:800}
-@keyframes csbob{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-6px)}}
+.cs-bubble .cs-txt{position:relative;display:block;font-family:'Inter',sans-serif;font-size:12.5px;line-height:1.4;font-weight:600;color:var(--mint);text-align:center}
+.cs-bubble .cs-txt b{font-weight:800}
+@keyframes csbob{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-5px)}}
 
 /* ---------- Résumé modal (iframe) ---------- */
 .rmodal{position:fixed;inset:0;z-index:200;opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s}
@@ -353,7 +355,8 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
   .cap:last-child{border-bottom:0}
   .section{padding:54px 0}
   .section-head{display:block;margin-bottom:24px}
-  .cs-bubble{transform:rotate(-2deg);margin-top:18px}
+  .cs-anchor{display:block;width:auto;height:auto}
+  .cs-bubble{position:static;left:auto;bottom:auto;transform:rotate(-2deg);margin:14px 0 2px}
   .section-aside{text-align:left;margin-top:12px;max-width:100%}
   .project-grid{grid-template-columns:1fr;gap:15px}
   .wk-grid{grid-template-columns:1fr}
@@ -498,12 +501,9 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
 <!-- ===== Selected work ===== -->
 <section class="section" id="work"><div class="wrap">
   <div class="section-head">
-    <div><div class="eyebrow">01 / Selected work</div><h2>Quality, demonstrated.</h2>
+    <div><div class="eyebrow">01 / Selected work</div>
+    <h2>Quality, demonstrated.<span class="cs-anchor" aria-hidden="true"><span class="cs-bubble"><svg class="squiggle" viewBox="0 0 244 112" fill="none" aria-hidden="true" preserveAspectRatio="none"><path d="M22 12 C 74 4 150 6 208 10 C 230 12 237 24 234 42 C 231 60 237 72 198 76 C 150 79 96 78 58 76 C 46 92 40 100 26 108 C 36 94 34 86 36 75 C 18 73 9 62 10 42 C 11 24 12 16 22 12 Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg><span class="cs-txt">Peek inside — <b>every tile</b> opens a real case study <span>👇</span></span></span></span></h2>
     <p class="section-intro">Real QA tools and automation I've built and use — grouped by the job they do.</p></div>
-    <div class="cs-bubble" role="note" aria-label="Tip: every tile opens a real case study">
-      <svg class="squiggle" viewBox="0 0 244 112" fill="none" aria-hidden="true" preserveAspectRatio="none"><path d="M22 12 C 74 4 150 6 208 10 C 230 12 237 24 234 42 C 231 60 237 72 198 76 C 150 79 96 78 58 76 C 46 92 40 100 26 108 C 36 94 34 86 36 75 C 18 73 9 62 10 42 C 11 24 12 16 22 12 Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      <p>Peek inside — <b>every tile</b> opens a real case study <span aria-hidden="true">👇</span></p>
-    </div>
   </div>
   <div class="filters" role="group" aria-label="Filter projects by type">
     <button class="filter" type="button" aria-pressed="true" data-filter="all">All</button>
