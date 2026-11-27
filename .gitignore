@@ -2,6 +2,8 @@
 .claude/settings.local.json
 .claude/cache/
 .claude/sessions/
+.claude-self/
+.playwright-mcp/
 
 # Local scratch / audit outputs from skills
 tmp/

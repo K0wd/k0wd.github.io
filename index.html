@@ -49,6 +49,8 @@
   --max:1180px;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --shadow-console:0 28px 85px #0007,0 0 45px #8ce4bf08;
   --ease:cubic-bezier(.16,1,.3,1);
+  /* fixed dark terminal palette — intentionally does NOT flip with the light theme */
+  --term-bg:#0b121c;--term-line:#22304a;--term-mint:#8ce4bf;--term-blue:#a4baff;--term-gold:#f4c77f;--term-dim:#8494a9;--term-fg:#d4dfea;
 }
 :root[data-theme="light"]{
   --bg:#f3f5f8;--surface:#ffffff;--surface2:#eef2f7;--line:#d8dee7;--line-soft:#e3e8ef;
@@ -286,6 +288,34 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
 .contact-list b{display:block;font-size:14px;font-weight:600}
 .contact-list small{color:var(--dim);font-size:12px}
 
+/* ---------- Case-study dialog internals ---------- */
+.cs-sub{font-family:var(--mono);font-size:12px;color:var(--mint);margin:0 0 14px;letter-spacing:.03em}
+.cs-stats{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 16px}
+.cs-stat{font:10px/1.4 var(--mono);letter-spacing:.03em;border:1px solid var(--line);border-radius:5px;padding:5px 9px;color:var(--muted);background:var(--surface2);white-space:nowrap}
+.cs-stat.good{color:var(--mint);border-color:var(--mint-line);background:var(--mint-soft)}
+.cs-term{background:var(--term-bg);border:1px solid var(--term-line);border-radius:9px;overflow:hidden}
+.cs-term-head{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-bottom:1px solid var(--term-line);font:10px var(--mono);letter-spacing:.04em;color:var(--term-dim)}
+.cs-term-body{padding:13px 14px;font-family:var(--mono);font-size:12px;line-height:1.75;display:flex;flex-direction:column;gap:3px;color:var(--term-fg)}
+.cs-term-body .cs-ln{opacity:0;transform:translateY(4px);white-space:pre-wrap;word-break:break-word}
+.cs-term-body .cs-ln.show{opacity:1;transform:none;transition:opacity .2s ease,transform .2s ease}
+.cs-ln.cmd{color:var(--term-mint);font-weight:700}
+.cs-ln.ok{color:var(--term-mint)}
+.cs-ln.warn{color:var(--term-gold)}
+.cs-ln.info{color:var(--term-blue)}
+.cs-ln.comment,.cs-ln.idle{color:var(--term-dim)}
+.cs-ln.out{color:var(--term-fg)}
+.cs-note{margin-top:14px;font-size:11px;color:var(--dim);font-family:var(--mono)}
+
+/* ---------- Squiggly "case studies" bubble ---------- */
+.cs-bubble{position:relative;width:218px;min-height:96px;flex-shrink:0;align-self:flex-start;
+  display:flex;align-items:flex-start;justify-content:center;padding:17px 20px 34px;
+  transform:rotate(-3deg);animation:csbob 2.8s ease-in-out infinite}
+.cs-bubble .squiggle{position:absolute;inset:0;width:100%;height:100%;color:var(--mint)}
+.cs-bubble .squiggle path{vector-effect:non-scaling-stroke}
+.cs-bubble p{position:relative;margin:0;font-size:13px;line-height:1.45;font-weight:600;color:var(--mint);text-align:center}
+.cs-bubble p b{font-weight:800}
+@keyframes csbob{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-6px)}}
+
 /* ---------- Résumé modal (iframe) ---------- */
 .rmodal{position:fixed;inset:0;z-index:200;opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s}
 .rmodal.open{opacity:1;visibility:visible}
@@ -323,6 +353,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
   .cap:last-child{border-bottom:0}
   .section{padding:54px 0}
   .section-head{display:block;margin-bottom:24px}
+  .cs-bubble{transform:rotate(-2deg);margin-top:18px}
   .section-aside{text-align:left;margin-top:12px;max-width:100%}
   .project-grid{grid-template-columns:1fr;gap:15px}
   .wk-grid{grid-template-columns:1fr}
@@ -469,7 +500,10 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
   <div class="section-head">
     <div><div class="eyebrow">01 / Selected work</div><h2>Quality, demonstrated.</h2>
     <p class="section-intro">Real QA tools and automation I've built and use — grouped by the job they do.</p></div>
-    <p class="section-aside">Descriptions are plain-English. No client, ticket or performance figures are implied.</p>
+    <div class="cs-bubble" role="note" aria-label="Tip: every tile opens a real case study">
+      <svg class="squiggle" viewBox="0 0 244 112" fill="none" aria-hidden="true" preserveAspectRatio="none"><path d="M22 12 C 74 4 150 6 208 10 C 230 12 237 24 234 42 C 231 60 237 72 198 76 C 150 79 96 78 58 76 C 46 92 40 100 26 108 C 36 94 34 86 36 75 C 18 73 9 62 10 42 C 11 24 12 16 22 12 Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <p>Peek inside — <b>every tile</b> opens a real case study <span aria-hidden="true">👇</span></p>
+    </div>
   </div>
   <div class="filters" role="group" aria-label="Filter projects by type">
     <button class="filter" type="button" aria-pressed="true" data-filter="all">All</button>
@@ -783,41 +817,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
   </div>
 </div>
 
-<!-- dialog templates -->
-<template id="template-ticket">
-  <h3>The problem</h3><p>Turning a written ticket into real, run tests is slow, repetitive work — and the proof often never makes it back to the ticket.</p>
-  <h3>The approach</h3><ul>
-    <li>Read the ticket, draft positive and negative scenarios, and keep locators in a page-object layer.</li>
-    <li>Run the suite headed in Playwright with deterministic waits — no arbitrary sleeps.</li>
-    <li>Post the result and evidence straight onto the ticket, double-checked before it lands.</li>
-  </ul>
-  <h3>Example scenario</h3><pre>Given an authenticated customer
-When the customer submits a valid order
-Then the order is confirmed
-And the API reflects the expected state</pre>
-  <div class="notice">A real tool I use (TestAgent). The scenario is an example; no client names, tickets or figures are shown.</div>
-</template>
-
-<template id="template-crew">
-  <h3>The problem</h3><p>One bot racing through many apps hides failures. Work is clearer when each run owns one job and leaves its trail.</p>
-  <h3>The approach</h3><ul>
-    <li>A small fleet of agents each picks up a single flow — sign-in, checkout, search — one at a time.</li>
-    <li>Every run is headed and captures screenshots, traces and a plain-English result.</li>
-    <li>Findings route to the right place: proof to the ticket, defects to dev.</li>
-  </ul>
-  <div class="notice">A real tool I use. Descriptions are generic; no client environments or figures are implied.</div>
-</template>
-
-<template id="template-brain">
-  <h3>The problem</h3><p>AI helpers are only as good as their context. Sending private code and notes to a cloud service isn't an option for client work.</p>
-  <h3>The approach</h3><ul>
-    <li>Index code and notes locally so the assistant answers from real project context.</li>
-    <li>Expose it over MCP so every agent shares the same memory.</li>
-    <li>Nothing leaves the machine — the whole index stays local.</li>
-  </ul>
-  <div class="notice">A real tool I run (agent-context). Shown as a methodology, not a claim of measured results.</div>
-</template>
-
+<!-- dialog template: contact (case studies are generated from JS data) -->
 <template id="template-contact">
   <p>The fastest way to reach me. No form, no tracking — these go straight to me.</p>
   <ul class="contact-list">
@@ -880,29 +880,88 @@ And the API reflects the expected state</pre>
     });});
   })();
 
-  /* ---- Case-study / contact dialog ---- */
+  /* ---- Case-study dialog: visual terminal, generated from real sample runs ---- */
   (function(){
     var dialog=document.getElementById('detail');if(!dialog)return;
-    var titles={ticket:'Ticket-to-Done',crew:'The QA Crew',brain:'Second Brain',contact:'Get in touch'};
-    var kickers={contact:'Contact',ticket:'Case study',crew:'Case study',brain:'Case study'};
+    var titleEl=document.getElementById('dialog-title'),kickEl=document.getElementById('dialog-kicker'),bodyEl=document.getElementById('dialog-body');
     var prev=null;
-    document.querySelectorAll('[data-dialog]').forEach(function(b){
-      if(b.dataset.dialog==='resume')return; /* résumé uses the iframe modal */
-      b.addEventListener('click',function(){
-        prev=b;var id=b.dataset.dialog;
-        document.getElementById('dialog-title').textContent=titles[id]||'Details';
-        document.getElementById('dialog-kicker').textContent=kickers[id]||'Details';
-        var tpl=document.getElementById('template-'+id);
-        document.getElementById('dialog-body').replaceChildren(tpl.content.cloneNode(true));
-        dialog.showModal();dialog.querySelector('.close').focus();
-      });
+    // Real representative sample runs for every tool. Category · stat chips · terminal lines.
+    var CASES={
+     "Ticket-to-Done":{cat:"Testing agent",sub:"ticket → tests → proof",stats:["6 scenarios","headed","✓ posted"],lines:["$ ticket-to-done run DEMO-142","› reading ticket: reset password","› drafting 6 scenarios · 3 pos · 3 neg","▸ playwright running… headed","✓ 6/6 passed · evidence posted"]},
+     "The QA Crew":{cat:"Testing agent",sub:"a team of bots, one job each",stats:["2 flows","one at a time","2 issues"],lines:["$ qa-crew start --app shop-demo","› agent-1 → checkout flow","› agent-2 → sign-in flow","▸ one ticket at a time, headed","✓ 2 issues found · screenshots posted"]},
+     "API Watchdog":{cat:"Testing agent",sub:"the plumbing, checked all day",stats:["8 envs","48 checks","all green"],lines:["$ watchdog run --all-envs","› GET /messages … 200 ✓","› POST /send … 200 ✓","▸ 48 checks across 8 environments","✓ all green"]},
+     "The Full Run":{cat:"Testing agent",sub:"login → cart → checkout",stats:["3 steps","end-to-end","✓ passed"],lines:["$ full-run demo-shop","› login ✓","› add to cart ✓","› checkout ✓","✓ journey passed · reusable anytime"]},
+     "Receipts":{cat:"Testing agent",sub:"proof, straight into the ticket",stats:["screenshots","before / after","✓ posted"],lines:["$ receipts post DEMO-142","› capturing screenshots","› rendering before / after","▸ verifying it shows in the ticket","✓ inline evidence posted"]},
+     "Always In Sync":{cat:"Testing agent",sub:"the status board, kept honest",stats:["312 tracked","auto-prune","in sync"],lines:["$ sync --watch","› 312 tickets tracked","› DEMO-98 moved to Done → removed","▸ dashboard refreshed","✓ board matches reality"]},
+     "The Monday Report":{cat:"Testing agent",sub:"a week of QA, one clean page",stats:["4 projects","128 checks","report ready"],lines:["$ monday-report --week","› gathering runs across 4 projects","› 128 checks · 5 bugs · 3 fixes verified","▸ building client-ready summary","✓ report.html ready to send"]},
+     "The Unblocker":{cat:"Testing agent",sub:"the stuck pile, sorted",stats:["91 blocked","6 groups","labelled"],lines:["$ unblocker scan","› 91 blocked tickets found","› grouping by real blocker","▸ 6 groups: env · data · spec …","✓ each one labelled with its cause"]},
+     "Second Brain":{cat:"AI toolbelt",sub:"memory for my AI, on my machine",stats:["local","code + notes","private"],lines:["$ brain ask \"where is login tested?\"","› searching code + notes locally","▸ nothing leaves the machine","✓ found: tests/auth/login.spec"]},
+     "Mission Control":{cat:"AI toolbelt",sub:"all my bots, one window",stats:["7 agents","2 running","healthy"],lines:["$ office open","› 7 agents online","› 2 running · 5 idle","▸ drift check… clean","✓ fleet healthy"]},
+     "Bot Blueprints":{cat:"AI toolbelt",sub:"AI skills, version-tracked",stats:["23 skills","11 agents","1-step"],lines:["$ kit deploy","› 23 skills · 11 agents","▸ one step, no manual edits","✓ synced to a fresh machine"]},
+     "The Critic":{cat:"AI toolbelt",sub:"sharpening my AI's rules",stats:["14 rules","3 found","tightened"],lines:["$ critic review","› reading 14 rule files","› 3 contradictions found","▸ suggesting fixes","✓ rules tightened"]},
+     "The Cozy Office":{cat:"AI toolbelt · WIP",sub:"a tiny game of my bots at work",stats:["isometric","work in progress"],lines:["$ opsffice preview","› rendering isometric desks","▸ work in progress","✓ cozy view streaming"]},
+     "Job Hunter":{cat:"Handy robot",sub:"applies while I sleep",stats:["6 boards","4 matched","4 applied"],lines:["$ hunter run","› scanning 6 job boards","› 4 roles matched","▸ applying… one at a time","✓ 4 applied · watching for replies"]},
+     "Inbox Helper":{cat:"Handy robot",sub:"reads free, writes on my word",stats:["38 emails","5 flagged","nothing sent"],lines:["$ inbox triage","› 38 new emails","› 5 need action","▸ drafts ready, nothing sent","✓ waiting for my ok"]},
+     "Support Sorter":{cat:"Handy robot · WIP",sub:"sorts mail, handles the easy ones",stats:["60 emails","4 buckets","22 handled"],lines:["$ sorter run","› 60 support emails","› refund · bug · how-to · spam","▸ auto-replying to the safe ones","✓ 22 handled · rest escalated"]},
+     "Auto-Promoter":{cat:"Handy robot · WIP",sub:"posts on its own",stats:["3 queued","auto-post","scheduled"],lines:["$ promoter post","› 3 products queued","▸ posting to pages","✓ scheduled"]},
+     "Flake Finder":{cat:"In the lab · concept",sub:"catching flaky tests early",stats:["concept","reliability"],lines:["// idea","› watch test history for wobble","› flag the ones that fail at random","▸ fix them before they waste a morning","○ not built yet — on the list"]},
+     "Release Radar":{cat:"In the lab · concept",sub:"safe-to-ship at a glance",stats:["concept","health check"],lines:["// idea","› one screen: tests · bugs · coverage","› green means go","○ not built yet — on the list"]},
+     "Test Scribe":{cat:"In the lab · concept",sub:"story → tests",stats:["concept","ai"],lines:["// idea","› paste a plain-English user story","› get ready-to-run tests back","○ not built yet — on the list"]},
+     "Bug Narrator":{cat:"In the lab · concept",sub:"failed run → bug report",stats:["concept","ai"],lines:["// idea","› read the failed run","› write clear steps to reproduce","○ not built yet — on the list"]}
+    };
+    function cls(s){s=s.trim();
+      if(s.indexOf('$')===0)return'cmd';
+      if(s.indexOf('✓')===0)return'ok';
+      if(s.indexOf('⚠')===0||s.indexOf('✗')===0)return'warn';
+      if(s.indexOf('//')===0)return'comment';
+      if(s.indexOf('○')===0)return'idle';
+      if(s.indexOf('›')===0||s.indexOf('▸')===0)return'info';
+      return'out';}
+    function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+    // Give every project card a "View case study" link (replacing any placeholder link).
+    document.querySelectorAll('.project').forEach(function(card){
+      var h=card.querySelector('h3');if(!h)return;var name=h.textContent.trim();if(!CASES[name])return;
+      var old=card.querySelector('.project-link');if(old)old.remove();
+      var body=card.querySelector('.project-body');if(!body)return;
+      var btn=document.createElement('button');btn.type='button';btn.className='project-link';btn.setAttribute('data-case',name);
+      btn.innerHTML='View case study <svg aria-hidden="true"><use href="#i-arrow"/></svg>';
+      body.appendChild(btn);
+    });
+    function renderCase(name){
+      var c=CASES[name];if(!c)return;
+      titleEl.textContent=name;kickEl.textContent='Case study · '+c.cat;
+      bodyEl.replaceChildren();
+      if(c.sub){var p=document.createElement('p');p.className='cs-sub';p.textContent='// '+c.sub;bodyEl.appendChild(p);}
+      if(c.stats&&c.stats.length){var sr=document.createElement('div');sr.className='cs-stats';
+        c.stats.forEach(function(s,i){var e=document.createElement('span');e.className='cs-stat'+(i===c.stats.length-1?' good':'');e.textContent=s;sr.appendChild(e);});
+        bodyEl.appendChild(sr);}
+      var term=document.createElement('div');term.className='cs-term';
+      var head=document.createElement('div');head.className='cs-term-head';
+      var hl=document.createElement('span');hl.textContent='~/'+slug(name);var hr=document.createElement('span');hr.textContent='sample run';
+      head.appendChild(hl);head.appendChild(hr);
+      var tb=document.createElement('div');tb.className='cs-term-body';
+      var lns=c.lines.map(function(s){var d=document.createElement('div');d.className='cs-ln '+cls(s);d.textContent=s;tb.appendChild(d);return d;});
+      term.appendChild(head);term.appendChild(tb);bodyEl.appendChild(term);
+      var note=document.createElement('div');note.className='cs-note';
+      note.textContent='Representative sample run — illustrative, not client data.';
+      bodyEl.appendChild(note);
+      if(reduce){lns.forEach(function(l){l.classList.add('show');});}
+      else{var i=0;(function step(){if(i>=lns.length)return;lns[i].classList.add('show');i++;setTimeout(step,220);})();}
+    }
+    function openDialog(){dialog.showModal();dialog.querySelector('.close').focus();}
+    document.addEventListener('click',function(e){
+      var cb=e.target.closest('[data-case]');
+      if(cb){prev=cb;renderCase(cb.getAttribute('data-case'));openDialog();return;}
+      var ct=e.target.closest('[data-dialog="contact"]');
+      if(ct){prev=ct;titleEl.textContent='Get in touch';kickEl.textContent='Contact';
+        bodyEl.replaceChildren(document.getElementById('template-contact').content.cloneNode(true));openDialog();}
     });
     dialog.querySelector('.close').addEventListener('click',function(){dialog.close();});
-    dialog.addEventListener('click',function(e){ /* click outside closes */
+    dialog.addEventListener('click',function(e){
       var r=dialog.getBoundingClientRect();
       if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();
     });
-    dialog.addEventListener('close',function(){if(prev)prev.focus();});
+    dialog.addEventListener('close',function(){if(prev&&prev.focus)prev.focus();});
   })();
 
   /* ---- Résumé iframe modal ---- */
