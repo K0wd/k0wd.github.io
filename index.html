@@ -122,8 +122,9 @@ img{max-width:100%}
 .role-line{margin-top:23px;color:var(--text);font-size:12px;display:flex;flex-wrap:wrap;gap:7px 10px;align-items:center}
 .role-line i{width:4px;height:4px;background:var(--dim);border-radius:50%}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:29px}
-.hero-note{margin-top:21px;font-size:11px;color:var(--dim);display:flex;align-items:center;gap:8px}
-.hero-note svg{width:14px;height:14px;color:var(--mint);flex-shrink:0}
+.hero-note{grid-column:1/-1;margin-top:40px;padding-top:30px;border-top:1px solid var(--line);font-size:clamp(14px,1.55vw,18px);color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px;letter-spacing:-.005em}
+.hero-note svg{width:19px;height:19px;color:var(--mint);flex-shrink:0}
+.hero-note i{width:4px;height:4px;background:var(--dim);border-radius:50%;flex-shrink:0}
 
 /* ---------- Console (hero) ---------- */
 .console{border:1px solid var(--mint-line);border-radius:13px;box-shadow:var(--shadow-console);overflow:hidden;background:var(--surface)}
@@ -458,7 +459,6 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
         <a class="button primary" href="#work">Explore my work <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <button class="button" data-dialog="resume" type="button"><svg aria-hidden="true"><use href="#i-file"/></svg> View resume</button>
       </div>
-      <p class="hero-note"><svg aria-hidden="true"><use href="#i-check"/></svg> 15 companies since 2013 · ISTQB CTFL · evidence over assumptions.</p>
     </div>
 
     <div class="console" role="group" aria-label="Illustrative quality report">
@@ -490,6 +490,8 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
       <div class="console-foot"><span>Portfolio demonstration only</span><span class="mono">44 PASS / 3 FAIL / 1 REVIEW</span></div>
     </div>
+
+    <p class="hero-note"><svg aria-hidden="true"><use href="#i-check"/></svg> 15 companies since 2013 <i aria-hidden="true"></i> ISTQB CTFL <i aria-hidden="true"></i> evidence over assumptions.</p>
   </div>
 </section>
 
