@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
-<title>Kim Bandeleon — QA Engineer</title>
+<title>I break it first</title>
 <meta name="description" content="Software Quality Assurance and Test Automation portfolio focused on reliable software delivery, risk-based testing, browser and API automation, and AI system evaluation.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://kimbandeleon.pro/">
@@ -1043,6 +1043,12 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       io.observe(target);
       setTimeout(function(){if(target.getBoundingClientRect().top<window.innerHeight)reveal();},80);
     }else{reveal();}
+  })();
+  // Blinking tab title: alternate two phrases on a slow, safe cadence; static if reduced-motion.
+  (function(){
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var phrases=['I break it first','Kim — QA'],i=0;
+    setInterval(function(){if(document.hidden)return;i=(i+1)%phrases.length;document.title=phrases[i];},1600);
   })();
 })();
 </script>
