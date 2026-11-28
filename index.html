@@ -204,6 +204,13 @@ img{max-width:100%}
 .project-link{background:transparent;border:0;border-top:1px solid var(--line);margin-top:17px;padding:14px 0 0;display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;font-size:12px;color:var(--text);font-weight:600;transition:color .15s}
 .project-link:hover{color:var(--mint)}
 .project-link svg{width:15px;height:15px}
+.project-more{margin-top:24px;display:flex;justify-content:center}
+.project-more[hidden]{display:none}
+.more-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;padding:11px 20px;min-height:42px;background:transparent;color:var(--text);font-size:13px;font-weight:600;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.more-btn:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-soft)}
+.more-btn .more-n{color:var(--muted);font-weight:500}
+.more-btn:hover .more-n{color:var(--mint)}
+.more-btn svg{width:14px;height:14px;transform:rotate(90deg)}
 
 /* ---------- Evidence ---------- */
 .ev-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
@@ -510,7 +517,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
   <p id="filter-status" class="visually-hidden" aria-live="polite">All projects shown</p>
   <div class="project-grid" id="project-grid">
 
-    <article class="project cat-agent" data-category="agent">
+    <article class="project cat-agent" data-category="agent" data-featured="1">
       <div class="project-body">
         <div class="project-top"><span class="project-type">Testing agent</span><span class="pstatus">Production</span></div>
         <h3>Ticket-to-Done</h3>
@@ -520,7 +527,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
     </article>
 
-    <article class="project cat-agent" data-category="agent">
+    <article class="project cat-agent" data-category="agent" data-featured="1">
       <div class="project-body">
         <div class="project-top"><span class="project-type">Testing agent</span><span class="pstatus">Production</span></div>
         <h3>The QA Crew</h3>
@@ -530,7 +537,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
     </article>
 
-    <article class="project cat-agent" data-category="agent">
+    <article class="project cat-agent" data-category="agent" data-featured="1">
       <div class="project-body">
         <div class="project-top"><span class="project-type">Testing agent</span><span class="pstatus">Production</span></div>
         <h3>API Watchdog</h3>
@@ -539,7 +546,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
     </article>
 
-    <article class="project cat-agent" data-category="agent">
+    <article class="project cat-agent" data-category="agent" data-featured="1">
       <div class="project-body">
         <div class="project-top"><span class="project-type">Testing agent</span><span class="pstatus">Production</span></div>
         <h3>The Full Run</h3>
@@ -548,7 +555,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
     </article>
 
-    <article class="project cat-agent" data-category="agent">
+    <article class="project cat-agent" data-category="agent" data-featured="1">
       <div class="project-body">
         <div class="project-top"><span class="project-type">Testing agent</span><span class="pstatus">Production</span></div>
         <h3>Receipts</h3>
@@ -584,7 +591,7 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
     </article>
 
-    <article class="project cat-tool" data-category="tool">
+    <article class="project cat-tool" data-category="tool" data-featured="1">
       <div class="project-body">
         <div class="project-top"><span class="project-type">AI toolbelt</span><span class="pstatus">Production</span></div>
         <h3>Second Brain</h3>
@@ -702,6 +709,12 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
       </div>
     </article>
 
+  </div>
+  <div class="project-more" id="project-more" hidden>
+    <button class="more-btn" type="button" id="project-more-btn" aria-controls="project-grid">
+      See all projects <span class="more-n">(+<span id="project-more-count">15</span>)</span>
+      <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+    </button>
   </div>
 </div></section>
 
@@ -876,15 +889,32 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
     var filters=[].slice.call(document.querySelectorAll('.filter'));
     var projects=[].slice.call(document.querySelectorAll('.project'));
     var status=document.getElementById('filter-status');
+    var moreWrap=document.getElementById('project-more');
+    var moreBtn=document.getElementById('project-more-btn');
+    var moreCount=document.getElementById('project-more-count');
+    var current='all',expanded=false;
+    function apply(){
+      var shown=0,hiddenExtra=0;
+      projects.forEach(function(p){
+        var inView=(current==='all'||p.dataset.category===current);
+        var show=inView;
+        // On All, show only the featured few until expanded.
+        if(current==='all'&&!expanded&&p.dataset.featured!=='1'){show=false;if(inView)hiddenExtra++;}
+        p.hidden=!show;if(show)shown++;
+      });
+      if(moreWrap){
+        var showMore=(current==='all'&&!expanded&&hiddenExtra>0);
+        moreWrap.hidden=!showMore;
+        if(showMore&&moreCount)moreCount.textContent=hiddenExtra;
+      }
+      status.textContent=shown+' '+(shown===1?'project':'projects')+' shown';
+    }
     filters.forEach(function(b){b.addEventListener('click',function(){
       filters.forEach(function(f){f.setAttribute('aria-pressed',String(f===b));});
-      var f=b.dataset.filter,count=0;
-      projects.forEach(function(p){
-        var show=(f==='all'||p.dataset.category===f);
-        p.hidden=!show;if(show)count++;
-      });
-      status.textContent=count+' '+(count===1?'project':'projects')+' shown';
+      current=b.dataset.filter;expanded=false;apply();
     });});
+    if(moreBtn)moreBtn.addEventListener('click',function(){expanded=true;apply();});
+    apply();
   })();
 
   /* ---- Case-study dialog: visual terminal, generated from real sample runs ---- */
