@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kimbandeleon.com/sitemap.xml
+Sitemap: https://kimbandeleon.pro/sitemap.xml
