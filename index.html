@@ -215,7 +215,7 @@ img{max-width:100%}
 .live-leg{display:flex;gap:9px 18px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:12px}
 .live-leg span{display:inline-flex;align-items:center;gap:6px}
 .live-leg em{width:9px;height:9px;border-radius:2px;display:inline-block;font-style:normal}
-.wk-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px}
+.wk-grid{display:grid;grid-template-columns:1fr;gap:28px}
 .wk{opacity:0;transform:translateY(10px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .wk.in{opacity:1;transform:none}
 .wk-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;margin-bottom:8px}
@@ -224,6 +224,7 @@ img{max-width:100%}
 .wk-tiles{display:flex;gap:3px;flex-wrap:wrap}
 .st{width:9px;height:22px;border-radius:2px;background:var(--line)}
 .st.p{background:var(--mint)}.st.f{background:var(--red)}
+.wk-tiles.q{gap:3px}.wk-tiles.q .st{width:8px;height:22px;border-radius:2px}
 .wk-sub{color:var(--dim);font-family:var(--mono);font-size:11px;margin-top:8px}
 .ev-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
 .ev-proj{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:22px;display:flex;flex-direction:column;gap:13px}
@@ -750,8 +751,8 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
     </article>
   </div>
 
-  <p class="evidence-note">The field-ops weeks in detail — each tile is one ticket across thirteen real QA weeks (Jun–Nov 2026), genericised. The grid reveals on scroll.</p>
-  <div class="wk-grid" id="wk-grid" role="img" aria-label="Weekly QA delivery across thirteen weeks: tiles show tickets shipped or verified (green) and defects caught and routed to dev (red)."></div>
+  <p class="evidence-note">The field-ops delivery by quarter — each tile is one ticket, summed across thirteen real QA weeks (Jun–Nov 2026), genericised. The bars reveal on scroll.</p>
+  <div class="wk-grid" id="wk-grid" role="img" aria-label="QA delivery across three quarters of 2026 (Jun–Nov): each bar shows tickets shipped or verified (green) and defects caught and routed to dev (red)."></div>
 </div></section>
 
 <!-- ===== Approach ===== -->
@@ -1006,34 +1007,41 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
 
   /* ---- Evidence: weekly delivery grid (real, genericised) ---- */
   (function(){
+    // Real weekly tallies (green = shipped/verified, red = defects → dev), tagged by quarter.
     var WEEKS=[
-      {d:"Jun 08 – 12", t:"full week",          v:9,  h:18, f:1 },
-      {d:"Jun 13 – 17", t:"triage week",        v:1,  h:20, f:1 },
-      {d:"Jun 22 – 26", t:"stage verification", v:44, h:7,  f:1 },
-      {d:"Jun 29 – Jul 05", t:"time-logged",    n:32 },
-      {d:"Jul 06 – 12", t:"activity log",       n:26 },
-      {d:"Jul 20 – 24", t:"stage priority run", v:8,  h:5,  f:2 },
-      {d:"Jul 27 – 31", t:"status sweep",       v:34, h:15, f:15},
-      {d:"Aug 24 – 29", t:"cross-project week", v:29, h:14, f:2 },
-      {d:"Sep 14 – 18", t:"sprint status",      v:3,  h:12, f:1 },
-      {d:"Oct 05 – 09", t:"full sprint sweep",  v:74, h:7,  f:6 },
-      {d:"Oct 12 – 16", t:"live-queue sweep",   v:23, h:4,  f:0 },
-      {d:"Oct 26 – 30", t:"AFK verify run",     v:8,  h:4,  f:0 },
-      {d:"Nov 16 – 20", t:"regression sweep",   v:16, h:10, f:11}
+      {d:"Jun 08 – 12", v:9,  h:18, f:1,  q:"Q2 2026" },
+      {d:"Jun 13 – 17", v:1,  h:20, f:1,  q:"Q2 2026" },
+      {d:"Jun 22 – 26", v:44, h:7,  f:1,  q:"Q2 2026" },
+      {d:"Jun 29 – Jul 05", n:32,         q:"Q3 2026" },
+      {d:"Jul 06 – 12", n:26,             q:"Q3 2026" },
+      {d:"Jul 20 – 24", v:8,  h:5,  f:2,  q:"Q3 2026" },
+      {d:"Jul 27 – 31", v:34, h:15, f:15, q:"Q3 2026" },
+      {d:"Aug 24 – 29", v:29, h:14, f:2,  q:"Q3 2026" },
+      {d:"Sep 14 – 18", v:3,  h:12, f:1,  q:"Q3 2026" },
+      {d:"Oct 05 – 09", v:74, h:7,  f:6,  q:"Q4 2026" },
+      {d:"Oct 12 – 16", v:23, h:4,  f:0,  q:"Q4 2026" },
+      {d:"Oct 26 – 30", v:8,  h:4,  f:0,  q:"Q4 2026" },
+      {d:"Nov 16 – 20", v:16, h:10, f:11, q:"Q4 2026" }
     ];
     var grid=document.getElementById('wk-grid');if(!grid)return;
-    var allTiles=[],rows=[];
+    // Aggregate the weeks into quarter buckets, preserving order.
+    var order=[],Q={};
     WEEKS.forEach(function(w){
-      var activity=(w.n!=null),tot=activity?w.n:(w.v+w.h+w.f);
+      var green=(w.n!=null)?w.n:(w.v+w.h),red=(w.n!=null)?0:w.f;
+      if(!Q[w.q]){Q[w.q]={green:0,red:0,weeks:0};order.push(w.q);}
+      Q[w.q].green+=green;Q[w.q].red+=red;Q[w.q].weeks++;
+    });
+    var allTiles=[],rows=[];
+    order.forEach(function(name){
+      var q=Q[name],tot=q.green+q.red;
       var row=document.createElement('div');row.className='wk';
       var top=document.createElement('div');top.className='wk-top';
-      top.innerHTML='<span class="wk-date">'+w.d+'</span><span class="wk-tag muted">'+w.t+'</span><span class="wk-ct">'+tot+' tickets</span>';
-      var tiles=document.createElement('div');tiles.className='wk-tiles';
+      top.innerHTML='<span class="wk-date">'+name+'</span><span class="wk-tag muted">'+q.weeks+' weeks</span><span class="wk-ct">'+tot+' tickets</span>';
+      var tiles=document.createElement('div');tiles.className='wk-tiles q';
       function add(n,cls){for(var i=0;i<n;i++){var s=document.createElement('span');s.className='st '+cls;tiles.appendChild(s);allTiles.push(s);}}
+      add(q.green,'p');add(q.red,'f');
       var sub=document.createElement('div');sub.className='wk-sub';
-      if(activity){add(w.n,'p');sub.textContent=w.n+' delivered · time-logged';}
-      else{add(w.v,'p');add(w.h,'p');add(w.f,'f');
-        sub.textContent=(w.v+w.h)+' shipped / verified · '+w.f+' defect'+(w.f===1?'':'s')+' caught → dev';}
+      sub.textContent=q.green+' shipped / verified · '+q.red+' defect'+(q.red===1?'':'s')+' caught → dev';
       row.appendChild(top);row.appendChild(tiles);row.appendChild(sub);grid.appendChild(row);rows.push(row);
     });
     function fillBar(){document.querySelectorAll('.live-bar i').forEach(function(b){b.style.width=b.dataset.w+'%';});}
