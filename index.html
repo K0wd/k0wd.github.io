@@ -233,6 +233,9 @@ img{max-width:100%}
 .ev-badge{font:10px var(--mono);letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:4px 8px;white-space:nowrap}
 .ev-num{font-size:34px;font-weight:650;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1;color:var(--mint)}
 .ev-num small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em;margin-top:7px;font-family:var(--mono);text-transform:uppercase}
+.ev-bar{display:flex;gap:2px;flex-wrap:wrap;margin-top:2px}
+.ev-bar i{width:7px;height:15px;border-radius:2px;background:var(--line)}
+.ev-bar i.p{background:var(--mint)}.ev-bar i.f{background:var(--red)}
 .ev-proj.b .ev-num{color:var(--blue)}
 .ev-proj.v .ev-num{color:#c89bef}
 :root[data-theme="light"] .ev-proj.v .ev-num{color:#7b3fb0}
@@ -737,21 +740,24 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
     <article class="ev-proj">
       <div class="ev-proj-top"><span class="ev-label">Email platform</span><span class="ev-badge">Jira · BDD</span></div>
       <div class="ev-num">51<small>scenarios green vs staging</small></div>
+      <div class="ev-bar" data-g="51" data-f="0" aria-hidden="true"></div>
       <p class="ev-desc">A Behave &amp; Playwright suite implemented and passing against staging — ready to merge.</p>
     </article>
     <article class="ev-proj b">
       <div class="ev-proj-top"><span class="ev-label">Field-ops SaaS</span><span class="ev-badge">Weekly QA</span></div>
       <div class="ev-num">463<small>tickets · 13 weeks</small></div>
-      <p class="ev-desc">Thirteen weeks of QA delivery; 40 defects caught early and routed to dev. Detailed below.</p>
+      <div class="ev-bar" data-g="423" data-f="40" aria-hidden="true"></div>
+      <p class="ev-desc">Thirteen weeks of QA delivery; 40 defects caught early and routed to dev. By quarter below.</p>
     </article>
     <article class="ev-proj v">
       <div class="ev-proj-top"><span class="ev-label">Ticketing &amp; e-commerce</span><span class="ev-badge">Azure DevOps</span></div>
       <div class="ev-num">170+<small>tickets · 2 sprints</small></div>
-      <p class="ev-desc">Purchase and checkout flows across two sprints; regressions found and filed.</p>
+      <div class="ev-bar" data-g="159" data-f="13" aria-hidden="true"></div>
+      <p class="ev-desc">Purchase and checkout flows across two sprints; 13 regressions caught and filed.</p>
     </article>
   </div>
 
-  <p class="evidence-note">The field-ops delivery by quarter — each tile is one ticket, summed across thirteen real QA weeks (Jun–Nov 2026), genericised. The bars reveal on scroll.</p>
+  <p class="evidence-note"><strong>Field-ops SaaS — the same delivery, by quarter.</strong> Each tile is one ticket, summed across thirteen real QA weeks (Jun–Nov 2026), genericised. The bars reveal on scroll.</p>
   <div class="wk-grid" id="wk-grid" role="img" aria-label="QA delivery across three quarters of 2026 (Jun–Nov): each bar shows tickets shipped or verified (green) and defects caught and routed to dev (red)."></div>
 </div></section>
 
@@ -1005,6 +1011,18 @@ dialog::backdrop{background:#05080dbb;backdrop-filter:blur(5px)}
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close();});
   })();
 
+  /* ---- Evidence: per-project mini health bars (proportional) ---- */
+  (function(){
+    document.querySelectorAll('.ev-bar').forEach(function(b){
+      var g=+b.dataset.g||0,f=+b.dataset.f||0,tot=g+f,N=26;
+      if(tot===0)return;
+      var red=Math.round(f/tot*N);if(f>0&&red===0)red=1;if(red>N)red=N;
+      var green=N-red,h='';
+      for(var i=0;i<green;i++)h+='<i class="p"></i>';
+      for(var j=0;j<red;j++)h+='<i class="f"></i>';
+      b.innerHTML=h;
+    });
+  })();
   /* ---- Evidence: weekly delivery grid (real, genericised) ---- */
   (function(){
     // Real weekly tallies (green = shipped/verified, red = defects → dev), tagged by quarter.
